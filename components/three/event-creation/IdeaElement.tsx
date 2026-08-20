@@ -9,19 +9,19 @@ interface StageProps {
   sceneProgress: React.MutableRefObject<number>;
 }
 
-const coreGeo = new THREE.IcosahedronGeometry(0.8, 1);
+const coreGeo = new THREE.IcosahedronGeometry(1.5, 2);
 const coreMat = new THREE.MeshStandardMaterial({ 
   color: "#fdfbf7", 
-  emissive: "#2dd4bf", 
-  emissiveIntensity: 0.8, 
+  emissive: "#fdfbf7", 
+  emissiveIntensity: 0.5, 
   wireframe: true,
   transparent: true 
 });
-const innerGeo = new THREE.IcosahedronGeometry(0.5, 0);
+const innerGeo = new THREE.SphereGeometry(1, 32, 32);
 const innerMat = new THREE.MeshStandardMaterial({
   color: "#fbbf24",
   emissive: "#fbbf24",
-  emissiveIntensity: 1,
+  emissiveIntensity: 0.8,
   transparent: true
 });
 

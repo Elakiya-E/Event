@@ -23,7 +23,7 @@ const leafMaterial = new THREE.MeshStandardMaterial({
 });
 
 export default function EventWorldScene({ sceneProgress }: EventWorldSceneProps) {
-  const { viewport } = useThree();
+  const { viewport, size } = useThree();
   
   // Refs for animation
   const cameraTarget = useRef(new THREE.Vector3(0, 0, 5));
@@ -85,40 +85,36 @@ export default function EventWorldScene({ sceneProgress }: EventWorldSceneProps)
     const p = sceneProgress.current;
 
     // 1. Camera Animation
-    // We start where Hero left off: camera at [0, 3, -5] looking roughly forward.
+    // Keep the camera relatively stable. Move mostly on Z to enter the scene.
     let targetCamZ = -5;
     let targetCamY = 3;
     let targetCamX = 0;
-    
-    // Smoothly pan camera target to look at the environment on the right
-    cameraTarget.current.x = THREE.MathUtils.lerp(0, 2, p * 2);
-    cameraTarget.current.y = THREE.MathUtils.lerp(0, 0, p * 2);
-    cameraTarget.current.z = THREE.MathUtils.lerp(0, 5, p * 2);
     
     if (p <= 0.15) {
       targetCamZ = -5;
       targetCamY = 3;
     } else if (p > 0.15 && p <= 0.5) {
-      // Move into the space
       const localP = (p - 0.15) / 0.35;
       targetCamZ = THREE.MathUtils.lerp(-5, 0, localP);
-      targetCamY = THREE.MathUtils.lerp(3, 0, localP);
-      targetCamX = THREE.MathUtils.lerp(0, -1, localP); // Move camera left to see right object better
+      targetCamY = THREE.MathUtils.lerp(3, 1.5, localP);
     } else if (p > 0.5 && p <= 0.85) {
-      // Orbit slightly to see the scale
       const localP = (p - 0.5) / 0.35;
-      targetCamZ = 0;
-      targetCamX = THREE.MathUtils.lerp(-1, -3, localP);
-      targetCamY = 0;
+      targetCamZ = THREE.MathUtils.lerp(0, 1, localP);
+      targetCamY = THREE.MathUtils.lerp(1.5, 1, localP);
+      targetCamX = THREE.MathUtils.lerp(0, -0.5, localP); // Subtle orbit
     } else if (p > 0.85) {
-      // Pull back down and forward for transition
       const localP = (p - 0.85) / 0.15;
-      targetCamZ = THREE.MathUtils.lerp(0, 4, localP);
-      targetCamX = THREE.MathUtils.lerp(-3, -1, localP);
-      targetCamY = THREE.MathUtils.lerp(0, 0, localP);
+      targetCamZ = THREE.MathUtils.lerp(1, 3, localP);
+      targetCamX = THREE.MathUtils.lerp(-0.5, 0, localP);
+      targetCamY = THREE.MathUtils.lerp(1, 0, localP);
     }
 
     state.camera.position.lerp(new THREE.Vector3(targetCamX, targetCamY, targetCamZ), 0.05);
+    
+    // Look Target stays focused on the environment's Z-depth
+    cameraTarget.current.x = THREE.MathUtils.lerp(0, isMobile ? 0 : 1, p);
+    cameraTarget.current.y = THREE.MathUtils.lerp(0, isMobile ? -1 : 0, p);
+    cameraTarget.current.z = THREE.MathUtils.lerp(0, 5, p * 2);
     state.camera.lookAt(cameraTarget.current);
 
     // 2. Leaf Swarm clearing
@@ -146,22 +142,27 @@ export default function EventWorldScene({ sceneProgress }: EventWorldSceneProps)
 
     // 3. Environment Animation
     if (environmentRef.current) {
-      // Drift up slightly to feel alive, but keep it centered
-      environmentRef.current.position.y = THREE.MathUtils.lerp(-0.5, 0.5, Math.min(p * 3, 1));
+      // Drift up slightly to feel alive
+      const driftY = THREE.MathUtils.lerp(-0.5, 0.2, Math.min(p * 3, 1));
+      environmentRef.current.position.y = (isMobile ? -1.5 : 0) + driftY;
     }
     
     if (ringsRef.current) {
-      ringsRef.current.rotation.z = p * Math.PI;
+      ringsRef.current.rotation.z = p * Math.PI * 0.5;
       ringsRef.current.rotation.x = THREE.MathUtils.lerp(Math.PI / 2, Math.PI / 2.5, p);
     }
 
     if (framesRef.current) {
       framesRef.current.children.forEach((frame, i) => {
         const frameP = Math.max(0, p - (i * 0.1));
-        frame.position.z = frameData[i].position.z + (frameP * 4);
+        frame.position.z = frameData[i].position.z + (frameP * 2);
       });
     }
   });
+
+  // Responsive composition
+  const isTablet = size.width >= 768 && size.width < 1024;
+  const envX = isMobile ? 0 : (isTablet ? 1.5 : 2.2);
 
   return (
     <>
@@ -179,44 +180,44 @@ export default function EventWorldScene({ sceneProgress }: EventWorldSceneProps)
       <instancedMesh ref={swarmRef} args={[leafGeometry, leafMaterial, leafCount]} frustumCulled={false} />
 
       {/* Main Event World Group */}
-      {/* Positioned on the right side of the screen, adequately scaled */}
-      <group ref={environmentRef} position={[3, -0.5, 5]} scale={isMobile ? 0.7 : 1.2}>
+      <group ref={environmentRef} position={[envX, 0, 5]} scale={isMobile ? 0.8 : 1.1}>
         
         {/* Abstract Floating Frames */}
         <group ref={framesRef}>
           {frameData.map((data, i) => (
             <mesh key={i} position={data.position}>
-              <boxGeometry args={[data.scale.x, data.scale.y, data.scale.z]} />
+              {/* Scaled down to match new focal element size */}
+              <boxGeometry args={[data.scale.x * 0.4, data.scale.y * 0.4, data.scale.z]} />
               <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.05 + (i * 0.02)} />
             </mesh>
           ))}
         </group>
 
-        {/* Core Luminous Rings */}
+        {/* Core Luminous Rings (Scaled down to fit 40-50% height) */}
         <group ref={ringsRef} position={[0, 0, 0]}>
           <mesh>
-            <torusGeometry args={[2.5, 0.02, 32, 100]} />
+            <torusGeometry args={[0.7, 0.015, 32, 100]} />
             <meshStandardMaterial color="#fbbf24" emissive="#fbbf24" emissiveIntensity={0.8} />
           </mesh>
           <mesh rotation={[0.1, 0.1, 0]}>
-            <torusGeometry args={[3.2, 0.01, 32, 100]} />
+            <torusGeometry args={[0.9, 0.01, 32, 100]} />
             <meshStandardMaterial color="#2dd4bf" emissive="#2dd4bf" emissiveIntensity={0.5} />
           </mesh>
           <mesh rotation={[-0.1, -0.1, 0]}>
-            <torusGeometry args={[3.8, 0.03, 32, 100]} />
+            <torusGeometry args={[1.1, 0.02, 32, 100]} />
             <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.2} transparent opacity={0.5} />
           </mesh>
         </group>
 
         {/* Central Monolith */}
         <mesh position={[0, 0, 0]}>
-          <cylinderGeometry args={[1.5, 1.5, 0.2, 64]} />
+          <cylinderGeometry args={[0.4, 0.4, 0.1, 64]} />
           <meshStandardMaterial color="#0a0a0a" roughness={0.1} metalness={0.9} />
         </mesh>
         
         {/* Soft volumetric glow under monolith */}
-        <mesh position={[0, -0.2, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[8, 8]} />
+        <mesh position={[0, -0.1, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[3, 3]} />
           <meshBasicMaterial color="#2dd4bf" transparent opacity={0.05} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
 

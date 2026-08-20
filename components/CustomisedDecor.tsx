@@ -5,7 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import DecorScene from "./three/decor/DecorScene";
+import DecorScene from "./three/DecorScene";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -90,7 +90,7 @@ export default function CustomisedDecor() {
       <div className="absolute inset-0 z-0">
         {!isReducedMotion ? (
           <Canvas camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]}>
-            <DecorScene sceneProgress={sceneProgress} />
+            <DecorScene progress={sceneProgress} />
           </Canvas>
         ) : (
           <div className="flex flex-col items-center justify-center h-full space-y-12 px-6">

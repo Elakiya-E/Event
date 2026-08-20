@@ -188,10 +188,10 @@ export default function IraguHeroScene({ sceneProgress }: IraguHeroSceneProps) {
       <color attach="background" args={['#050505']} />
       
       {/* Lighting setup */}
-      <ambientLight intensity={0.4} color="#fdfbf7" />
-      <directionalLight position={[5, 5, 2]} intensity={1.2} color="#fbbf24" /> {/* Warm gold key */}
-      <spotLight position={[-5, 5, -5]} intensity={2.5} color="#2dd4bf" penumbra={1} angle={0.5} /> {/* Teal rim */}
-      <pointLight position={[0, 0, 5]} intensity={0.8} color="#ffffff" /> {/* Frontal white fill to reveal ivory material */}
+      <ambientLight intensity={0.4} color="#ffffff" />
+      <directionalLight position={[0, 5, 5]} intensity={1.5} color="#ffffff" /> {/* Neutral frontal studio light */}
+      <spotLight position={[5, 5, -5]} intensity={0.5} color="#fbbf24" penumbra={1} angle={0.5} /> {/* Very subtle gold rim */}
+      <spotLight position={[-5, 5, -5]} intensity={0.5} color="#2dd4bf" penumbra={1} angle={0.5} /> {/* Very subtle teal rim */}
 
       {/* Atmospheric Particles */}
       <Points positions={particlesPosition} stride={3}>
