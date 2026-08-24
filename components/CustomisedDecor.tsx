@@ -1,123 +1,73 @@
 "use client";
+import React, { useRef } from "react";
+import { useGSAP, gsap, ScrollTrigger } from "@/hooks/useGsap";
+import { siteContent } from "@/data/siteContent";
+import Link from "next/link";
 
-import React, { useRef, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
-import DecorScene from "./three/DecorScene";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const DECOR_STAGES = [
-  { id: "SPACE", text: "Every detail begins with a blank space.", range: [0.0, 0.2] },
-  { id: "ARCHITECTURE", text: "Building the physical structure.", range: [0.2, 0.4] },
-  { id: "DECORATION", text: "Layering floral and design elements.", range: [0.4, 0.6] },
-  { id: "LIGHT & COLOR", text: "Painting with atmosphere and illumination.", range: [0.6, 0.8] },
-  { id: "EXPERIENCE", text: "A completely customised environment.", range: [0.8, 1.0] },
-];
+gsap.registerPlugin(ScrollTrigger);
 
 export default function CustomisedDecor() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const sceneProgress = useRef(0);
-  const textContainerRef = useRef<HTMLDivElement>(null);
-  const isReducedMotion = useReducedMotion();
+  const imageRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (isReducedMotion || !containerRef.current) return;
+  useGSAP(() => {
+    if (!containerRef.current || !imageRef.current) return;
 
-    gsap.timeline({
+    gsap.to(imageRef.current, {
+      scale: 1.1,
+      ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top top",
-        end: "+=500%",
-        scrub: 1,
-        pin: true,
-        onUpdate: (self) => {
-          sceneProgress.current = self.progress;
-
-          if (textContainerRef.current) {
-            const p = self.progress;
-            
-            let currentStageIdx = 0;
-            for (let i = 0; i < DECOR_STAGES.length; i++) {
-              if (p >= DECOR_STAGES[i].range[0] && p < DECOR_STAGES[i].range[1]) {
-                currentStageIdx = i;
-                break;
-              }
-            }
-            if (p >= 1) currentStageIdx = DECOR_STAGES.length - 1;
-            
-            const stage = DECOR_STAGES[currentStageIdx];
-            
-            const rangeStart = stage.range[0];
-            const rangeEnd = stage.range[1];
-            const stageLength = rangeEnd - rangeStart;
-            const localP = (p - rangeStart) / stageLength;
-            
-            let opacity = 1;
-            let yOffset = 0;
-            
-            if (localP < 0.2) {
-              opacity = localP / 0.2;
-              yOffset = 10 * (1 - (localP / 0.2));
-            } else if (localP > 0.8) {
-              opacity = 1 - ((localP - 0.8) / 0.2);
-              yOffset = -10 * ((localP - 0.8) / 0.2);
-            }
-
-            textContainerRef.current.style.opacity = opacity.toString();
-            textContainerRef.current.style.transform = `translateY(${yOffset}px)`;
-            
-            const titleEl = textContainerRef.current.querySelector('h3');
-            const descEl = textContainerRef.current.querySelector('p');
-            if (titleEl && titleEl.textContent !== stage.id) titleEl.textContent = stage.id;
-            if (descEl && descEl.textContent !== stage.text) descEl.textContent = stage.text;
-          }
-        },
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
       },
     });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
-  }, [isReducedMotion]);
+  }, { scope: containerRef });
 
   return (
-    <section id="decor" ref={containerRef} className="relative w-full h-screen bg-black overflow-hidden border-t border-border/10">
-      <div className="absolute inset-0 z-0">
-        {!isReducedMotion ? (
-          <Canvas camera={{ position: [0, 2, 8], fov: 45 }} dpr={[1, 2]}>
-            <DecorScene progress={sceneProgress} />
-          </Canvas>
-        ) : (
-          <div className="flex flex-col items-center justify-center h-full space-y-12 px-6">
-            <h2 className="text-3xl text-accent font-serif tracking-widest">CUSTOMISED DÉCOR</h2>
-            {DECOR_STAGES.map(stage => (
-              <div key={stage.id} className="text-center">
-                <h3 className="text-xl text-white font-bold">{stage.id}</h3>
-                <p className="text-gray-400 mt-2">{stage.text}</p>
-              </div>
-            ))}
-          </div>
-        )}
+    <section
+      id="customised-decor"
+      ref={containerRef}
+      className="relative w-full h-screen min-h-[600px] bg-black overflow-hidden flex items-center justify-center"
+    >
+      {/* Background Visual */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div ref={imageRef} className="absolute inset-[-10%] w-[120%] h-[120%] flex items-center justify-center bg-neutral-900">
+           {/* Elegant placeholder for missing decor photograph */}
+           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30 z-10" />
+           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-black to-black z-10" />
+           <div className="w-full h-full opacity-10" style={{ backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, .3) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, .3) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .3) 76%, transparent 77%, transparent)', backgroundSize: '50px 50px' }} />
+        </div>
       </div>
 
-      {!isReducedMotion && (
-        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-24 px-6 md:px-24 pointer-events-none">
-          <h2 className="text-sm text-accent font-mono tracking-[0.2em] mb-4 uppercase">Customised Décor</h2>
-          <div ref={textContainerRef} className="max-w-2xl">
-            <h3 className="text-3xl md:text-5xl font-serif text-white uppercase drop-shadow-lg">
-              SPACE
-            </h3>
-            <p className="mt-2 text-xl md:text-2xl text-gray-300 drop-shadow-md">
-              Every detail begins with a blank space.
-            </p>
-          </div>
-        </div>
-      )}
+      {/* Floating Labels */}
+      <div className="absolute top-12 left-6 md:left-12 z-20 flex gap-4">
+        <span className="px-4 py-2 border border-white/20 text-white text-xs font-bold tracking-widest uppercase backdrop-blur-md">
+          Customised Décor
+        </span>
+        <span className="px-4 py-2 bg-white text-black text-xs font-bold tracking-widest uppercase hidden md:inline-block">
+          Designed Around You
+        </span>
+      </div>
+
+      {/* Center Content */}
+      <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
+        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight whitespace-pre-wrap">
+          {siteContent.customisedDecor.heading}
+        </h2>
+        
+        <p className="mt-8 text-xl md:text-2xl text-gray-300 font-light max-w-2xl">
+          {siteContent.customisedDecor.subheading}
+        </p>
+
+        <Link
+           href="#contact"
+           className="mt-12 inline-flex px-8 py-4 bg-teal-500 text-black font-bold uppercase tracking-widest hover:bg-teal-400 transition-colors"
+        >
+          {siteContent.customisedDecor.cta}
+        </Link>
+      </div>
     </section>
   );
 }

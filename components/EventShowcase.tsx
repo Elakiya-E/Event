@@ -1,122 +1,72 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
-import ShowcaseScene from "./three/showcase/ShowcaseScene";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const SHOWCASE_DATA = [
-  { id: "AURA", title: "THE AURA GALA", location: "Metropolis Museum", scale: "1,200 Guests" },
-  { id: "NOVA", title: "PROJECT NOVA", location: "Industrial Pier 4", scale: "800 Guests" },
-  { id: "ECHO", title: "ECHO SUMMIT", location: "Botanical Glasshouse", scale: "450 Guests" },
-];
+import React, { useState } from "react";
+import { siteContent } from "@/data/siteContent";
 
 export default function EventShowcase() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const sceneProgress = useRef(0);
-  const uiContainerRef = useRef<HTMLDivElement>(null);
-  const isReducedMotion = useReducedMotion();
+  const content = siteContent.portfolio;
+  const [activeFilter, setActiveFilter] = useState("ALL");
 
-  useEffect(() => {
-    if (isReducedMotion || !containerRef.current) return;
-
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=500%",
-        scrub: 1,
-        pin: true,
-        onUpdate: (self) => {
-          sceneProgress.current = self.progress;
-
-          if (uiContainerRef.current) {
-            const p = self.progress;
-            
-            // UI fading logic
-            // 0.0 - 0.2: Transition from Decor
-            // 0.2 - 0.4: Event 1 (AURA)
-            // 0.5 - 0.7: Event 2 (NOVA)
-            // 0.8 - 1.0: Event 3 (ECHO)
-            
-            let activeIdx = -1;
-            let opacity = 0;
-            
-            if (p > 0.2 && p < 0.45) {
-              activeIdx = 0;
-              opacity = Math.sin(((p - 0.2) / 0.25) * Math.PI);
-            } else if (p > 0.45 && p < 0.75) {
-              activeIdx = 1;
-              opacity = Math.sin(((p - 0.45) / 0.3) * Math.PI);
-            } else if (p > 0.75) {
-              activeIdx = 2;
-              opacity = Math.sin(((p - 0.75) / 0.25) * Math.PI);
-            }
-
-            uiContainerRef.current.style.opacity = opacity.toString();
-            
-            if (activeIdx >= 0) {
-              const data = SHOWCASE_DATA[activeIdx];
-              const titleEl = uiContainerRef.current.querySelector('.showcase-title');
-              const detailsEl = uiContainerRef.current.querySelector('.showcase-details');
-              
-              if (titleEl && titleEl.textContent !== data.title) titleEl.textContent = data.title;
-              if (detailsEl && detailsEl.textContent !== `${data.location} // ${data.scale}`) {
-                detailsEl.textContent = `${data.location} // ${data.scale}`;
-              }
-            }
-          }
-        },
-      },
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
-  }, [isReducedMotion]);
+  const filteredProjects = activeFilter === "ALL" 
+    ? content.projects 
+    : content.projects.filter(p => p.category === activeFilter);
 
   return (
-    <section id="showcase" ref={containerRef} className="relative w-full h-screen bg-[#030303] overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        {!isReducedMotion ? (
-          <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 2]}>
-            <ShowcaseScene sceneProgress={sceneProgress} />
-          </Canvas>
-        ) : (
-          <div className="flex flex-col items-center justify-center h-full space-y-16 px-6 py-24 bg-[#030303]">
-            <h2 className="text-3xl text-accent font-serif tracking-widest uppercase">Portfolio</h2>
-            {SHOWCASE_DATA.map(item => (
-              <div key={item.id} className="text-center">
-                <h3 className="text-4xl text-white font-serif uppercase mb-2">{item.title}</h3>
-                <p className="text-gray-400 font-mono text-sm tracking-widest">{item.location} {"//"} {item.scale}</p>
-              </div>
+    <section id="portfolio" className="relative w-full bg-[#030303] py-32">
+      <div className="w-full max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-white whitespace-pre-wrap">
+            {content.heading}
+          </h2>
+          
+          <div className="flex flex-wrap gap-2 md:gap-4 md:max-w-md md:justify-end">
+            {content.filters.map((filter, idx) => (
+              <button 
+                key={idx}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-4 py-2 text-xs font-bold tracking-widest uppercase transition-colors rounded-full ${activeFilter === filter ? 'bg-teal-500 text-black' : 'text-neutral-400 hover:text-white border border-neutral-800 hover:border-teal-500/50'}`}
+              >
+                {filter}
+              </button>
             ))}
           </div>
-        )}
-      </div>
-
-      {!isReducedMotion && (
-        <div 
-          ref={uiContainerRef} 
-          className="absolute inset-0 z-10 flex flex-col justify-end pb-24 px-6 md:px-24 pointer-events-none opacity-0 will-change-opacity transition-opacity duration-300"
-        >
-          <div className="max-w-3xl">
-            <h4 className="text-accent font-mono text-xs tracking-[0.3em] uppercase mb-4">Featured Experience</h4>
-            <h3 className="showcase-title text-4xl md:text-6xl lg:text-7xl font-serif text-white uppercase drop-shadow-xl mb-4">
-              TITLE
-            </h3>
-            <p className="showcase-details text-sm md:text-base text-gray-300 font-sans tracking-widest uppercase drop-shadow-md border-l border-accent/50 pl-4">
-              LOCATION // SCALE
-            </p>
-          </div>
         </div>
-      )}
+
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+          {filteredProjects.map((project, idx) => {
+            // Give different heights for a masonry feel
+            const heightClass = idx % 3 === 0 ? "aspect-[3/4]" : idx % 3 === 1 ? "aspect-square" : "aspect-[4/3]";
+            
+            return (
+              <div key={idx} className={`group relative bg-neutral-900 overflow-hidden ${heightClass} break-inside-avoid flex flex-col justify-end p-8 cursor-pointer`}>
+                
+                {/* Elegant abstract background instead of solid grey placeholder */}
+                <div className="absolute inset-0 bg-neutral-900 flex items-center justify-center -z-10 overflow-hidden">
+                  <div className="absolute w-full h-full bg-gradient-to-br from-teal-950/30 to-black/90" />
+                  <div className={`w-[200%] h-[200%] opacity-[0.02] absolute`} style={{ backgroundImage: 'radial-gradient(circle at center, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+                </div>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+
+                <div className="relative z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <div className="text-teal-400 text-xs tracking-widest uppercase mb-3 flex flex-wrap items-center gap-2">
+                    <span>{project.location}</span>
+                    <span className="w-1 h-1 rounded-full bg-teal-400/50"></span>
+                    <span>{project.type}</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">{project.name}</h3>
+                  
+                  <div className="overflow-hidden h-0 group-hover:h-auto opacity-0 group-hover:opacity-100 transition-all duration-500 mt-4">
+                    <p className="text-neutral-300 text-sm font-light leading-relaxed">
+                      {project.servicesProvided.join(" • ")}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 }

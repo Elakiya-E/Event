@@ -14,11 +14,16 @@ const fontSerif = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Iragu Events | Cinematic Event Experience",
-  description: "Premium, cinematic, scroll-driven event management website.",
+  title: "Iragu Events | Complete Event Planning & Customised Décor",
+  description: "From customised décor to complete event planning and execution, Iragu Events takes complete responsibility for bringing your vision to life.",
+  openGraph: {
+    title: "Iragu Events | Complete Event Planning & Customised Décor",
+    description: "From customised décor to complete event planning and execution, Iragu Events takes complete responsibility for bringing your vision to life.",
+    type: "website",
+    locale: "en_IN",
+  }
 };
 
-import ScrollProgress from "@/components/ScrollProgress";
 
 export default function RootLayout({
   children,
@@ -26,11 +31,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontSerif.variable} antialiased`}>
+    <html lang="en" className={`${fontSans.variable} ${fontSerif.variable} antialiased`} suppressHydrationWarning>
       <body>
         <LenisProvider>
           {children}
-          <ScrollProgress />
         </LenisProvider>
       </body>
     </html>

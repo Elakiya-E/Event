@@ -4,25 +4,26 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
     { label: 'Home', href: '#hero' },
-    { label: 'Event World', href: '#event-world' },
-    { label: 'Creation Journey', href: '#creation' },
-    { label: 'The Difference', href: '#difference' },
-    { label: 'Customised Décor', href: '#decor' },
-    { label: 'Portfolio', href: '#showcase' },
+    { label: 'About', href: '#about' },
     { label: 'Services', href: '#services' },
+    { label: 'Our Work', href: '#portfolio' },
+    { label: 'Case Studies', href: '#case-studies' },
+    { label: 'Why Iragu', href: '#why-iragu' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 p-6 md:p-10 pointer-events-none mix-blend-difference text-white">
-      <div className="flex items-center justify-between pointer-events-auto">
-        <Link href="/" className="text-xl md:text-2xl font-serif tracking-widest uppercase">
-          Iragu Events
+    <header className="fixed top-0 left-0 right-0 h-20 md:h-24 z-[1000] bg-black border-b border-white/5 isolate">
+      <div className="w-full h-full px-6 md:px-10 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/images/logo.png" alt="Iragu Events Logo" width={150} height={40} className="object-contain" />
         </Link>
         
         {/* Desktop Nav */}
@@ -32,7 +33,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/#plan" className="border border-white/50 px-6 py-2 rounded-full hover:bg-white hover:text-black transition-colors mix-blend-normal">
+          <Link href="/#contact" className="border border-white/50 px-6 py-2 rounded-full hover:bg-white hover:text-black transition-colors mix-blend-normal">
             Plan Your Event
           </Link>
         </nav>
@@ -58,8 +59,8 @@ export default function Navbar() {
             className="fixed inset-0 bg-background text-foreground z-50 flex flex-col p-6 pointer-events-auto mix-blend-normal"
           >
             <div className="flex items-center justify-between">
-              <Link href="/" className="text-xl font-serif tracking-widest uppercase" onClick={() => setIsOpen(false)}>
-                Iragu Events
+              <Link href="/" onClick={() => setIsOpen(false)}>
+                <Image src="/images/logo.png" alt="Iragu Events Logo" width={120} height={32} className="object-contain" />
               </Link>
               <button 
                 className="p-2 -mr-2"
@@ -76,7 +77,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="mt-8">
-                <Link href="/#plan" onClick={() => setIsOpen(false)} className="inline-block border border-border px-8 py-3 rounded-full hover:bg-white hover:text-black transition-colors text-base font-sans">
+                <Link href="/#contact" onClick={() => setIsOpen(false)} className="inline-block border border-border px-8 py-3 rounded-full hover:bg-white hover:text-black transition-colors text-base font-sans">
                   Plan Your Event
                 </Link>
               </div>

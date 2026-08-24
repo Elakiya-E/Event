@@ -1,111 +1,112 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import IraguHeroScene from "./three/IraguHeroScene";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import React, { useRef, useState, useEffect } from "react";
+import { useGSAP, gsap } from "@/hooks/useGsap";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { siteContent } from "@/data/siteContent";
+import { motion, AnimatePresence } from "framer-motion";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+// Cinematic transition images
+// Using the same image twice allows the subtle Ken Burns scale animation to seamlessly crossfade and loop.
+const IMAGES = [
+  "/images/hero-bg.png",
+  "/images/hero-bg.png"
+];
 
 export default function IraguHero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const sceneProgress = useRef(0);
-  const textRef1 = useRef<HTMLHeadingElement>(null);
-  const textRef2 = useRef<HTMLHeadingElement>(null);
-  const textRef3 = useRef<HTMLHeadingElement>(null);
-  const textContainerRef = useRef<HTMLDivElement>(null);
-  const isReducedMotion = useReducedMotion();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Background slideshow logic
   useEffect(() => {
-    if (isReducedMotion || !containerRef.current) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % IMAGES.length);
+    }, 7000); // 7 seconds per slide
+    return () => clearInterval(timer);
+  }, []);
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=300%",
-        scrub: 1,
-        pin: true,
-        onUpdate: (self) => {
-          sceneProgress.current = self.progress;
-        },
-      },
-    });
-
-    // Typography animations
-    tl.to(textRef1.current, { y: -50, opacity: 0, duration: 0.2 }, 0.2)
-      .to(textRef2.current, { y: -50, opacity: 0, duration: 0.2 }, 0.4)
-      .to(textRef3.current, { y: -50, opacity: 0, duration: 0.2 }, 0.6)
-      .to(textContainerRef.current, { opacity: 0, duration: 0.2 }, 0.8);
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [isReducedMotion]);
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    
+    // Subtle entry animation for content
+    gsap.fromTo(containerRef.current.querySelectorAll('.animate-in'), 
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out", delay: 0.2 }
+    );
+  }, { scope: containerRef });
 
   return (
     <section
       id="hero"
       ref={containerRef}
-      className="relative w-full h-screen bg-[#050505] overflow-hidden pt-24"
+      className="relative w-full min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-6rem)] mt-20 md:mt-24 bg-black overflow-hidden flex flex-col justify-center"
     >
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        {!isReducedMotion ? (
-          <Canvas
-            camera={{ position: [0, 0, 8], fov: 45 }}
-            dpr={[1, 2]} // Support higher pixel density for retina displays, capped at 2 for performance
-            gl={{ antialias: true, alpha: false }}
-          >
-            <IraguHeroScene sceneProgress={sceneProgress} />
-          </Canvas>
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-teal-950/20" />
-        )}
+      {/* Cinematic Slideshow Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 1 }}
+            animate={{ opacity: 1, scale: 1.035 }}
+            exit={{ opacity: 0 }}
+            transition={{ 
+              opacity: { duration: 1.5, ease: "easeInOut" },
+              scale: { duration: 8.5, ease: [0.22, 1, 0.36, 1] } 
+            }}
+            className="absolute inset-0 w-full h-full bg-cover bg-right"
+            style={{ backgroundImage: `url(${IMAGES[currentIndex]})` }}
+          />
+        </AnimatePresence>
+        
+        {/* Strong black gradient from LEFT to RIGHT for readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent w-full z-10 hidden md:block" />
+        
+        {/* Mobile stronger overlay for readability */}
+        <div className="absolute inset-0 bg-black/70 md:hidden z-10" />
       </div>
-
-      {/* HTML Overlay */}
-      <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 md:px-12 lg:px-24 pointer-events-none">
-        <div ref={textContainerRef} className="max-w-3xl pointer-events-auto">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white uppercase leading-[0.9]">
-            <span ref={textRef1} className="block overflow-hidden">
-              WE CREATE
-            </span>
-            <span ref={textRef2} className="block overflow-hidden text-teal-400">
-              EXPERIENCES
-            </span>
-            <span ref={textRef3} className="block overflow-hidden">
-              THAT STAY
-            </span>
+      
+      {/* Content */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 flex flex-col justify-center py-12 md:py-0">
+        {/* Desktop: left 42% constraints */}
+        <div className="w-full lg:w-[42%]">
+          
+          <h1 className="font-serif text-3xl md:text-4xl lg:text-[3.25rem] font-medium tracking-tight text-white leading-[1.0] animate-in">
+            Helping People & Brands <br />
+            <span className="text-teal-500">Create Stress-Free</span> Events
           </h1>
           
-          <p className="mt-8 text-lg md:text-xl text-gray-300 max-w-xl font-light">
-            From ideas to unforgettable celebrations, we plan, design and execute
-            events that leave lasting impressions.
+          <p className="mt-6 text-sm md:text-base text-neutral-200 font-light animate-in leading-relaxed max-w-[560px]">
+            {siteContent.hero.supportingStatement}
           </p>
 
-          <div className="mt-12 flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+          <div className="mt-6 border-l-2 border-teal-500 pl-5 animate-in max-w-[560px]">
+            <p className="text-[10px] md:text-xs text-neutral-300 font-semibold tracking-[0.15em] uppercase leading-relaxed">
+              We&apos;re not just event decorators.<br />
+              We&apos;re your complete event partner.<br />
+              <span className="text-teal-500">Your Vision. Our Creativity.</span><br />
+              Complete Event Responsibility.
+            </p>
+          </div>
+
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center animate-in">
             <Link
-              href="#plan"
-              className="group relative inline-flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-black px-8 py-4 rounded-full font-semibold transition-all duration-300"
+              href="#contact"
+              className="group relative inline-flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-black px-8 py-4 font-bold uppercase tracking-widest transition-colors duration-300 text-sm"
             >
-              PLAN YOUR EVENT
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              {siteContent.hero.ctaPrimary}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             
             <Link
-              href="#work"
-              className="text-white hover:text-teal-400 font-medium tracking-wide transition-colors duration-300 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-px after:bg-teal-400 after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-300"
+              href="#portfolio"
+              className="group relative inline-flex items-center justify-center gap-2 border border-neutral-500 hover:border-white text-white px-8 py-4 font-bold uppercase tracking-widest transition-colors duration-300 text-sm"
             >
-              EXPLORE OUR WORK
+              {siteContent.hero.ctaSecondary}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
+          
         </div>
       </div>
     </section>

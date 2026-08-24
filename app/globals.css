@@ -40,6 +40,10 @@
   }
 
   /* Lenis smooth scrolling base */
+  html {
+    scroll-padding-top: 100px;
+  }
+  
   html.lenis, html.lenis body {
     height: auto;
   }

@@ -11,12 +11,19 @@ if (typeof window !== "undefined") {
 
 const SECTIONS = [
   { id: "hero", label: "01 / HERO" },
-  { id: "event-world", label: "02 / EVENT WORLD" },
-  { id: "creation", label: "03 / CREATION" },
-  { id: "difference", label: "04 / DIFFERENCE" },
-  { id: "decor", label: "05 / DÉCOR" },
-  { id: "showcase", label: "06 / PORTFOLIO" },
-  { id: "services", label: "07 / SERVICES" },
+  { id: "trust", label: "02 / SOCIAL PROOF" },
+  { id: "what-we-do", label: "03 / WHAT WE DO" },
+  { id: "decor", label: "04 / DÉCOR" },
+  { id: "portfolio", label: "05 / PORTFOLIO" },
+  { id: "services", label: "06 / SERVICES" },
+  { id: "creation", label: "07 / HOW WE WORK" },
+  { id: "case-studies", label: "08 / CASE STUDIES" },
+  { id: "difference", label: "09 / WHY IRAGU" },
+  { id: "testimonials", label: "10 / TESTIMONIALS" },
+  { id: "locations", label: "11 / LOCATIONS" },
+  { id: "about", label: "12 / ABOUT" },
+  { id: "pricing", label: "13 / PRICING" },
+  { id: "contact", label: "14 / CONTACT" }
 ];
 
 export default function ScrollIndicator() {
