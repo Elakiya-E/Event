@@ -467,6 +467,12 @@ export const siteContent = {
 
   locations: {
     heading: "Creating Events Across South Tamil Nadu",
+    /**
+     * The component `Locations.tsx` expects a `subheading` field for a short
+     * supporting line displayed beneath the main heading. Adding this field
+     * resolves the TypeScript error `Property 'subheading' does not exist`.
+     */
+    subheading: "Based in Nagercoil, serving South Tamil Nadu and beyond",
     content: "Based in Nagercoil, Iragu Events works with clients across:",
     base: "Based in Nagercoil, Iragu Events works with clients across:",
     cities: [
