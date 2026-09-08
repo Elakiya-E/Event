@@ -6,18 +6,39 @@ export default function WhatWeDo() {
   const content = siteContent.whatWeDo;
 
   return (
-    <section id="what-we-do" className="w-full bg-[#050505] text-white py-24 md:py-32 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-4">
+    <section id="services" className="w-full bg-[#050505] text-white py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-10 lg:px-16 border-t border-neutral-900">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start">
+        <div className="lg:col-span-5 space-y-4">
+          <span className="text-teal-400 font-mono text-xs tracking-widest uppercase">
+            {content.eyebrow}
+          </span>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-white leading-tight">
             {content.heading}
           </h2>
-          <h3 className="text-2xl md:text-3xl font-medium text-teal-400">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-medium text-teal-400">
             {content.subheading}
           </h3>
+          <div className="pt-4 sm:pt-6">
+            <div className="inline-block p-3 sm:p-4 rounded-lg bg-neutral-900/80 border border-neutral-800">
+              <p className="text-xs sm:text-sm font-semibold text-neutral-200 tracking-wide uppercase">
+                {siteContent.brand.signature}
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="space-y-6 text-lg text-neutral-300 leading-relaxed whitespace-pre-wrap">
-          {content.body}
+
+        <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-sm sm:text-base md:text-lg text-neutral-300 font-light leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl font-normal text-white">
+            {content.intro}
+          </p>
+          <div className="space-y-4 whitespace-pre-wrap text-neutral-300">
+            {content.body}
+          </div>
+          <div className="pt-4 border-l-2 border-teal-500 pl-4">
+            <p className="text-base sm:text-lg md:text-xl font-medium text-teal-300 italic">
+              &quot;{content.highlight}&quot;
+            </p>
+          </div>
         </div>
       </div>
     </section>

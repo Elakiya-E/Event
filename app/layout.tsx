@@ -14,15 +14,16 @@ const fontSerif = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Iragu Events | Complete Event Planning & Customised Décor",
-  description: "From customised décor to complete event planning and execution, Iragu Events takes complete responsibility for bringing your vision to life.",
+  title: "Iragu Events | Complete Event Planning & Management",
+  description: "Helping People & Brands Create Stress-Free Events. We're not just event decorators — we're your complete event partner. Your Vision. Our Creativity. Complete Event Responsibility.",
   openGraph: {
-    title: "Iragu Events | Complete Event Planning & Customised Décor",
-    description: "From customised décor to complete event planning and execution, Iragu Events takes complete responsibility for bringing your vision to life.",
+    title: "Iragu Events | Complete Event Planning & Management",
+    description: "Helping People & Brands Create Stress-Free Events. From customised décor to complete event execution, Iragu Events takes complete responsibility.",
     type: "website",
     locale: "en_IN",
   }
 };
+
 
 
 export default function RootLayout({

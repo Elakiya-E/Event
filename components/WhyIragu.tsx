@@ -1,1 +1,7 @@
-export default function WhyIragu() { return <div>WhyIragu</div>; }
+"use client";
+
+import IraguDifference from "@/components/IraguDifference";
+
+export default function WhyIragu() {
+  return <IraguDifference />;
+}

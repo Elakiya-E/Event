@@ -1,38 +1,97 @@
 "use client";
 
-import { siteContent } from "@/data/siteContent";
+import React, { useRef } from "react";
 import Link from "next/link";
+import { siteContent } from "@/data/siteContent";
+import { useGSAP, gsap, ScrollTrigger } from "@/hooks/useGsap";
+import { ArrowRight, Sparkles } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function FinalCTA() {
-  const content = siteContent.cta;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const data = siteContent.finalCta;
+
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+
+      gsap.fromTo(
+        containerRef.current.querySelectorAll(".final-cta-elem"),
+        { y: 28, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 82%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
+  const handleScrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // If we're on the same page with #contact-form, smooth scroll to it
+    const formElement = document.getElementById("contact-form");
+    if (formElement) {
+      e.preventDefault();
+      formElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      const firstInput = formElement.querySelector<HTMLInputElement>("input#\\:r0\\:-name, input[name='name']");
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 600);
+      }
+    }
+  };
 
   return (
-    <section id="contact" className="w-full bg-teal-500 text-black py-24 md:py-40 px-6">
-      <div className="max-w-5xl mx-auto text-center space-y-12">
-        <h3 className="text-xl md:text-2xl font-bold uppercase tracking-widest text-teal-900">
-          {content.heading}
-        </h3>
-        
-        <h2 className="text-5xl md:text-7xl font-bold tracking-tight whitespace-pre-wrap leading-tight">
-          {content.subheading}
-        </h2>
-        
-        <p className="text-xl md:text-2xl text-teal-950 max-w-2xl mx-auto">
-          {content.body}
-        </p>
-        
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
-          <Link href="#contact" className="inline-block px-10 py-5 bg-black text-white font-bold uppercase tracking-widest text-lg hover:bg-neutral-800 transition-colors w-full sm:w-auto">
-            {content.button}
-          </Link>
+    <section
+      id="planning"
+      ref={containerRef}
+      className="relative w-full bg-[#020202] text-white py-16 sm:py-28 md:py-36 px-4 sm:px-6 border-t border-neutral-800/80 overflow-hidden"
+      aria-labelledby="final-cta-title"
+    >
+      {/* Subtle ambient lighting accent */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+        <div className="w-[600px] sm:w-[850px] h-[350px] bg-teal-500/10 blur-[140px] rounded-full opacity-70" />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6 sm:space-y-8 md:space-y-10">
+        {/* Sub-heading / Eyebrow */}
+        <div className="final-cta-elem inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-teal-500/20 bg-teal-950/30 text-teal-400 text-[11px] sm:text-xs md:text-sm font-mono tracking-[0.2em] uppercase">
+          <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+          <span>{data.heading}</span>
         </div>
 
-        <div className="pt-16 flex flex-wrap justify-center gap-8 text-teal-950 font-bold tracking-widest uppercase">
-          {content.contactLinks.map((link, idx) => (
-            <a key={idx} href="#" className="hover:text-black transition-colors">
-              {link.type}
-            </a>
-          ))}
+        {/* Main Heading / Message */}
+        <h2
+          id="final-cta-title"
+          className="final-cta-elem text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-bold tracking-tight text-white leading-[1.12]"
+        >
+          {data.mainHeading}
+        </h2>
+
+        {/* Description */}
+        <p className="final-cta-elem max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-neutral-300 font-light leading-relaxed">
+          {data.description}
+        </p>
+
+        {/* Dominant Conversion Action */}
+        <div className="final-cta-elem pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            href="#contact-form"
+            onClick={handleScrollToForm}
+            aria-label="Start planning your event with Iragu Events"
+            className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-teal-500 hover:bg-teal-400 text-black font-bold uppercase tracking-widest text-xs sm:text-sm transition-all duration-300 shadow-xl shadow-teal-500/25 active:scale-95"
+          >
+            <span>{data.cta}</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+          </Link>
         </div>
       </div>
     </section>

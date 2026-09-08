@@ -1,38 +1,20 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { useGSAP, gsap } from "@/hooks/useGsap";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { siteContent } from "@/data/siteContent";
-import { motion, AnimatePresence } from "framer-motion";
-
-// Cinematic transition images
-// Using the same image twice allows the subtle Ken Burns scale animation to seamlessly crossfade and loop.
-const IMAGES = [
-  "/images/hero-bg.png",
-  "/images/hero-bg.png"
-];
+import { ArrowRight, Leaf, Calendar, Sparkles } from "lucide-react";
 
 export default function IraguHero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Background slideshow logic
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % IMAGES.length);
-    }, 7000); // 7 seconds per slide
-    return () => clearInterval(timer);
-  }, []);
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    
-    // Subtle entry animation for content
-    gsap.fromTo(containerRef.current.querySelectorAll('.animate-in'), 
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out", delay: 0.2 }
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.fromTo(
+      containerRef.current.querySelectorAll(".hero-fade-in"),
+      { y: 24, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, stagger: 0.12 }
     );
   }, { scope: containerRef });
 
@@ -40,74 +22,131 @@ export default function IraguHero() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative w-full min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-6rem)] mt-20 md:mt-24 bg-black overflow-hidden flex flex-col justify-center"
+      className="relative flex w-full min-h-[92vh] md:min-h-screen overflow-hidden bg-[#0a0f0f]"
     >
-      {/* Cinematic Slideshow Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, scale: 1 }}
-            animate={{ opacity: 1, scale: 1.035 }}
-            exit={{ opacity: 0 }}
-            transition={{ 
-              opacity: { duration: 1.5, ease: "easeInOut" },
-              scale: { duration: 8.5, ease: [0.22, 1, 0.36, 1] } 
-            }}
-            className="absolute inset-0 w-full h-full bg-cover bg-right"
-            style={{ backgroundImage: `url(${IMAGES[currentIndex]})` }}
-          />
-        </AnimatePresence>
-        
-        {/* Strong black gradient from LEFT to RIGHT for readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent w-full z-10 hidden md:block" />
-        
-        {/* Mobile stronger overlay for readability */}
-        <div className="absolute inset-0 bg-black/70 md:hidden z-10" />
-      </div>
-      
-      {/* Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 flex flex-col justify-center py-12 md:py-0">
-        {/* Desktop: left 42% constraints */}
-        <div className="w-full lg:w-[42%]">
-          
-          <h1 className="font-serif text-3xl md:text-4xl lg:text-[3.25rem] font-medium tracking-tight text-white leading-[1.0] animate-in">
-            Helping People & Brands <br />
-            <span className="text-teal-500">Create Stress-Free</span> Events
-          </h1>
-          
-          <p className="mt-6 text-sm md:text-base text-neutral-200 font-light animate-in leading-relaxed max-w-[560px]">
-            {siteContent.hero.supportingStatement}
-          </p>
+      {/* Left Panel */}
+      <div
+        className="relative flex flex-col justify-center w-2/5 text-white px-8 py-8 md:px-12 md:py-10 gap-4 hero-fade-in"
+        style={{ clipPath: "polygon(0 0, 95% 0, 100% 5%, 100% 100%, 0 100%)" }}
+      >
+        <div className="max-w-[480px] space-y-6">
 
-          <div className="mt-6 border-l-2 border-teal-500 pl-5 animate-in max-w-[560px]">
-            <p className="text-[10px] md:text-xs text-neutral-300 font-semibold tracking-[0.15em] uppercase leading-relaxed">
-              We&apos;re not just event decorators.<br />
-              We&apos;re your complete event partner.<br />
-              <span className="text-teal-500">Your Vision. Our Creativity.</span><br />
-              Complete Event Responsibility.
-            </p>
-          </div>
-
-          <div className="mt-6 flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center animate-in">
-            <Link
-              href="#contact"
-              className="group relative inline-flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-black px-8 py-4 font-bold uppercase tracking-widest transition-colors duration-300 text-sm"
-            >
-              {siteContent.hero.ctaPrimary}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            
-            <Link
-              href="#portfolio"
-              className="group relative inline-flex items-center justify-center gap-2 border border-neutral-500 hover:border-white text-white px-8 py-4 font-bold uppercase tracking-widest transition-colors duration-300 text-sm"
-            >
-              {siteContent.hero.ctaSecondary}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-          
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-teal-400/70 text-xs uppercase tracking-wider text-teal-400 bg-black/30">
+          <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+          COMPLETE EVENT PLANNING & MANAGEMENT
         </div>
+
+        {/* Heading */}
+        <h1 className="text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.12] font-serif font-bold">
+          <span className="block">Helping People &amp;</span>
+          <span className="block">Brands</span>
+          <span className="block text-[#2dd4c8]">Create Stress‑Free</span>
+          <span className="block">Events</span>
+        </h1>
+
+        {/* Description */}
+        <p className="max-w-[420px] text-base text-neutral-300 leading-[1.6]">
+          From customised décor to complete event execution, we take care of every detail —
+          so you focus on the people, moments and memories that matter.
+        </p>
+
+        {/* CTAs */}
+        <div className="flex gap-4">
+          <Link
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-black font-bold px-5 py-3 rounded-full transition"
+          >
+            PLAN YOUR EVENT <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            href="#portfolio"
+            className="inline-flex items-center gap-2 border border-white/30 text-white font-bold px-5 py-3 rounded-full hover:bg-white/10 transition"
+          >
+            VIEW OUR WORK <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Feature items */}
+        <div className="flex gap-8 pt-2">
+          <div className="flex items-center gap-3">
+            <Leaf className="w-5 h-5 text-[#d4af37]" />
+            <div className="text-xs text-white">
+              <div>Customised</div>
+              <div>Décor</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Calendar className="w-5 h-5 text-[#d4af37]" />
+            <div className="text-xs text-white">
+              <div>Complete</div>
+              <div>Planning</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Sparkles className="w-5 h-5 text-[#d4af37]" />
+            <div className="text-xs text-white">
+              <div>Seamless</div>
+              <div>Execution</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom tagline */}
+        <div className="text-[10px] uppercase text-white/70 flex items-center gap-2">
+          YOUR VISION. OUR CREATIVITY. COMPLETE EVENT RESPONSIBILITY.
+          <span className="w-8 h-0.5 bg-[#d4af37] inline-block" />
+        </div>
+        </div>
+      </div>
+
+      {/* Right Panel */}
+      <div className="relative w-3/5 overflow-hidden">
+        {/* Gradient fade on left edge of image */}
+        <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#0a0f0f] to-transparent pointer-events-none" />
+        {/* Main image */}
+        <img
+          src="/images/hero1.png"
+          alt="Elegant candlelit wedding event stage"
+          className="w-full h-full object-cover"
+        />
+        {/* Gradient edges for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f0f] via-transparent to-transparent pointer-events-none" />
+
+        {/* Top‑right script overlay */}
+        <div className="absolute top-6 right-6 text-white italic font-serif text-2xl tracking-wider">
+          Events People Memories
+        </div>
+        <div className="absolute top-12 right-6 w-16 h-0.5 bg-[#d4af37]" />
+
+        {/* Bottom‑right small cards */}
+        <div className="absolute bottom-6 right-8 flex gap-3">
+          <img
+            src="/images/hero2.png"
+            alt="Event detail close‑up"
+            className="w-32 h-32 object-cover rounded-lg border border-white/30"
+          />
+          <img
+            src="/images/hero2.png"
+            alt="Event detail close‑up"
+            className="w-32 h-32 object-cover rounded-lg border border-white/30 -translate-x-4"
+          />
+        </div>
+
+        {/* Badge over main image */}
+        <div className="absolute bottom-8 left-8 bg-black/50 text-xs uppercase text-white px-3 py-1 rounded-md flex items-center gap-1">
+          MORE THAN EVENTS
+          <span className="w-4 h-0.5 bg-[#d4af37]" />
+        </div>
+
+        {/* Curved separator – overlay SVG */}
+        <svg
+          className="absolute left-0 top-0 h-full w-12 pointer-events-none"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          <path d="M0,0 C30,20 30,80 0,100 L100,100 L100,0 Z" fill="#0a0f0f" />
+        </svg>
       </div>
     </section>
   );

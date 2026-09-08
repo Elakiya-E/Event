@@ -1,1 +1,7 @@
-export default function Clients() { return <div>Clients</div>; }
+"use client";
+
+import TrustSection from "@/components/TrustSection";
+
+export default function Clients() {
+  return <TrustSection />;
+}
