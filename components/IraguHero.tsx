@@ -139,11 +139,11 @@ export default function IraguHero() {
 
         {/* Curved separator SVG (desktop only) */}
         <svg
-          className="hidden md:block absolute left-0 top-0 h-full w-12 pointer-events-none z-10"
+          className="hidden md:block absolute left-[-1px] top-0 h-full w-12 pointer-events-none z-10"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
         >
-          <path d="M0,0 C30,20 30,80 0,100 L100,100 L100,0 Z" fill="#F1EADF" />
+          <path d="M0,0 C40,20 40,80 0,100 Z" fill="#F1EADF" />
         </svg>
       </div>
     </section>
