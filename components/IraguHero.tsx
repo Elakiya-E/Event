@@ -22,18 +22,18 @@ export default function IraguHero() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative flex w-full min-h-[92vh] md:min-h-screen overflow-hidden bg-[#0a0f0f]"
+      className="relative flex w-full min-h-[92vh] md:min-h-screen overflow-hidden bg-[#F7F3EA]"
     >
       {/* Left Panel */}
       <div
-        className="relative flex flex-col justify-center w-2/5 text-white px-8 py-8 md:px-12 md:py-10 gap-4 hero-fade-in"
+        className="relative flex flex-col justify-center w-2/5 text-[#292825] px-8 py-8 md:px-12 md:py-10 gap-4 hero-fade-in bg-[#F1EADF]"
         style={{ clipPath: "polygon(0 0, 95% 0, 100% 5%, 100% 100%, 0 100%)" }}
       >
         <div className="max-w-[480px] space-y-6">
 
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-teal-400/70 text-xs uppercase tracking-wider text-teal-400 bg-black/30">
-          <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-[#4F918B]/40 text-xs uppercase tracking-wider text-[#4F918B] bg-[#FCFAF6]">
+          <span className="w-2 h-2 rounded-full bg-[#C7A978] animate-pulse" />
           COMPLETE EVENT PLANNING & MANAGEMENT
         </div>
 
@@ -41,12 +41,12 @@ export default function IraguHero() {
         <h1 className="text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.12] font-serif font-bold">
           <span className="block">Helping People &amp;</span>
           <span className="block">Brands</span>
-          <span className="block text-[#2dd4c8]">Create Stress‑Free</span>
+          <span className="block text-[#4F918B]">Create Stress‑Free</span>
           <span className="block">Events</span>
         </h1>
 
         {/* Description */}
-        <p className="max-w-[420px] text-base text-neutral-300 leading-[1.6]">
+        <p className="max-w-[420px] text-base text-[#6F6A61] leading-[1.6]">
           From customised décor to complete event execution, we take care of every detail —
           so you focus on the people, moments and memories that matter.
         </p>
@@ -55,13 +55,13 @@ export default function IraguHero() {
         <div className="flex gap-4">
           <Link
             href="#contact"
-            className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-black font-bold px-5 py-3 rounded-full transition"
+            className="inline-flex items-center gap-2 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] font-bold px-5 py-3 rounded-full transition"
           >
             PLAN YOUR EVENT <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             href="#portfolio"
-            className="inline-flex items-center gap-2 border border-white/30 text-white font-bold px-5 py-3 rounded-full hover:bg-white/10 transition"
+            className="inline-flex items-center gap-2 border border-[#DED6C9] text-[#292825] font-bold px-5 py-3 rounded-full hover:bg-[#F1EADF] transition"
           >
             VIEW OUR WORK <ArrowRight className="w-4 h-4" />
           </Link>
@@ -70,22 +70,22 @@ export default function IraguHero() {
         {/* Feature items */}
         <div className="flex gap-8 pt-2">
           <div className="flex items-center gap-3">
-            <Leaf className="w-5 h-5 text-[#d4af37]" />
-            <div className="text-xs text-white">
+            <Leaf className="w-5 h-5 text-[#C7A978]" />
+            <div className="text-xs text-[#292825]">
               <div>Customised</div>
               <div>Décor</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Calendar className="w-5 h-5 text-[#d4af37]" />
-            <div className="text-xs text-white">
+            <Calendar className="w-5 h-5 text-[#C7A978]" />
+            <div className="text-xs text-[#292825]">
               <div>Complete</div>
               <div>Planning</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Sparkles className="w-5 h-5 text-[#d4af37]" />
-            <div className="text-xs text-white">
+            <Sparkles className="w-5 h-5 text-[#C7A978]" />
+            <div className="text-xs text-[#292825]">
               <div>Seamless</div>
               <div>Execution</div>
             </div>
@@ -93,9 +93,9 @@ export default function IraguHero() {
         </div>
 
         {/* Bottom tagline */}
-        <div className="text-[10px] uppercase text-white/70 flex items-center gap-2">
+        <div className="text-[10px] uppercase text-[#6F6A61] flex items-center gap-2">
           YOUR VISION. OUR CREATIVITY. COMPLETE EVENT RESPONSIBILITY.
-          <span className="w-8 h-0.5 bg-[#d4af37] inline-block" />
+          <span className="w-8 h-0.5 bg-[#C7A978] inline-block" />
         </div>
         </div>
       </div>
@@ -103,40 +103,38 @@ export default function IraguHero() {
       {/* Right Panel */}
       <div className="relative w-3/5 overflow-hidden">
         {/* Gradient fade on left edge of image */}
-        <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#0a0f0f] to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#F7F3EA] via-[#F7F3EA]/60 to-transparent pointer-events-none" />
         {/* Main image */}
         <img
           src="/images/hero1.png"
           alt="Elegant candlelit wedding event stage"
           className="w-full h-full object-cover"
         />
-        {/* Gradient edges for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f0f] via-transparent to-transparent pointer-events-none" />
 
         {/* Top‑right script overlay */}
-        <div className="absolute top-6 right-6 text-white italic font-serif text-2xl tracking-wider">
+        <div className="absolute top-6 right-6 text-[#292825] italic font-serif text-2xl tracking-wider bg-[#FCFAF6]/80 backdrop-blur-sm px-3 py-1 rounded-md">
           Events People Memories
         </div>
-        <div className="absolute top-12 right-6 w-16 h-0.5 bg-[#d4af37]" />
+        <div className="absolute top-14 right-6 w-16 h-0.5 bg-[#C7A978]" />
 
         {/* Bottom‑right small cards */}
         <div className="absolute bottom-6 right-8 flex gap-3">
           <img
             src="/images/hero2.png"
             alt="Event detail close‑up"
-            className="w-32 h-32 object-cover rounded-lg border border-white/30"
+            className="w-32 h-32 object-cover rounded-lg border border-[#DED6C9] shadow-md"
           />
           <img
             src="/images/hero2.png"
             alt="Event detail close‑up"
-            className="w-32 h-32 object-cover rounded-lg border border-white/30 -translate-x-4"
+            className="w-32 h-32 object-cover rounded-lg border border-[#DED6C9] shadow-md -translate-x-4"
           />
         </div>
 
         {/* Badge over main image */}
-        <div className="absolute bottom-8 left-8 bg-black/50 text-xs uppercase text-white px-3 py-1 rounded-md flex items-center gap-1">
+        <div className="absolute bottom-8 left-8 bg-[#FCFAF6]/95 border border-[#DED6C9] text-xs uppercase text-[#292825] px-3 py-1 rounded-md flex items-center gap-1 shadow-sm">
           MORE THAN EVENTS
-          <span className="w-4 h-0.5 bg-[#d4af37]" />
+          <span className="w-4 h-0.5 bg-[#C7A978]" />
         </div>
 
         {/* Curved separator – overlay SVG */}
@@ -145,7 +143,7 @@ export default function IraguHero() {
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
         >
-          <path d="M0,0 C30,20 30,80 0,100 L100,100 L100,0 Z" fill="#0a0f0f" />
+          <path d="M0,0 C30,20 30,80 0,100 L100,100 L100,0 Z" fill="#F1EADF" />
         </svg>
       </div>
     </section>

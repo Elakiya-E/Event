@@ -80,26 +80,26 @@ export default function TrustSection() {
     <section
       id="trust"
       ref={containerRef}
-      className="relative w-full bg-[#030303] overflow-hidden py-20 md:py-28 border-t border-neutral-800/70"
+      className="relative w-full bg-[#FCFAF6] overflow-hidden py-20 md:py-28 border-t border-[#DED6C9]"
     >
       {/* Background ambient lighting */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-teal-500/5 blur-[140px] rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[#C7A978]/5 blur-[140px] rounded-full" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         {/* ── Section Header ── */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 sm:mb-14 md:mb-16">
-          <div className="trust-head-elem inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-teal-500/20 bg-teal-950/30 text-teal-400 text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+          <div className="trust-head-elem inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#4F918B]/30 bg-[#FCFAF6] text-[#4F918B] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C7A978] animate-pulse" />
             Clients &amp; Collaborations
           </div>
 
-          <h2 className="trust-head-elem text-3xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight text-white leading-tight">
+          <h2 className="trust-head-elem text-3xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight text-[#292825] leading-tight">
             {content.heading}
           </h2>
 
-          <p className="trust-head-elem text-sm md:text-base text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="trust-head-elem text-sm md:text-base text-[#6F6A61] font-light max-w-2xl mx-auto leading-relaxed">
             {content.description || content.statement}
           </p>
         </div>
@@ -112,7 +112,7 @@ export default function TrustSection() {
               {verifiedBrands.map((brand) => (
                 <div
                   key={brand.id}
-                  className="trust-card p-6 rounded-2xl border border-neutral-800/80 bg-neutral-950/70 backdrop-blur-md flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300"
+                  className="trust-card p-6 rounded-2xl border border-[#DED6C9] bg-[#FCFAF6] hover:border-[#C7A978]/60 shadow-sm flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300"
                 >
                   {brand.logoUrl && (
                     <Image
@@ -135,27 +135,27 @@ export default function TrustSection() {
                   return (
                     <div
                       key={idx}
-                      className="trust-card group p-6 rounded-2xl border border-neutral-800/80 bg-neutral-950/70 backdrop-blur-md hover:border-teal-500/40 transition-all duration-300 flex flex-col justify-between"
+                      className="trust-card group p-6 rounded-2xl border border-[#DED6C9] bg-[#FCFAF6] hover:border-[#C7A978]/60 shadow-sm transition-all duration-300 flex flex-col justify-between"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-4">
-                          <div className="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-teal-400 group-hover:bg-teal-500 group-hover:text-black transition-colors">
+                          <div className="p-2.5 rounded-xl bg-[#F1EADF] border border-[#DED6C9] text-[#4F918B] group-hover:bg-[#4F918B] group-hover:text-[#FCFAF6] transition-colors">
                             <Icon className="w-5 h-5" />
                           </div>
                           <span className="font-mono text-[10px] text-neutral-500 uppercase tracking-widest">
                             0{idx + 1}
                           </span>
                         </div>
-                        <h3 className="text-base font-bold text-white mb-1.5 group-hover:text-teal-300 transition-colors">
+                        <h3 className="text-base font-bold text-[#292825] mb-1.5 group-hover:text-[#4F918B] transition-colors">
                           {industry.name}
                         </h3>
-                        <p className="text-xs text-neutral-400 font-light leading-relaxed">
+                        <p className="text-xs text-[#6F6A61] font-light leading-relaxed">
                           {industry.desc}
                         </p>
                       </div>
 
-                      <div className="mt-5 pt-3 border-t border-neutral-800/50 flex items-center gap-1.5 text-[10px] font-mono text-neutral-500 uppercase tracking-wider">
-                        <CheckCircle2 className="w-3 h-3 text-teal-400" />
+                      <div className="mt-5 pt-3 border-t border-[#DED6C9] flex items-center gap-1.5 text-[10px] font-mono text-[#928B81] uppercase tracking-wider">
+                        <CheckCircle2 className="w-3 h-3 text-[#4F918B]" />
                         <span>Trusted Partner</span>
                       </div>
                     </div>
@@ -164,16 +164,16 @@ export default function TrustSection() {
               </div>
 
               {/* Permission & Policy Note */}
-              <div className="p-4 rounded-xl bg-neutral-900/40 border border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-                <div className="flex items-center gap-2 text-xs text-neutral-400 font-mono">
-                  <ShieldCheck className="w-4 h-4 text-teal-400 flex-shrink-0" />
+              <div className="p-4 rounded-xl bg-[#F1EADF] border border-[#DED6C9] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+                <div className="flex items-center gap-2 text-xs text-[#6F6A61] font-mono">
+                  <ShieldCheck className="w-4 h-4 text-[#4F918B] flex-shrink-0" />
                   <span>
                     Client &amp; brand logos are published exclusively with written consent.
                   </span>
                 </div>
                 <Link
                   href="#contact"
-                  className="text-xs font-mono text-teal-400 hover:text-teal-300 uppercase tracking-wider flex items-center gap-1 flex-shrink-0"
+                  className="text-xs font-mono text-[#4F918B] hover:text-[#4F918B]/80 uppercase tracking-wider flex items-center gap-1 flex-shrink-0"
                 >
                   <span>Inquire for Corporate References</span>
                   <ArrowRight className="w-3 h-3" />

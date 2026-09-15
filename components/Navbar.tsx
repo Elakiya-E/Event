@@ -86,8 +86,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 h-20 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-black/90 backdrop-blur-md border-b border-neutral-800 shadow-2xl shadow-black/40"
-          : "bg-black/70 backdrop-blur-sm border-b border-neutral-900/60"
+          ? "bg-[#FCFAF6]/95 backdrop-blur-md border-b border-[#DED6C9] shadow-[0_4px_20px_rgba(41,40,37,0.06)]"
+          : "bg-[#F7F3EA]/90 backdrop-blur-sm border-b border-[#DED6C9]/70"
       }`}
     >
       <div className="w-full h-full max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between gap-4">
@@ -99,7 +99,7 @@ export default function Navbar() {
             alt="Iragu Events Logo"
             width={152}
             height={38}
-            className="h-12 w-auto object-contain transition-opacity duration-300 filter drop-shadow-[0_0_2px_rgba(255,255,255,0.6)]"
+            className="h-12 w-auto object-contain transition-opacity duration-300"
             priority
           />
         </Link>
@@ -117,14 +117,14 @@ export default function Navbar() {
                 href={item.href}
                 className={`relative py-1 transition-colors whitespace-nowrap ${
                   active
-                    ? "text-teal-400 font-semibold"
-                    : "text-neutral-300 hover:text-white"
+                    ? "text-[#4F918B] font-semibold"
+                    : "text-[#292825] hover:text-[#4F918B]"
                 }`}
                 aria-current={active ? "page" : undefined}
               >
                 <span>{item.label}</span>
                 {active && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-teal-400 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#4F918B] rounded-full" />
                 )}
               </Link>
             );
@@ -135,7 +135,7 @@ export default function Navbar() {
         <div className="hidden xl:flex items-center flex-shrink-0">
           <Link
             href="/#contact-form"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-500 hover:bg-teal-400 text-black font-mono font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-md shadow-teal-500/20 active:scale-95"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] font-mono font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-md shadow-[#4F918B]/15 active:scale-95"
           >
             <span>PLAN YOUR EVENT</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -147,7 +147,7 @@ export default function Navbar() {
           {/* Quick prominent CTA for mobile header (Visible from 360px+) */}
           <Link
             href="/#contact-form"
-            className="hidden min-[360px]:inline-flex text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-3 py-2 bg-teal-500 hover:bg-teal-400 text-black shadow-sm transition-all"
+            className="hidden min-[360px]:inline-flex text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-3 py-2 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] shadow-sm transition-all rounded-md"
           >
             PLAN EVENT
           </Link>
@@ -157,7 +157,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isOpen}
-            className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg border border-neutral-800 bg-neutral-900/80 text-white hover:text-teal-400 hover:border-teal-500/40 transition-colors"
+            className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg border border-[#DED6C9] bg-[#FCFAF6] text-[#292825] hover:text-[#4F918B] hover:border-[#4F918B]/40 transition-colors"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -172,15 +172,15 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 top-20 bg-black/95 backdrop-blur-xl border-t border-neutral-800 z-40 overflow-y-auto flex flex-col justify-between px-4 sm:px-6 py-6 sm:py-8"
+            className="fixed inset-0 top-20 bg-[#F7F3EA] backdrop-blur-xl border-t border-[#DED6C9] z-40 overflow-y-auto flex flex-col justify-between px-4 sm:px-6 py-6 sm:py-8"
           >
             <div className="space-y-6 max-w-lg mx-auto w-full">
-              <div className="flex items-center justify-between pb-3 border-b border-neutral-800/80">
-                <span className="text-[11px] font-mono tracking-widest text-neutral-400 uppercase flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+              <div className="flex items-center justify-between pb-3 border-b border-[#DED6C9]">
+                <span className="text-[11px] font-mono tracking-widest text-[#6F6A61] uppercase flex items-center gap-2">
+                  <Sparkles className="w-3.5 h-3.5 text-[#4F918B]" />
                   Menu Navigation
                 </span>
-                <span className="text-[10px] font-mono text-teal-400">IRAGU EVENTS</span>
+                <span className="text-[10px] font-mono text-[#C7A978]">IRAGU EVENTS</span>
               </div>
 
               {/* Navigation Items List */}
@@ -194,12 +194,12 @@ export default function Navbar() {
                       onClick={() => setIsOpen(false)}
                       className={`flex items-center justify-between py-3 px-3 rounded-xl transition-all ${
                         active
-                          ? "bg-neutral-900 text-teal-400 font-bold border border-teal-500/30"
-                          : "text-neutral-300 hover:text-white hover:bg-neutral-900/50"
+                          ? "bg-[#F1EADF] text-[#4F918B] font-bold border border-[#DED6C9]"
+                          : "text-[#292825] hover:text-[#4F918B] hover:bg-[#F1EADF]/60"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-[10px] font-mono text-neutral-500">
+                        <span className="text-[10px] font-mono text-[#928B81]">
                           {String(idx + 1).padStart(2, "0")}
                         </span>
                         <span className="text-sm font-mono uppercase tracking-wider">
@@ -207,7 +207,7 @@ export default function Navbar() {
                         </span>
                       </div>
                       {active && (
-                        <span className="w-2 h-2 rounded-full bg-teal-400" />
+                        <span className="w-2 h-2 rounded-full bg-[#4F918B]" />
                       )}
                     </Link>
                   );
@@ -219,7 +219,7 @@ export default function Navbar() {
                 <Link
                   href="/#contact-form"
                   onClick={() => setIsOpen(false)}
-                  className="w-full flex items-center justify-center gap-2.5 py-4 bg-teal-500 hover:bg-teal-400 text-black font-bold font-mono text-xs uppercase tracking-widest transition-all shadow-lg shadow-teal-500/20"
+                  className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] font-bold font-mono text-xs uppercase tracking-widest transition-all shadow-md shadow-[#4F918B]/15"
                 >
                   <span>PLAN YOUR EVENT</span>
                   <ArrowRight className="w-4 h-4" />
@@ -228,26 +228,26 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Footer Contact Details */}
-            <div className="pt-8 border-t border-neutral-900 max-w-lg mx-auto w-full space-y-3">
+            <div className="pt-8 border-t border-[#DED6C9] max-w-lg mx-auto w-full space-y-3">
               <div className="grid grid-cols-2 gap-3 text-xs font-mono">
                 <a
                   href="tel:+919042429868"
-                  className="flex items-center justify-center gap-2 p-2.5 rounded-lg border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:text-white"
+                  className="flex items-center justify-center gap-2 p-2.5 rounded-lg border border-[#DED6C9] bg-[#FCFAF6] text-[#292825] hover:text-[#4F918B] hover:border-[#4F918B]/40"
                 >
-                  <Phone className="w-3.5 h-3.5 text-teal-400" />
+                  <Phone className="w-3.5 h-3.5 text-[#4F918B]" />
                   <span>Call Us</span>
                 </a>
                 <a
                   href="https://wa.me/919042429868?text=Hello%20Iragu%20Events%2C%20I%20would%20like%20to%20plan%20an%20event."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-2.5 rounded-lg border border-[#25D366]/30 bg-[#25D366]/10 text-neutral-200 hover:text-white"
+                  className="flex items-center justify-center gap-2 p-2.5 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 text-[#292825] hover:text-[#25D366]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
                   <span>WhatsApp</span>
                 </a>
               </div>
-              <p className="text-[10px] text-center font-mono text-neutral-500">
+              <p className="text-[10px] text-center font-mono text-[#928B81]">
                 © 2026 Iragu Events • Nagercoil, Tamil Nadu
               </p>
             </div>

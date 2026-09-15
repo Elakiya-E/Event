@@ -28,58 +28,58 @@ const diffIcons = [
 
 const cardAccents = [
   {
-    gradient: "from-teal-500/15 via-teal-900/5 to-transparent",
-    border: "hover:border-teal-500/50",
-    glow: "shadow-[0_0_30px_rgba(20,184,166,0.15)]",
-    iconBg: "bg-teal-500/10 text-teal-400 border-teal-500/20 group-hover:bg-teal-500 group-hover:text-black",
-    numberColor: "text-teal-400",
-    tag: "border-teal-500/30 text-teal-300 bg-teal-950/40",
-    dot: "bg-teal-400",
+    gradient: "from-[#C7A978]/18 via-[#C7A978]/6 to-transparent",
+    border: "hover:border-[#C7A978]/60",
+    glow: "shadow-[0_0_30px_rgba(199,169,120,0.12)]",
+    iconBg: "bg-[#C7A978]/10 text-[#C7A978] border-[#C7A978]/25 group-hover:bg-[#4F918B] group-hover:text-[#FCFAF6]",
+    numberColor: "text-[#928B81]",
+    tag: "border-[#C7A978]/35 text-[#C7A978] bg-[#F1EADF]",
+    dot: "bg-[#C7A978]",
   },
   {
-    gradient: "from-sky-500/15 via-blue-900/5 to-transparent",
-    border: "hover:border-sky-500/50",
-    glow: "shadow-[0_0_30px_rgba(14,165,233,0.15)]",
-    iconBg: "bg-sky-500/10 text-sky-400 border-sky-500/20 group-hover:bg-sky-500 group-hover:text-black",
-    numberColor: "text-sky-400",
-    tag: "border-sky-500/30 text-sky-300 bg-sky-950/40",
-    dot: "bg-sky-400",
+    gradient: "from-[#4F918B]/14 via-[#4F918B]/5 to-transparent",
+    border: "hover:border-[#4F918B]/55",
+    glow: "shadow-[0_0_30px_rgba(79,145,139,0.10)]",
+    iconBg: "bg-[#4F918B]/10 text-[#4F918B] border-[#4F918B]/25 group-hover:bg-[#4F918B] group-hover:text-[#FCFAF6]",
+    numberColor: "text-[#928B81]",
+    tag: "border-[#4F918B]/35 text-[#4F918B] bg-[#F1EADF]",
+    dot: "bg-[#4F918B]",
   },
   {
-    gradient: "from-violet-500/15 via-purple-900/5 to-transparent",
-    border: "hover:border-violet-500/50",
-    glow: "shadow-[0_0_30px_rgba(139,92,246,0.15)]",
-    iconBg: "bg-violet-500/10 text-violet-400 border-violet-500/20 group-hover:bg-violet-500 group-hover:text-black",
-    numberColor: "text-violet-400",
-    tag: "border-violet-500/30 text-violet-300 bg-violet-950/40",
-    dot: "bg-violet-400",
+    gradient: "from-[#AEBBAA]/18 via-[#AEBBAA]/6 to-transparent",
+    border: "hover:border-[#AEBBAA]/60",
+    glow: "shadow-[0_0_30px_rgba(174,187,170,0.12)]",
+    iconBg: "bg-[#AEBBAA]/15 text-[#6F6A61] border-[#AEBBAA]/35 group-hover:bg-[#4F918B] group-hover:text-[#FCFAF6]",
+    numberColor: "text-[#928B81]",
+    tag: "border-[#AEBBAA]/40 text-[#6F6A61] bg-[#F1EADF]",
+    dot: "bg-[#AEBBAA]",
   },
   {
-    gradient: "from-amber-500/15 via-orange-900/5 to-transparent",
-    border: "hover:border-amber-500/50",
-    glow: "shadow-[0_0_30px_rgba(245,158,11,0.15)]",
-    iconBg: "bg-amber-500/10 text-amber-400 border-amber-500/20 group-hover:bg-amber-500 group-hover:text-black",
-    numberColor: "text-amber-400",
-    tag: "border-amber-500/30 text-amber-300 bg-amber-950/40",
-    dot: "bg-amber-400",
+    gradient: "from-[#D8C9B5]/22 via-[#D8C9B5]/9 to-transparent",
+    border: "hover:border-[#D8C9B5]/70",
+    glow: "shadow-[0_0_30px_rgba(216,201,181,0.14)]",
+    iconBg: "bg-[#D8C9B5]/25 text-[#6F6A61] border-[#D8C9B5]/50 group-hover:bg-[#4F918B] group-hover:text-[#FCFAF6]",
+    numberColor: "text-[#928B81]",
+    tag: "border-[#D8C9B5]/50 text-[#6F6A61] bg-[#F7F3EA]",
+    dot: "bg-[#D8C9B5]",
   },
   {
-    gradient: "from-rose-500/15 via-red-900/5 to-transparent",
-    border: "hover:border-rose-500/50",
-    glow: "shadow-[0_0_30px_rgba(244,63,94,0.15)]",
-    iconBg: "bg-rose-500/10 text-rose-400 border-rose-500/20 group-hover:bg-rose-500 group-hover:text-black",
-    numberColor: "text-rose-400",
-    tag: "border-rose-500/30 text-rose-300 bg-rose-950/40",
-    dot: "bg-rose-400",
+    gradient: "from-[#E8C5B8]/18 via-[#E8C5B8]/6 to-transparent",
+    border: "hover:border-[#E8C5B8]/60",
+    glow: "shadow-[0_0_30px_rgba(232,197,184,0.12)]",
+    iconBg: "bg-[#E8C5B8]/15 text-[#6F6A61] border-[#E8C5B8]/35 group-hover:bg-[#4F918B] group-hover:text-[#FCFAF6]",
+    numberColor: "text-[#928B81]",
+    tag: "border-[#E8C5B8]/40 text-[#6F6A61] bg-[#F1EADF]",
+    dot: "bg-[#E8C5B8]",
   },
   {
-    gradient: "from-emerald-500/15 via-teal-900/5 to-transparent",
-    border: "hover:border-emerald-500/50",
-    glow: "shadow-[0_0_30px_rgba(16,185,129,0.15)]",
-    iconBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-black",
-    numberColor: "text-emerald-400",
-    tag: "border-emerald-500/30 text-emerald-300 bg-emerald-950/40",
-    dot: "bg-emerald-400",
+    gradient: "from-[#B8A89A]/18 via-[#B8A89A]/6 to-transparent",
+    border: "hover:border-[#B8A89A]/60",
+    glow: "shadow-[0_0_30px_rgba(184,168,154,0.12)]",
+    iconBg: "bg-[#B8A89A]/15 text-[#6F6A61] border-[#B8A89A]/35 group-hover:bg-[#4F918B] group-hover:text-[#FCFAF6]",
+    numberColor: "text-[#928B81]",
+    tag: "border-[#B8A89A]/40 text-[#6F6A61] bg-[#F1EADF]",
+    dot: "bg-[#B8A89A]",
   },
 ];
 
@@ -135,27 +135,21 @@ export default function IraguDifference() {
     <section
       id="why-iragu"
       ref={containerRef}
-      className="relative w-full bg-[#040404] overflow-hidden py-24 md:py-36 border-t border-neutral-800/70"
+      className="relative w-full bg-[#F1EADF] overflow-hidden py-24 md:py-36 border-t border-[#DED6C9]"
     >
-      {/* Background ambient lighting */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-[600px] h-[300px] bg-teal-500/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-10 left-10 w-[500px] h-[300px] bg-teal-900/10 blur-[100px] rounded-full" />
-      </div>
-
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         {/* ── Section Header ── */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 sm:mb-16 md:mb-20">
-          <div className="diff-head-elem inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-teal-500/20 bg-teal-950/30 text-teal-400 text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+          <div className="diff-head-elem inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#C7A978]/30 bg-[#F7F3EA] text-[#C7A978] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C7A978] animate-pulse" />
             Why Iragu Events
           </div>
 
-          <h2 className="diff-head-elem text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-white leading-tight">
+          <h2 className="diff-head-elem text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-[#292825] leading-tight">
             {content.heading}
           </h2>
 
-          <p className="diff-head-elem text-sm sm:text-base md:text-lg text-neutral-400 font-light max-w-xl mx-auto">
+          <p className="diff-head-elem text-sm sm:text-base md:text-lg text-[#6F6A61] font-light max-w-xl mx-auto">
             {content.subheading}
           </p>
         </div>
@@ -169,7 +163,7 @@ export default function IraguDifference() {
             return (
               <div
                 key={idx}
-                className={`diff-card group relative p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-neutral-800/90 bg-neutral-950/70 backdrop-blur-md ${accent.border} ${accent.glow} transition-all duration-400 hover:-translate-y-2 flex flex-col justify-between`}
+                className={`diff-card group relative p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-[#DED6C9] bg-[#FCFAF6] ${accent.border} ${accent.glow} transition-all duration-400 hover:-translate-y-2 flex flex-col justify-between`}
               >
                 {/* Hover Gradient Glow */}
                 <div
@@ -179,7 +173,7 @@ export default function IraguDifference() {
                 <div className="relative z-10">
                   {/* Top: Number + Custom Icon Box */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className={`font-mono text-xs font-bold tracking-widest ${accent.numberColor} uppercase px-3 py-1 rounded-full bg-neutral-900/90 border border-neutral-800`}>
+                    <span className={`font-mono text-xs font-bold tracking-widest ${accent.numberColor} uppercase px-3 py-1 rounded-full bg-[#F7F3EA] border border-[#DED6C9]`}>
                       0{idx + 1}
                     </span>
                     <div
@@ -190,24 +184,24 @@ export default function IraguDifference() {
                   </div>
 
                   {/* Advantage Title */}
-                  <h3 className="text-xl font-bold tracking-tight text-white group-hover:text-white mb-3 uppercase leading-snug">
+                  <h3 className="text-xl font-bold tracking-tight text-[#292825] group-hover:text-[#292825] mb-3 uppercase leading-snug">
                     {item.title}
                   </h3>
 
                   {/* Advantage Description */}
-                  <p className="text-sm md:text-base text-neutral-400 group-hover:text-neutral-300 font-light leading-relaxed">
+                  <p className="text-sm md:text-base text-[#6F6A61] group-hover:text-[#6F6A61] font-light leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
                 {/* Bottom Tag */}
-                <div className="relative z-10 mt-8 pt-4 border-t border-neutral-800/60 flex items-center justify-between">
+                <div className="relative z-10 mt-8 pt-4 border-t border-[#DED6C9] flex items-center justify-between">
                   <span className={`px-2.5 py-1 rounded-md text-[10px] font-mono tracking-wider uppercase border ${accent.tag}`}>
                     {item.tag}
                   </span>
                   <div className="flex items-center gap-1.5">
                     <span className={`w-1.5 h-1.5 rounded-full ${accent.dot}`} />
-                    <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                    <span className="text-[10px] font-mono text-[#928B81] uppercase tracking-widest">
                       Iragu Standard
                     </span>
                   </div>
@@ -221,7 +215,7 @@ export default function IraguDifference() {
         <div className="diff-head-elem mt-16 md:mt-20 text-center">
           <Link
             href="#contact"
-            className="group inline-flex items-center gap-3 bg-teal-500 hover:bg-teal-400 text-black px-8 py-4 font-bold uppercase tracking-widest text-xs rounded-none transition-all duration-300 shadow-lg shadow-teal-500/20"
+            className="group inline-flex items-center gap-3 bg-[#4F918B] hover:bg-[#3F7A75] text-[#FCFAF6] px-8 py-4 font-bold uppercase tracking-widest text-xs rounded-none transition-all duration-300 shadow-lg shadow-[#4F918B]/20"
           >
             <span>Partner With Iragu</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

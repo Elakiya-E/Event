@@ -77,27 +77,21 @@ export default function Locations() {
     <section
       id="locations"
       ref={containerRef}
-      className="relative w-full bg-[#030303] overflow-hidden py-24 md:py-36 border-t border-neutral-800/70"
+      className="relative w-full bg-[#F1EADF] overflow-hidden py-24 md:py-36 border-t border-[#DED6C9]/70"
     >
-      {/* Background ambient glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-teal-500/5 blur-[140px] rounded-full" />
-        <div className="absolute bottom-10 right-10 w-[450px] h-[350px] bg-sky-900/10 blur-[120px] rounded-full" />
-      </div>
-
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-10 text-center space-y-10 sm:space-y-12">
         {/* ── Section Header ── */}
         <div className="space-y-4 max-w-3xl mx-auto">
-          <div className="loc-head-elem inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-teal-500/20 bg-teal-950/30 text-teal-400 text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+          <div className="loc-head-elem inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#C7A978]/30 bg-[#FCFAF6] text-[#C7A978] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C7A978] animate-pulse" />
             Geographic Coverage
           </div>
 
-          <h2 className="loc-head-elem text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-white leading-tight">
+          <h2 className="loc-head-elem text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-[#292825] leading-tight">
             {content.heading}
           </h2>
 
-          <p className="loc-head-elem text-sm sm:text-base md:text-xl text-teal-400 font-medium max-w-xl mx-auto">
+          <p className="loc-head-elem text-sm sm:text-base md:text-xl text-[#4F918B] font-medium max-w-xl mx-auto">
             {content.subheading}
           </p>
         </div>
@@ -109,25 +103,25 @@ export default function Locations() {
             return (
               <div
                 key={city}
-                className={`city-pill group relative px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl border bg-neutral-950/80 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 flex items-center gap-2.5 sm:gap-3 shadow-lg ${
+                className={`city-pill group relative px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl border bg-[#FCFAF6] transition-all duration-300 hover:-translate-y-1 flex items-center gap-2.5 sm:gap-3 shadow-sm ${
                   isHq
-                    ? "border-teal-500/50 hover:border-teal-400 shadow-[0_0_25px_rgba(20,184,166,0.15)]"
-                    : "border-neutral-800/90 hover:border-teal-500/40 hover:shadow-[0_0_20px_rgba(20,184,166,0.1)]"
+                    ? "border-[#4F918B]/50 hover:border-[#3d7a75] shadow-[0_0_25px_rgba(199,169,120,0.15)]"
+                    : "border-[#DED6C9] hover:border-[#C7A978]/60 hover:shadow-sm"
                 }`}
               >
                 <MapPin
                   className={`w-4 h-4 transition-colors ${
                     isHq
-                      ? "text-teal-400"
-                      : "text-neutral-500 group-hover:text-teal-400"
+                      ? "text-[#4F918B]"
+                      : "text-[#928B81] group-hover:text-[#4F918B]"
                   }`}
                 />
-                <span className="text-base md:text-lg font-medium text-white tracking-wide group-hover:text-teal-300 transition-colors">
+                <span className="text-base md:text-lg font-medium text-[#292825] tracking-wide group-hover:text-[#4F918B] transition-colors">
                   {city}
                 </span>
 
                 {isHq && (
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-teal-300 bg-teal-950/70 border border-teal-500/40 px-2 py-0.5 rounded-md">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#4F918B] bg-[#F7F3EA] border border-[#4F918B]/50 px-2 py-0.5 rounded-md">
                     Base / HQ
                   </span>
                 )}
@@ -138,27 +132,27 @@ export default function Locations() {
 
         {/* ── Closing Statement Card ── */}
         <div className="loc-closing-card pt-6">
-          <div className="relative p-8 md:p-12 rounded-3xl border border-neutral-800/90 bg-gradient-to-br from-neutral-950/90 via-neutral-900/60 to-neutral-950/90 backdrop-blur-md max-w-3xl mx-auto overflow-hidden shadow-2xl space-y-4">
-            <div className="absolute inset-0 bg-gradient-to-r from-teal-500/5 via-transparent to-sky-500/5 pointer-events-none" />
+          <div className="relative p-8 md:p-12 rounded-3xl border border-[#DED6C9] bg-gradient-to-br from-[#F7F3EA] via-[#FCFAF6] to-[#F7F3EA] backdrop-blur-md max-w-3xl mx-auto overflow-hidden shadow-2xl space-y-4">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#4F918B]/5 via-transparent to-[#C7A978]/5 pointer-events-none" />
 
             <div className="relative z-10 space-y-3">
-              <div className="inline-flex items-center gap-2 text-teal-400 font-mono text-xs uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 text-[#4F918B] font-mono text-xs uppercase tracking-widest">
                 <Compass className="w-4 h-4" />
                 <span>Extended Reach</span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#292825] tracking-tight">
                 {content.closing}
               </h3>
 
-              <p className="text-base md:text-lg text-neutral-300 font-light leading-relaxed max-w-xl mx-auto">
+              <p className="text-base md:text-lg text-[#6F6A61] font-light leading-relaxed max-w-xl mx-auto">
                 {content.additionalLine}
               </p>
 
               <div className="pt-4 flex items-center justify-center">
                 <Link
                   href="#contact"
-                  className="group inline-flex items-center gap-3 bg-teal-500 hover:bg-teal-400 text-black px-8 py-4 font-bold uppercase tracking-widest text-xs transition-all duration-300 shadow-lg shadow-teal-500/20"
+                  className="group inline-flex items-center gap-3 bg-[#4F918B] hover:bg-[#3d7a75] text-[#FCFAF6] px-8 py-4 font-bold uppercase tracking-widest text-xs transition-all duration-300 shadow-lg shadow-[#4F918B]/20"
                 >
                   <span>Plan Your Event in Your City</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

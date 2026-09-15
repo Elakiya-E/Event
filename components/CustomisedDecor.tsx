@@ -23,57 +23,57 @@ const decorElements = [
     icon: Palette,
     label: "Theme",
     desc: "Concepts designed around your story",
-    gradient: "from-rose-500/20 to-pink-600/20",
-    border: "border-rose-500/20",
-    iconColor: "text-rose-400",
+    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
+    border: "border-[#DED6C9]",
+    iconColor: "text-[#4F918B]",
   },
   {
     icon: SwatchBook,
     label: "Colours",
     desc: "Palettes that match your personality",
-    gradient: "from-amber-500/20 to-orange-600/20",
-    border: "border-amber-500/20",
-    iconColor: "text-amber-400",
+    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
+    border: "border-[#DED6C9]",
+    iconColor: "text-[#C7A978]",
   },
   {
     icon: Flower2,
     label: "Florals",
     desc: "Arrangements that set the mood",
-    gradient: "from-pink-500/20 to-fuchsia-600/20",
-    border: "border-pink-500/20",
-    iconColor: "text-pink-400",
+    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
+    border: "border-[#DED6C9]",
+    iconColor: "text-[#4F918B]",
   },
   {
     icon: LayoutDashboard,
     label: "Stage",
     desc: "Centrepieces that create impact",
-    gradient: "from-violet-500/20 to-purple-600/20",
-    border: "border-violet-500/20",
-    iconColor: "text-violet-400",
+    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
+    border: "border-[#DED6C9]",
+    iconColor: "text-[#C7A978]",
   },
   {
     icon: DoorOpen,
     label: "Entrance",
     desc: "First impressions that wow",
-    gradient: "from-teal-500/20 to-emerald-600/20",
-    border: "border-teal-500/20",
-    iconColor: "text-teal-400",
+    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
+    border: "border-[#DED6C9]",
+    iconColor: "text-[#4F918B]",
   },
   {
     icon: Camera,
     label: "Photo Zones",
     desc: "Backdrops made for memories",
-    gradient: "from-sky-500/20 to-blue-600/20",
-    border: "border-sky-500/20",
-    iconColor: "text-sky-400",
+    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
+    border: "border-[#DED6C9]",
+    iconColor: "text-[#C7A978]",
   },
   {
     icon: Gem,
     label: "Details",
     desc: "The little things that matter most",
-    gradient: "from-yellow-500/20 to-amber-600/20",
-    border: "border-yellow-500/20",
-    iconColor: "text-yellow-400",
+    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
+    border: "border-[#DED6C9]",
+    iconColor: "text-[#4F918B]",
   },
 ];
 
@@ -150,39 +150,37 @@ export default function CustomisedDecor() {
     <section
       id="customised-decor"
       ref={containerRef}
-      className="relative w-full bg-black overflow-hidden"
+      className="relative w-full bg-[#F1EADF] overflow-hidden"
     >
       {/* ═══════════════════════════════════════════════════════════════ */}
       {/* FULL-WIDTH CINEMATIC HEADER BAND                               */}
       {/* ═══════════════════════════════════════════════════════════════ */}
       <div className="relative w-full min-h-[50vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {/* Background — real project hero image with cinematic overlay */}
+        {/* Background — real project hero image with warm overlay */}
         <div className="absolute inset-0 z-0">
           <div
             className="decor-bg-visual absolute inset-[-5%] w-[110%] h-[110%] bg-cover bg-center"
             style={{ backgroundImage: `url('/images/hero-bg.png')` }}
           />
-          {/* Multi-layer gradient for depth + text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black z-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60 z-10" />
-          {/* Warm accent glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(244,114,182,0.07),transparent)] z-10" />
+          {/* Multi-layer warm gradient for depth + text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F7F3EA]/60 via-[#F7F3EA]/10 to-[#F1EADF]/70 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F7F3EA]/40 via-transparent to-[#F7F3EA]/40 z-10" />
         </div>
 
         {/* Content */}
         <div className="relative z-20 text-center px-4 sm:px-6 py-14 sm:py-20 md:py-28 max-w-5xl mx-auto">
           {/* Eyebrow */}
           <div className="decor-anim mb-4 sm:mb-5">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-pink-500/20 bg-pink-950/20 text-pink-300 text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse" />
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#4F918B]/30 bg-[#FCFAF6] text-[#4F918B] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#4F918B] animate-pulse" />
               Customised Décor
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className="decor-anim text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight leading-[1.1]">
+          <h2 className="decor-anim text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-[#292825] tracking-tight leading-[1.1]">
             Your Idea.{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-300 to-amber-300">
+            <span className="text-[#C7A978]">
               Your Story.
             </span>
             <br className="hidden sm:inline" />
@@ -190,7 +188,7 @@ export default function CustomisedDecor() {
           </h2>
 
           {/* Subheading */}
-          <p className="decor-anim mt-4 sm:mt-6 text-base sm:text-lg md:text-2xl text-neutral-200 font-light tracking-wide">
+          <p className="decor-anim mt-4 sm:mt-6 text-base sm:text-lg md:text-2xl text-[#6F6A61] font-light tracking-wide">
             Customised Décor Designed Around You
           </p>
         </div>
@@ -202,10 +200,10 @@ export default function CustomisedDecor() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-12 sm:py-16 md:py-24">
         {/* Intro content — centred, elegant */}
         <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-5 mb-12 sm:mb-16 md:mb-20">
-          <p className="decor-anim text-base sm:text-lg md:text-xl text-white font-medium leading-relaxed">
+          <p className="decor-anim text-base sm:text-lg md:text-xl text-[#292825] font-medium leading-relaxed">
             We specialise in creating décor concepts that are uniquely yours.
           </p>
-          <p className="decor-anim text-sm sm:text-base md:text-lg text-neutral-300 font-light leading-relaxed">
+          <p className="decor-anim text-sm sm:text-base md:text-lg text-[#6F6A61] font-light leading-relaxed">
             From elegant and minimal setups to grand, immersive experiences,
             every element is thoughtfully designed to match your celebration.
           </p>
@@ -218,7 +216,7 @@ export default function CustomisedDecor() {
             return (
               <div
                 key={el.label}
-                className={`decor-card group relative p-4 sm:p-5 md:p-6 rounded-2xl border ${el.border} bg-neutral-950/60 backdrop-blur-md hover:bg-neutral-900/60 transition-all duration-500 overflow-hidden cursor-default`}
+                className={`decor-card group relative p-4 sm:p-5 md:p-6 rounded-2xl border ${el.border} bg-[#FCFAF6] hover:border-[#C7A978]/60 transition-all duration-500 overflow-hidden cursor-default`}
               >
                 {/* Hover glow */}
                 <div
@@ -229,7 +227,7 @@ export default function CustomisedDecor() {
                   {/* Icon */}
                   <div className="mb-3 sm:mb-4">
                     <div
-                      className={`inline-flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-neutral-800/80 group-hover:bg-neutral-800 transition-colors duration-300`}
+                      className={`inline-flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#F1EADF] border border-[#DED6C9] transition-colors duration-300`}
                     >
                       <Icon
                         className={`w-4 h-4 sm:w-5 sm:h-5 ${el.iconColor} group-hover:scale-110 transition-transform duration-300`}
@@ -238,12 +236,12 @@ export default function CustomisedDecor() {
                   </div>
 
                   {/* Label */}
-                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-white tracking-tight mb-1">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#292825] tracking-tight mb-1">
                     {el.label}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[11px] sm:text-xs md:text-sm text-neutral-400 group-hover:text-neutral-300 font-light leading-relaxed transition-colors duration-300">
+                  <p className="text-[11px] sm:text-xs md:text-sm text-[#6F6A61] group-hover:text-[#292825] font-light leading-relaxed transition-colors duration-300">
                     {el.desc}
                   </p>
                 </div>
@@ -252,10 +250,10 @@ export default function CustomisedDecor() {
           })}
 
           {/* Special closing card spanning remaining space */}
-          <div className="decor-card col-span-2 sm:col-span-3 lg:col-span-1 relative p-5 md:p-6 rounded-2xl border border-teal-500/20 bg-gradient-to-br from-teal-950/30 to-neutral-950/60 backdrop-blur-md flex flex-col justify-center items-center text-center overflow-hidden group hover:border-teal-500/40 transition-all duration-500 cursor-default">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(13,148,136,0.06),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="decor-card col-span-2 sm:col-span-3 lg:col-span-1 relative p-5 md:p-6 rounded-2xl border border-[#DED6C9] bg-[#F1EADF] flex flex-col justify-center items-center text-center overflow-hidden group hover:border-[#C7A978]/60 transition-all duration-500 cursor-default">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(199,169,120,0.08),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative z-10">
-              <p className="text-sm sm:text-base md:text-lg text-teal-300 font-medium italic leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-[#4F918B] font-medium italic leading-relaxed">
                 &ldquo;You tell us what you imagine.
                 <br />
                 We&apos;ll create it.&rdquo;
@@ -269,7 +267,7 @@ export default function CustomisedDecor() {
           <Link
             href="#contact"
             aria-label="Discuss your décor idea"
-            className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white px-7 sm:px-9 py-4 font-bold uppercase tracking-widest transition-all duration-300 text-xs md:text-sm shadow-lg shadow-pink-500/15 rounded-sm"
+            className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] px-7 sm:px-9 py-4 font-bold uppercase tracking-widest transition-all duration-300 text-xs md:text-sm shadow-lg rounded-sm"
           >
             Discuss Your Décor Idea
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

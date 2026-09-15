@@ -24,13 +24,13 @@ export default function MobileCTABar() {
   return (
     <nav
       aria-label="Mobile quick contact actions"
-      className="fixed inset-x-0 bottom-0 z-40 flex justify-between items-center bg-neutral-900/90 backdrop-blur-md border-t border-neutral-800 px-4 py-2 lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 flex justify-between items-center bg-[#F7F3EA]/95 backdrop-blur-md border-t border-[#DED6C9] px-4 py-2 lg:hidden"
     >
       {/* CALL */}
       <Link
         href={`tel:${phoneRaw}`}
         aria-label="Call Iragu Events"
-        className="flex-1 flex items-center justify-center gap-1.5 text-xs font-mono text-teal-400 hover:text-white"
+        className="flex-1 flex items-center justify-center gap-1.5 text-xs font-mono text-[#4F918B] hover:text-[#292825]"
       >
         <Phone className="w-4 h-4" />
         <span>CALL</span>
@@ -42,7 +42,7 @@ export default function MobileCTABar() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Iragu Events on WhatsApp"
-        className="flex-1 flex items-center justify-center gap-1.5 text-xs font-mono text-[#25D366] hover:text-white"
+        className="flex-1 flex items-center justify-center gap-1.5 text-xs font-mono text-[#25D366] hover:text-[#25D366]"
       >
         <MessageCircle className="w-4 h-4" />
         <span>WHATSAPP</span>
@@ -53,7 +53,7 @@ export default function MobileCTABar() {
         href="#contact-form"
         onClick={handleScrollToForm}
         aria-label="Plan your event"
-        className="flex-1 flex items-center justify-center gap-1.5 text-xs font-mono text-teal-500 bg-teal-950 hover:bg-teal-900 rounded-sm px-2 py-1"
+        className="flex-1 flex items-center justify-center gap-1.5 text-xs font-mono text-[#FCFAF6] bg-[#4F918B] hover:bg-[#437D77] rounded-md px-2 py-1.5 transition-colors"
       >
         <span>PLAN EVENT</span>
       </Link>

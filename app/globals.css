@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-border: var(--border);
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--color-primary);
+  --color-muted: var(--color-secondary);
+  --color-accent: var(--accent-teal);
+  --color-border: var(--border-color);
+  --color-accent-champagne: var(--accent-champagne);
 
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-serif), ui-serif, Georgia, serif;
@@ -13,27 +14,24 @@
 
 @layer base {
   :root {
-    --background: #050505; /* Deep rich black */
-    --foreground: #fafafa;
-    --muted: #888888;
-    --accent: #d4af37; /* Premium gold accent */
-    --border: #222222;
-  }
-
-  @media (prefers-color-scheme: light) {
-    :root {
-      --background: #fafafa;
-      --foreground: #050505;
-      --muted: #666666;
-      --accent: #b7950b;
-      --border: #e5e5e5;
-    }
+    --bg-primary: #F7F3EA;
+    --bg-secondary: #FCFAF6;
+    --bg-cream: #F1EADF;
+    --bg-beige: #E8DFD0;
+    --bg-sand: #D8C9B5;
+    --color-primary: #292825;
+    --color-secondary: #6F6A61;
+    --color-muted: #928B81;
+    --border-color: #DED6C9;
+    --accent-champagne: #C7A978;
+    --accent-teal: #4F918B;
+    --accent-sage: #AEBBAA;
   }
 
   html,
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--bg-primary);
+    color: var(--color-primary);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

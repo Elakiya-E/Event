@@ -20,29 +20,29 @@ const processSteps = [
     icon: Lightbulb,
     label: "Client Vision",
     description: "You share your idea, expectations and personality.",
-    accent: "from-amber-500 to-yellow-400",
-    glow: "shadow-amber-500/20",
+    accent: "from-[#C7A978]/40 via-[#D8C9B5]/30 to-transparent",
+    glow: "",
   },
   {
     icon: Search,
     label: "Understanding",
     description: "We study your theme, venue, audience and budget.",
-    accent: "from-teal-500 to-cyan-400",
-    glow: "shadow-teal-500/20",
+    accent: "from-[#4F918B]/30 via-[#D8C9B5]/20 to-transparent",
+    glow: "",
   },
   {
     icon: Sparkles,
     label: "Creativity",
     description: "Our team develops a concept designed around you.",
-    accent: "from-purple-500 to-pink-400",
-    glow: "shadow-purple-500/20",
+    accent: "from-[#C7A978]/35 via-[#F1EADF] to-transparent",
+    glow: "",
   },
   {
     icon: CheckCircle2,
     label: "Execution",
     description: "We deliver the complete experience flawlessly.",
-    accent: "from-emerald-500 to-green-400",
-    glow: "shadow-emerald-500/20",
+    accent: "from-[#4F918B]/25 via-[#C7A978]/20 to-transparent",
+    glow: "",
   },
 ];
 
@@ -115,16 +115,15 @@ export default function USPSection() {
     <section
       id="usp"
       ref={containerRef}
-      className="relative w-full bg-[#050505] overflow-hidden py-24 md:py-32 lg:py-40"
+      className="relative w-full bg-[#F7F3EA] overflow-hidden py-24 md:py-32 lg:py-40"
     >
       {/* ── Subtle background texture ── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(13,148,136,0.08),transparent)]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)",
+              "radial-gradient(circle at 1px 1px, rgba(41,40,37,0.2) 1px, transparent 0)",
             backgroundSize: "32px 32px",
           }}
         />
@@ -133,32 +132,32 @@ export default function USPSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         {/* ── Section Eyebrow ── */}
         <div className="usp-heading text-center mb-4">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-teal-500/20 bg-teal-950/30 text-teal-400 text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#4F918B]/30 bg-[#FCFAF6] text-[#4F918B] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#4F918B] animate-pulse" />
             Our USP
           </span>
         </div>
 
         {/* ── Heading ── */}
-        <h2 className="usp-heading text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-[1.12] max-w-4xl mx-auto">
+        <h2 className="usp-heading text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#292825] tracking-tight leading-[1.12] max-w-4xl mx-auto">
           Your Vision. Our Creativity.{" "}
-          <span className="text-teal-400">Complete Event Responsibility.</span>
+          <span className="text-[#4F918B]">Complete Event Responsibility.</span>
         </h2>
 
         {/* ── Body Content ── */}
         <div className="usp-body mt-10 md:mt-14 max-w-3xl mx-auto text-center space-y-5">
-          <p className="usp-content text-lg md:text-xl text-white font-medium">
+          <p className="usp-content text-lg md:text-xl text-[#292825] font-medium">
             Every celebration is different.
           </p>
-          <p className="usp-content text-base md:text-lg text-neutral-300 font-light leading-relaxed">
+          <p className="usp-content text-base md:text-lg text-[#6F6A61] font-light leading-relaxed">
             That&apos;s why we don&apos;t believe in simply offering ready-made
             event packages.
           </p>
-          <p className="usp-content text-base md:text-lg text-neutral-300 font-light leading-relaxed">
+          <p className="usp-content text-base md:text-lg text-[#6F6A61] font-light leading-relaxed">
             We first understand your expectations, ideas, personality, theme,
             venue and budget — and then create an experience around them.
           </p>
-          <p className="usp-content text-base md:text-lg text-neutral-300 font-light leading-relaxed">
+          <p className="usp-content text-base md:text-lg text-[#6F6A61] font-light leading-relaxed">
             Whether it&apos;s an intimate family celebration, a grand wedding, a
             corporate gathering or a large-scale public event, we bring your
             vision to life with creativity and careful execution.
@@ -174,37 +173,37 @@ export default function USPSection() {
                 {/* Connector arrow — visible between cards on lg */}
                 {i < processSteps.length - 1 && (
                   <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-6 h-6 items-center justify-center">
-                    <ArrowRight className="w-4 h-4 text-neutral-600" />
+                    <ArrowRight className="w-4 h-4 text-[#928B81]" />
                   </div>
                 )}
 
                 <div
-                  className={`process-card relative h-full p-6 md:p-7 rounded-2xl border border-neutral-800/80 bg-neutral-900/40 backdrop-blur-md hover:border-neutral-600/60 transition-all duration-500 group overflow-hidden shadow-lg ${step.glow}`}
+                  className={`process-card relative h-full p-6 md:p-7 rounded-2xl border border-[#DED6C9] bg-[#FCFAF6] hover:border-[#C7A978]/60 transition-all duration-500 group overflow-hidden shadow-sm`}
                 >
                   {/* Glow background on hover */}
                   <div
-                    className={`absolute -top-12 -right-12 w-32 h-32 rounded-full bg-gradient-to-br ${step.accent} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-700`}
+                    className={`absolute -top-12 -right-12 w-32 h-32 rounded-full bg-gradient-to-br ${step.accent} opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-700`}
                   />
 
                   {/* Step number */}
-                  <div className="text-[10px] font-mono tracking-[0.25em] text-neutral-500 uppercase mb-4">
+                  <div className="text-[10px] font-mono tracking-[0.25em] text-[#928B81] uppercase mb-4">
                     {String(i + 1).padStart(2, "0")}
                   </div>
 
                   {/* Icon */}
                   <div
-                    className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${step.accent} mb-5 shadow-md`}
+                    className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#F1EADF] border border-[#DED6C9] mb-5 shadow-sm`}
                   >
-                    <Icon className="w-6 h-6 text-white" />
+                    <Icon className="w-6 h-6 text-[#4F918B]" />
                   </div>
 
                   {/* Label */}
-                  <h3 className="text-lg md:text-xl font-bold text-white tracking-tight mb-2">
+                  <h3 className="text-lg md:text-xl font-bold text-[#292825] tracking-tight mb-2">
                     {step.label}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-neutral-400 font-light leading-relaxed">
+                  <p className="text-sm text-[#6F6A61] font-light leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -215,13 +214,13 @@ export default function USPSection() {
 
         {/* ── Mobile process connector (visual) ── */}
         <div className="flex sm:hidden justify-center mt-6 mb-2">
-          <div className="flex flex-wrap items-center justify-center gap-1.5 text-neutral-400 text-[10px] font-mono tracking-wider uppercase text-center">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 text-[#6F6A61] text-[10px] font-mono tracking-wider uppercase text-center">
             <span>Vision</span>
-            <ArrowRight className="w-2.5 h-2.5 text-teal-400 flex-shrink-0" />
+            <ArrowRight className="w-2.5 h-2.5 text-[#4F918B] flex-shrink-0" />
             <span>Understanding</span>
-            <ArrowRight className="w-2.5 h-2.5 text-teal-400 flex-shrink-0" />
+            <ArrowRight className="w-2.5 h-2.5 text-[#4F918B] flex-shrink-0" />
             <span>Creativity</span>
-            <ArrowRight className="w-2.5 h-2.5 text-teal-400 flex-shrink-0" />
+            <ArrowRight className="w-2.5 h-2.5 text-[#4F918B] flex-shrink-0" />
             <span>Execution</span>
           </div>
         </div>
