@@ -25,7 +25,7 @@ export default function IraguHero() {
       className="relative flex flex-col md:flex-row w-full min-h-screen overflow-hidden bg-[#F7F3EA]"
     >
       {/* ── LEFT / BOTTOM: Content Panel ── */}
-      <div className="relative flex flex-col justify-center order-2 md:order-1 w-full md:w-2/5 text-[#292825] px-6 py-10 md:px-12 md:py-14 bg-[#F1EADF] hero-fade-in">
+      <div className="relative flex flex-col justify-center order-2 md:order-1 w-full md:w-2/5 text-[#292825] px-6 py-10 md:px-12 md:py-14 bg-[#F1EADF] hero-fade-in z-20">
         <div className="max-w-[480px] mx-auto md:mx-0 space-y-5">
 
           {/* Badge */}
@@ -95,10 +95,20 @@ export default function IraguHero() {
             <span className="w-8 h-0.5 bg-[#C7A978] inline-block" />
           </div>
         </div>
+
+        {/* Curved separator SVG (desktop only) - Hanging off the right edge */}
+        <svg
+          className="hidden md:block absolute left-full top-0 h-full w-10 pointer-events-none"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          {/* A slight negative left margin (via overlapping paths) isn't strictly needed if we just draw from x=0. But to prevent 1px gap, we can start at x=-1 or just x=0 */}
+          <path d="M-5,0 L0,0 C60,20 60,80 0,100 L-5,100 Z" fill="#F1EADF" />
+        </svg>
       </div>
 
       {/* ── RIGHT / TOP: Image Panel ── */}
-      <div className="relative order-1 md:order-2 w-full md:w-3/5 h-[56vw] min-h-[260px] md:h-auto overflow-hidden">
+      <div className="relative order-1 md:order-2 w-full md:w-3/5 h-[56vw] min-h-[260px] md:h-auto overflow-hidden z-10">
         {/* Left-edge gradient fade (desktop only) */}
         <div className="hidden md:block absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#F1EADF] via-[#F1EADF]/60 to-transparent pointer-events-none z-10" />
         {/* Bottom gradient fade (mobile only) */}
@@ -136,15 +146,6 @@ export default function IraguHero() {
           More Than Events
           <span className="w-4 h-0.5 bg-[#C7A978]" />
         </div>
-
-        {/* Curved separator SVG (desktop only) */}
-        <svg
-          className="hidden md:block absolute left-[-1px] top-0 h-full w-12 pointer-events-none z-10"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <path d="M0,0 C40,20 40,80 0,100 Z" fill="#F1EADF" />
-        </svg>
       </div>
     </section>
   );
