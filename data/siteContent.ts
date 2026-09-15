@@ -355,7 +355,7 @@ export const siteContent = {
         description: "Complete event planning, grand stage & production, sound, lighting, and crowd management for 1300+ attendees.",
         guestCount: "1300+ Guests",
         servicesProvided: ["Complete Event Planning", "Décor", "Stage & Production", "Sound & Lighting"],
-        image: "/images/hero-bg.png",
+        image: "/images/img1.1.png",
         caseStudyLink: "#case-studies"
       },
       {
@@ -368,11 +368,13 @@ export const siteContent = {
         description: "A fast-turnaround celebration featuring pathway décor, grand baby entry, special effects, DJ setup, and complete event coordination in a strict 2-hour window.",
         guestCount: "Private Gathering",
         servicesProvided: ["Customised Décor", "Special Effects", "DJ Setup", "Cake Arrangement", "Complete Coordination"],
-        image: "/images/hero-bg.png",
+        image: "/images/img1.2.png",
         caseStudyLink: "#case-studies"
       }
     ]
   },
+
+
 
   caseStudies: {
     heading: "Behind Every Event Is a Story.",

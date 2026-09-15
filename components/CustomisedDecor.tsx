@@ -156,39 +156,38 @@ export default function CustomisedDecor() {
       {/* FULL-WIDTH CINEMATIC HEADER BAND                               */}
       {/* ═══════════════════════════════════════════════════════════════ */}
       <div className="relative w-full min-h-[50vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {/* Background — real project hero image with warm overlay */}
+        {/* Background image */}
         <div className="absolute inset-0 z-0">
           <div
             className="decor-bg-visual absolute inset-[-5%] w-[110%] h-[110%] bg-cover bg-center"
             style={{ backgroundImage: `url('/images/hero-bg.png')` }}
           />
-          {/* Multi-layer warm gradient for depth + text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F7F3EA]/60 via-[#F7F3EA]/10 to-[#F1EADF]/70 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F7F3EA]/40 via-transparent to-[#F7F3EA]/40 z-10" />
+          {/* Strong dark overlay for text readability */}
+          <div className="absolute inset-0 bg-[#1a1208]/55 z-10" />
+          {/* Bottom fade into section background */}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#F1EADF] to-transparent z-10" />
         </div>
 
         {/* Content */}
         <div className="relative z-20 text-center px-4 sm:px-6 py-14 sm:py-20 md:py-28 max-w-5xl mx-auto">
-          {/* Eyebrow */}
-          <div className="decor-anim mb-4 sm:mb-5">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#4F918B]/30 bg-[#FCFAF6] text-[#4F918B] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#4F918B] animate-pulse" />
+          {/* Eyebrow badge */}
+          <div className="decor-anim mb-5 sm:mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C7A978]/50 bg-[#FCFAF6]/10 text-[#C7A978] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C7A978] animate-pulse" />
               Customised Décor
             </span>
           </div>
 
-          {/* Heading */}
-          <h2 className="decor-anim text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-[#292825] tracking-tight leading-[1.1]">
+          {/* Heading — white on dark overlay */}
+          <h2 className="decor-anim text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight leading-[1.12]" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
             Your Idea.{" "}
-            <span className="text-[#C7A978]">
-              Your Story.
-            </span>
+            <span className="text-[#C7A978]">Your Story.</span>
             <br className="hidden sm:inline" />
             Your Celebration.
           </h2>
 
           {/* Subheading */}
-          <p className="decor-anim mt-4 sm:mt-6 text-base sm:text-lg md:text-2xl text-[#6F6A61] font-light tracking-wide">
+          <p className="decor-anim mt-5 sm:mt-7 text-base sm:text-lg md:text-xl text-white/80 font-light tracking-wide" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.3)' }}>
             Customised Décor Designed Around You
           </p>
         </div>
