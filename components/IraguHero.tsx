@@ -22,7 +22,7 @@ export default function IraguHero() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative flex flex-col md:flex-row w-full min-h-screen overflow-hidden bg-[#F7F3EA]"
+      className="relative flex flex-col md:flex-row w-full min-h-screen overflow-hidden bg-[#F1EADF]"
     >
       {/* ── LEFT / BOTTOM: Content Panel ── */}
       <div className="relative flex flex-col justify-center order-2 md:order-1 w-full md:w-2/5 text-[#292825] px-6 py-10 md:px-12 md:py-14 bg-[#F1EADF] hero-fade-in z-20">
@@ -95,16 +95,6 @@ export default function IraguHero() {
             <span className="w-8 h-0.5 bg-[#C7A978] inline-block" />
           </div>
         </div>
-
-        {/* Curved separator SVG (desktop only) - Hanging off the right edge */}
-        <svg
-          className="hidden md:block absolute left-full top-0 h-full w-10 pointer-events-none"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          {/* A slight negative left margin (via overlapping paths) isn't strictly needed if we just draw from x=0. But to prevent 1px gap, we can start at x=-1 or just x=0 */}
-          <path d="M-5,0 L0,0 C60,20 60,80 0,100 L-5,100 Z" fill="#F1EADF" />
-        </svg>
       </div>
 
       {/* ── RIGHT / TOP: Image Panel ── */}
