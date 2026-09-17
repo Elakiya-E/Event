@@ -102,7 +102,7 @@ export default function EventShowcase() {
               <span className="text-[#4F918B]">We Build Them.</span>
             </h2>
 
-            <div className="port-head-elem space-y-2 text-xs sm:text-sm md:text-base text-[#6F6A61] font-light leading-relaxed">
+            <div className="port-head-elem space-y-2 text-xs sm:text-sm md:text-base text-[#292825] font-light leading-relaxed">
               <p>Every event teaches us something new. Every project has a story.</p>
               <p>
                 Explore some of the celebrations, experiences and events we&apos;ve
@@ -123,7 +123,7 @@ export default function EventShowcase() {
                 className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono tracking-wider uppercase transition-all duration-300 rounded-full ${
                   isActive
                     ? "bg-[#4F918B] text-[#FCFAF6] font-bold shadow-sm"
-                    : "text-[#6F6A61] hover:text-[#292825] bg-[#F7F3EA] border border-[#DED6C9] hover:border-[#C7A978]/60"
+                    : "text-[#292825] hover:text-[#292825] bg-[#F7F3EA] border border-[#DED6C9] hover:border-[#C7A978]/60"
                 }`}
               >
                 {filter}
@@ -157,7 +157,7 @@ export default function EventShowcase() {
                         {project.categoryDisplay || project.category}
                       </span>
                       {project.guestCount && (
-                        <span className="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider uppercase bg-[#F7F3EA]/95 border border-[#DED6C9] text-[#6F6A61] flex items-center gap-1.5">
+                        <span className="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider uppercase bg-[#F7F3EA]/95 border border-[#DED6C9] text-[#292825] flex items-center gap-1.5">
                           <Users className="w-3 h-3 text-[#4F918B]" />
                           {project.guestCount}
                         </span>
@@ -171,7 +171,7 @@ export default function EventShowcase() {
                       {/* Location & Type metadata */}
                       <div className="flex flex-wrap items-center gap-3 text-xs text-[#4F918B] font-mono tracking-wider uppercase mb-3">
                         {project.location && (
-                          <span className="flex items-center gap-1 text-[#6F6A61]">
+                          <span className="flex items-center gap-1 text-[#292825]">
                             <MapPin className="w-3.5 h-3.5 text-[#4F918B]" />
                             {project.location}
                           </span>
@@ -191,7 +191,7 @@ export default function EventShowcase() {
 
                       {/* Description */}
                       {project.description && (
-                        <p className="text-sm text-[#6F6A61] font-light leading-relaxed mb-6">
+                        <p className="text-sm text-[#292825] font-light leading-relaxed mb-6">
                           {project.description}
                         </p>
                       )}
@@ -202,7 +202,7 @@ export default function EventShowcase() {
                           {project.servicesProvided.map((service, sIdx) => (
                             <span
                               key={sIdx}
-                              className="px-2.5 py-1 rounded-lg text-[11px] font-mono tracking-wider text-[#6F6A61] bg-[#F1EADF] border border-[#DED6C9]"
+                              className="px-2.5 py-1 rounded-lg text-[11px] font-mono tracking-wider text-[#292825] bg-[#F1EADF] border border-[#DED6C9]"
                             >
                               {service}
                             </span>
@@ -221,7 +221,7 @@ export default function EventShowcase() {
                         <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                       </Link>
 
-                      <span className="text-[10px] font-mono text-[#928B81] uppercase tracking-widest">
+                      <span className="text-[10px] font-mono text-[#4A453F] uppercase tracking-widest">
                         Verified Execution
                       </span>
                     </div>
@@ -238,7 +238,7 @@ export default function EventShowcase() {
               <h3 className="text-xl md:text-2xl font-serif font-bold text-[#292825]">
                 {activeFilter} Case Studies &amp; Galleries
               </h3>
-              <p className="text-sm text-[#6F6A61] font-light leading-relaxed">
+              <p className="text-sm text-[#292825] font-light leading-relaxed">
                 We have executed memorable experiences in this category across South Tamil Nadu. Contact our team to view private portfolio archives and discuss custom concepts for your event.
               </p>
               <div className="pt-4">

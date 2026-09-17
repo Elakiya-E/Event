@@ -15,13 +15,9 @@ interface NavItem {
 
 const navLinks: NavItem[] = [
   { label: "HOME", href: "/#hero", id: "hero" },
-  { label: "ABOUT", href: "/#about", id: "about" },
   { label: "SERVICES", href: "/#services", id: "services" },
-  { label: "CUSTOMISED DÉCOR", href: "/#customised-decor", id: "customised-decor" },
-  { label: "OUR WORK", href: "/#portfolio", id: "portfolio" },
-  { label: "CASE STUDIES", href: "/#case-studies", id: "case-studies" },
+  { label: "ABOUT", href: "/#about", id: "about" },
   { label: "WHY IRAGU", href: "/#why-iragu", id: "why-iragu" },
-  { label: "FAQ", href: "/#faq", id: "faq" },
   { label: "CONTACT", href: "/contact", id: "contact" },
 ];
 

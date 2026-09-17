@@ -14,7 +14,6 @@ import AboutFounder from "@/components/AboutFounder";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import Locations from "@/components/Locations";
-import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import MobileCTABar from "@/components/MobileCTABar";
@@ -69,10 +68,7 @@ export default function Home() {
       {/* 14. LOCATIONS */}
       <Locations />
 
-      {/* 15. FAQ */}
-      <FAQ />
-      
-      {/* 16. FINAL CTA */}
+      {/* 15. FINAL CTA */}
       <FinalCTA />
       
       {/* 17. FOOTER / ENQUIRY FORM */}

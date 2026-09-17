@@ -58,11 +58,11 @@ const categoryTheme = {
   "institutional-public": {
     accent: "from-[#D8C9B5]/30 via-[#D8C9B5]/10 to-transparent",
     border: "border-[#D8C9B5]/40 hover:border-[#D8C9B5]/70",
-    badge: "border-[#D8C9B5]/40 text-[#928B81] bg-[#D8C9B5]/20",
+    badge: "border-[#D8C9B5]/40 text-[#4A453F] bg-[#D8C9B5]/20",
     dot: "bg-[#D8C9B5]",
     pill: "bg-[#F7F3EA] border-[#DED6C9] text-[#292825] hover:border-[#D8C9B5]/60",
     glow: "",
-    iconColor: "text-[#928B81]",
+    iconColor: "text-[#4A453F]",
   },
   "brand-experiences": {
     accent: "from-[#AEBBAA]/25 via-[#AEBBAA]/8 to-transparent",
@@ -104,6 +104,37 @@ const itemIcons: Record<string, React.ElementType> = {
   "Brand Activations": Flame,
   "Promotional Events": TrendingUp,
   "Experiential Marketing": Compass,
+};
+
+const itemPageSlugs: Record<string, string> = {
+  // Life Events -> dedicated pages
+  Weddings: "weddings",
+  Birthdays: "birthdays",
+  "Baptism & Baby Celebrations": "baptism",
+  "Engagements & Anniversaries": "engagements-anniversaries",
+  "Family Celebrations": "family-celebrations",
+
+  // Corporate Events -> all use corporate page
+  "Brand Launches": "corporate",
+  "Corporate Gatherings": "corporate",
+  "Conferences & Seminars": "corporate",
+  "Annual Celebrations": "corporate",
+  "Product Launches": "corporate",
+
+  // Institutional & Public -> all use public-events page
+  "College & Institutional Events": "public-events",
+  "Medical & Graduation Events": "public-events",
+  "Government Events": "public-events",
+  "Public Events": "public-events",
+  "Political Events": "public-events",
+  "Large-Scale Celebrations": "public-events",
+
+  // Brand Experiences -> all use customised-decor page (creative / design centric)
+  Exhibitions: "customised-decor",
+  "Expo Stalls": "customised-decor",
+  "Brand Activations": "customised-decor",
+  "Promotional Events": "customised-decor",
+  "Experiential Marketing": "customised-decor",
 };
 
 export default function EventCategories() {
@@ -192,7 +223,7 @@ export default function EventCategories() {
           <h2 className="cat-heading-elem text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-[#292825] leading-tight">
             Events We Plan, Design &amp; Manage
           </h2>
-          <p className="cat-heading-elem text-[#6F6A61] text-xs sm:text-sm md:text-base font-light max-w-2xl">
+          <p className="cat-heading-elem text-[#292825] text-xs sm:text-sm md:text-base font-light max-w-2xl">
             From personal life milestones to corporate gatherings and large-scale public events, explore our complete event execution capabilities.
           </p>
         </div>
@@ -204,7 +235,7 @@ export default function EventCategories() {
             className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono tracking-wider uppercase transition-all duration-300 ${
               activeTab === "all"
                 ? "bg-[#4F918B] text-[#FCFAF6] font-bold shadow-md shadow-[#4F918B]/20"
-                : "border-[#DED6C9] bg-[#F7F3EA] text-[#6F6A61] hover:text-[#292825] hover:border-[#C7A978]/60"
+                : "border-[#DED6C9] bg-[#F7F3EA] text-[#292825] hover:text-[#292825] hover:border-[#C7A978]/60"
             }`}
           >
             All Categories (04)
@@ -216,7 +247,7 @@ export default function EventCategories() {
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono tracking-wider uppercase transition-all duration-300 ${
                 activeTab === cat.id
                   ? "bg-[#4F918B] text-[#FCFAF6] font-bold shadow-md shadow-[#4F918B]/20"
-                  : "border-[#DED6C9] bg-[#F7F3EA] text-[#6F6A61] hover:text-[#292825] hover:border-[#C7A978]/60"
+                  : "border-[#DED6C9] bg-[#F7F3EA] text-[#292825] hover:text-[#292825] hover:border-[#C7A978]/60"
               }`}
             >
               0{idx + 1}. {cat.title}
@@ -246,7 +277,7 @@ export default function EventCategories() {
                 {/* Card Header Bar */}
                 <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 border-b border-[#DED6C9] flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
                   <div className="flex items-start md:items-center gap-3 sm:gap-5">
-                    <span className="font-mono text-sm sm:text-base md:text-lg font-bold text-[#928B81]">
+                    <span className="font-mono text-sm sm:text-base md:text-lg font-bold text-[#4A453F]">
                       {(originalIndex + 1).toString().padStart(2, "0")}
                     </span>
                     <div>
@@ -260,7 +291,7 @@ export default function EventCategories() {
                           Category 0{originalIndex + 1}
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm md:text-base text-[#6F6A61] font-light max-w-3xl leading-relaxed mt-1">
+                      <p className="text-xs sm:text-sm md:text-base text-[#292825] font-light max-w-3xl leading-relaxed mt-1">
                         {category.description}
                       </p>
                     </div>
@@ -299,37 +330,60 @@ export default function EventCategories() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                         {category.itemsWithDesc.map((item, itemIdx) => {
                           const ItemIcon = itemIcons[item.title] || Sparkles;
+                          const pageSlug =
+                            itemPageSlugs[item.title] ||
+                            (category.id === "corporate-events"
+                              ? "corporate"
+                              : category.id === "institutional-public"
+                                ? "public-events"
+                                : category.id === "brand-experiences"
+                                  ? "customised-decor"
+                                  : "weddings");
+                          const href = `/events/${pageSlug}`;
                           return (
-                            <div
+                            <Link
                               key={itemIdx}
-                              className="group/item relative p-5 md:p-6 rounded-2xl border border-[#DED6C9] bg-[#FCFAF6] hover:bg-[#F1EADF] hover:border-[#C7A978]/60 transition-all duration-300 flex flex-col justify-between"
+                              href={href}
+                              className="group/link block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F918B] rounded-2xl"
                             >
-                              <div>
-                                <div className="flex items-center justify-between mb-4">
-                                  <div
-                                    className={`w-10 h-10 rounded-xl bg-[#F7F3EA] border border-[#DED6C9] flex items-center justify-center ${theme.iconColor} group-hover/item:scale-105 transition-transform`}
-                                  >
-                                    <ItemIcon className="w-5 h-5" />
+                              <div className="relative h-full p-5 md:p-6 rounded-2xl border border-[#DED6C9] bg-[#FCFAF6] hover:bg-[#F1EADF] hover:border-[#C7A978]/60 transition-all duration-300 flex flex-col justify-between">
+                                <div>
+                                  <div className="flex items-center justify-between mb-4">
+                                    <div
+                                      className={`w-10 h-10 rounded-xl bg-[#F7F3EA] border border-[#DED6C9] flex items-center justify-center ${theme.iconColor} group-hover/link:scale-105 transition-transform`}
+                                    >
+                                      <ItemIcon className="w-5 h-5" />
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                      <span className="font-mono text-[10px] text-[#4A453F] uppercase tracking-widest">
+                                        {(itemIdx + 1).toString().padStart(2, "0")}
+                                      </span>
+                                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#DED6C9] bg-[#F7F3EA] text-[#4A453F] group-hover/link:border-[#4F918B] group-hover/link:text-[#4F918B] group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all">
+                                        <ArrowUpRight className="w-3.5 h-3.5" />
+                                      </span>
+                                    </div>
                                   </div>
-                                  <span className="font-mono text-[10px] text-[#928B81] uppercase tracking-widest">
-                                    {(itemIdx + 1).toString().padStart(2, "0")}
+                                  <h4 className="text-lg font-bold text-[#292825] mb-2 group-hover/link:text-[#4F918B] transition-colors">
+                                    {item.title}
+                                  </h4>
+                                  <p className="text-xs md:text-sm text-[#292825] font-light leading-relaxed">
+                                    {item.desc}
+                                  </p>
+                                </div>
+
+                                <div className="mt-4 pt-3 border-t border-[#DED6C9]/60 flex items-center justify-between text-[11px] text-[#4A453F]">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className={`w-1.5 h-1.5 rounded-full ${theme.dot}`} />
+                                    <span className="font-mono uppercase tracking-wider text-[10px]">
+                                      Full Service Management
+                                    </span>
+                                  </div>
+                                  <span className="font-mono uppercase tracking-wider text-[10px] text-[#292825] group-hover/link:text-[#4F918B] transition-colors">
+                                    View →
                                   </span>
                                 </div>
-                                <h4 className="text-lg font-bold text-[#292825] mb-2 group-hover/item:text-[#4F918B] transition-colors">
-                                  {item.title}
-                                </h4>
-                                <p className="text-xs md:text-sm text-[#6F6A61] font-light leading-relaxed">
-                                  {item.desc}
-                                </p>
                               </div>
-
-                              <div className="mt-4 pt-3 border-t border-[#DED6C9]/60 flex items-center gap-1.5 text-[11px] text-[#928B81]">
-                                <span className={`w-1.5 h-1.5 rounded-full ${theme.dot}`} />
-                                <span className="font-mono uppercase tracking-wider text-[10px]">
-                                  Full Service Management
-                                </span>
-                              </div>
-                            </div>
+                            </Link>
                           );
                         })}
                       </div>
@@ -342,7 +396,7 @@ export default function EventCategories() {
                             <CheckCircle2 className="w-5 h-5" />
                           </div>
                           <div>
-                            <span className="text-xs font-mono uppercase tracking-wider text-[#6F6A61] block mb-1">
+                            <span className="text-xs font-mono uppercase tracking-wider text-[#292825] block mb-1">
                               Execution Capability &amp; Scale
                             </span>
                             <p className="text-sm md:text-base text-[#292825] font-normal leading-relaxed">
@@ -355,26 +409,43 @@ export default function EventCategories() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 md:gap-4">
                           {category.items.map((item, itemIdx) => {
                             const ItemIcon = itemIcons[item] || Sparkles;
+                            const pageSlug =
+                              itemPageSlugs[item] ||
+                              (category.id === "corporate-events"
+                                ? "corporate"
+                                : category.id === "institutional-public"
+                                  ? "public-events"
+                                  : category.id === "brand-experiences"
+                                    ? "customised-decor"
+                                    : "weddings");
+                            const href = `/events/${pageSlug}`;
                             return (
-                              <div
+                              <Link
                                 key={itemIdx}
-                                className={`group/item flex items-center justify-between p-4 md:p-5 rounded-2xl border transition-all duration-300 ${theme.pill}`}
+                                href={href}
+                                className="group/link block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F918B] rounded-2xl"
                               >
-                                <div className="flex items-center gap-3.5">
-                                  <div className={`p-2 rounded-xl bg-[#FCFAF6] border border-[#DED6C9] ${theme.iconColor}`}>
-                                    <ItemIcon className="w-4 h-4" />
+                                <div
+                                  className={`w-full flex items-center justify-between p-4 md:p-5 rounded-2xl border transition-all duration-300 ${theme.pill}`}
+                                >
+                                  <div className="flex items-center gap-3.5">
+                                    <div className={`p-2 rounded-xl bg-[#FCFAF6] border border-[#DED6C9] ${theme.iconColor} group-hover/link:scale-105 transition-transform`}>
+                                      <ItemIcon className="w-4 h-4" />
+                                    </div>
+                                    <div>
+                                      <h4 className="text-sm md:text-base font-semibold text-[#292825] group-hover/link:text-[#4F918B] transition-colors">
+                                        {item}
+                                      </h4>
+                                      <span className="text-[10px] font-mono text-[#4A453F] uppercase tracking-widest block mt-0.5">
+                                        End-to-End Execution
+                                      </span>
+                                    </div>
                                   </div>
-                                  <div>
-                                    <h4 className="text-sm md:text-base font-semibold text-[#292825] group-hover/item:text-[#4F918B] transition-colors">
-                                      {item}
-                                    </h4>
-                                    <span className="text-[10px] font-mono text-[#928B81] uppercase tracking-widest block mt-0.5">
-                                      End-to-End Execution
-                                    </span>
-                                  </div>
+                                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-[#DED6C9] bg-[#FCFAF6] text-[#4A453F] group-hover/link:border-[#4F918B] group-hover/link:text-[#4F918B] group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all flex-shrink-0">
+                                    <ArrowUpRight className="w-4 h-4" />
+                                  </span>
                                 </div>
-                                <ArrowUpRight className="w-4 h-4 text-[#928B81] group-hover/item:text-[#4F918B] group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 transition-all flex-shrink-0" />
-                              </div>
+                              </Link>
                             );
                           })}
                         </div>
