@@ -103,7 +103,7 @@ export default function Navbar() {
         {/* Desktop Navigation (Clean, Non-Overcrowded, High-Res View) */}
         <nav
           aria-label="Main Navigation"
-          className="hidden xl:flex items-center gap-4 2xl:gap-5 text-[11px] 2xl:text-xs font-mono tracking-wider uppercase"
+          className="hidden xl:flex items-center gap-5 2xl:gap-7 text-sm 2xl:text-base font-mono tracking-wider uppercase"
         >
           {navLinks.map((item) => {
             const active = isCurrent(item);
