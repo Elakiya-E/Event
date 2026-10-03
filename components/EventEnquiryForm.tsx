@@ -138,14 +138,30 @@ export default function EventEnquiryForm() {
         eventDate: values.eventDate || "Not specified",
         venue: values.venue.trim() || "Not specified",
         guestCount: values.guestCount.trim() || "Not specified",
-        services: values.services.length > 0 ? values.services : ["Not specified"],
+        services:
+          values.services.length > 0
+            ? values.services.join(", ")
+            : "Not specified",
         budget: values.budget || "Not Decided",
         message: values.message.trim() || "",
-        submittedAt: new Date().toISOString(),
       };
 
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      // POST to our own API route — avoids CORS with Google Apps Script
+      const response = await fetch("/api/submit-enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Failed to submit enquiry. Please try again."
+        );
+      }
+
+      // Success
       setIsSuccess(true);
       setIsSubmitting(false);
 
@@ -162,13 +178,18 @@ export default function EventEnquiryForm() {
       });
       setTouched({});
       setErrors({});
-    } catch (err) {
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "An unexpected error occurred.";
       setIsSubmitting(false);
       setErrors({
         general:
+          message ||
           "Unable to submit enquiry right now. Please call or WhatsApp us directly at 90424 29868.",
       });
     }
+
+
   };
 
   const todayDate = new Date().toISOString().split("T")[0];
