@@ -1,9 +1,12 @@
 "use client";
-import React, { useRef } from "react";
-import { useGSAP, gsap, ScrollTrigger } from "@/hooks/useGsap";
+
+import React, { useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useGSAP, gsap, ScrollTrigger } from "@/hooks/useGsap";
 import {
   ArrowRight,
+  Sparkles,
   Palette,
   SwatchBook,
   Flower2,
@@ -16,86 +19,162 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 /* ------------------------------------------------------------------ */
-/* Décor element data — visual keyword grid                            */
+/* 7 Décor Elements Data with authentic imagery, dimensions & accents  */
 /* ------------------------------------------------------------------ */
-const decorElements = [
+interface DecorItem {
+  id: string;
+  num: string;
+  label: string;
+  desc: string;
+  image: string;
+  alt: string;
+  icon: React.ElementType;
+  accent: string;
+  accentBg: string;
+  tag: string;
+  widthClass: string;
+  heightClass: string;
+  yOffsetClass: string;
+  shapeClass: string;
+}
+
+const decorShowcaseItems: DecorItem[] = [
   {
-    icon: Palette,
+    id: "theme",
+    num: "01",
     label: "Theme",
-    desc: "Concepts designed around your story",
-    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
-    border: "border-[#DED6C9]",
-    iconColor: "text-[#4F918B]",
+    desc: "Concepts designed around your story.",
+    image: "/images/decor/colours.png",
+    alt: "Theme — Bespoke concept celebration setup by Iragu Events",
+    icon: Palette,
+    accent: "#4F918B",
+    accentBg: "bg-[#FCFAF6] text-[#4F918B] border-[#4F918B]/35",
+    tag: "Concept & Narrative",
+    widthClass: "w-[290px] sm:w-[320px] lg:w-[340px]",
+    heightClass: "h-[400px] sm:h-[440px] lg:h-[460px]",
+    yOffsetClass: "translate-y-0",
+    shapeClass: "rounded-t-[140px] rounded-b-3xl",
   },
   {
-    icon: SwatchBook,
+    id: "colours",
+    num: "02",
     label: "Colours",
-    desc: "Palettes that match your personality",
-    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
-    border: "border-[#DED6C9]",
-    iconColor: "text-[#C7A978]",
+    desc: "Palettes that match your personality.",
+    image: "/images/b1.png",
+    alt: "Colours — Curated color palette and harmonious lighting",
+    icon: SwatchBook,
+    accent: "#C7A978",
+    accentBg: "bg-[#FCFAF6] text-[#C7A978] border-[#C7A978]/40",
+    tag: "Harmonious Palettes",
+    widthClass: "w-[270px] sm:w-[300px] lg:w-[310px]",
+    heightClass: "h-[370px] sm:h-[400px] lg:h-[420px]",
+    yOffsetClass: "translate-y-4 lg:translate-y-7",
+    shapeClass: "rounded-3xl",
   },
   {
-    icon: Flower2,
+    id: "florals",
+    num: "03",
     label: "Florals",
-    desc: "Arrangements that set the mood",
-    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
-    border: "border-[#DED6C9]",
-    iconColor: "text-[#4F918B]",
+    desc: "Arrangements that set the mood.",
+    image: "/images/hero2.png",
+    alt: "Florals — Premium floral installations and botanical artistry",
+    icon: Flower2,
+    accent: "#AEBBAA",
+    accentBg: "bg-[#FCFAF6] text-[#556953] border-[#AEBBAA]/50",
+    tag: "Botanical Artistry",
+    widthClass: "w-[280px] sm:w-[310px] lg:w-[330px]",
+    heightClass: "h-[410px] sm:h-[450px] lg:h-[470px]",
+    yOffsetClass: "-translate-y-2 lg:-translate-y-5",
+    shapeClass: "rounded-t-3xl rounded-b-[130px]",
   },
   {
-    icon: LayoutDashboard,
+    id: "stage",
+    num: "04",
     label: "Stage",
-    desc: "Centrepieces that create impact",
-    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
-    border: "border-[#DED6C9]",
-    iconColor: "text-[#C7A978]",
+    desc: "Centrepieces that create impact.",
+    image: "/images/hero1.png",
+    alt: "Stage — Grand celebration centerpiece stage architecture",
+    icon: LayoutDashboard,
+    accent: "#C7A978",
+    accentBg: "bg-[#FCFAF6] text-[#C7A978] border-[#C7A978]/40",
+    tag: "Grand Centrepieces",
+    widthClass: "w-[330px] sm:w-[360px] lg:w-[380px]",
+    heightClass: "h-[430px] sm:h-[470px] lg:h-[490px]",
+    yOffsetClass: "translate-y-1 lg:translate-y-3",
+    shapeClass: "rounded-t-[160px] rounded-b-3xl",
   },
   {
-    icon: DoorOpen,
+    id: "entrance",
+    num: "05",
     label: "Entrance",
-    desc: "First impressions that wow",
-    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
-    border: "border-[#DED6C9]",
-    iconColor: "text-[#4F918B]",
+    desc: "First impressions that wow.",
+    image: "/images/decor/entrance.png",
+    alt: "Entrance — Elegant pathway arch and welcoming entrance décor",
+    icon: DoorOpen,
+    accent: "#D8B5A8",
+    accentBg: "bg-[#FCFAF6] text-[#9A6051] border-[#D8B5A8]/50",
+    tag: "First Impressions",
+    widthClass: "w-[280px] sm:w-[310px] lg:w-[320px]",
+    heightClass: "h-[380px] sm:h-[420px] lg:h-[440px]",
+    yOffsetClass: "translate-y-5 lg:translate-y-9",
+    shapeClass: "rounded-3xl",
   },
   {
-    icon: Camera,
+    id: "photozones",
+    num: "06",
     label: "Photo Zones",
-    desc: "Backdrops made for memories",
-    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
-    border: "border-[#DED6C9]",
-    iconColor: "text-[#C7A978]",
+    desc: "Backdrops made for memories.",
+    image: "/images/decor/photozone.png",
+    alt: "Photo Zones — Immersive photo booth and backdrop styling",
+    icon: Camera,
+    accent: "#F0D7C8",
+    accentBg: "bg-[#FCFAF6] text-[#A66E58] border-[#F0D7C8]/70",
+    tag: "Backdrops & Frames",
+    widthClass: "w-[290px] sm:w-[320px] lg:w-[330px]",
+    heightClass: "h-[400px] sm:h-[440px] lg:h-[460px]",
+    yOffsetClass: "-translate-y-1 lg:-translate-y-4",
+    shapeClass: "rounded-t-3xl rounded-b-[120px]",
   },
   {
-    icon: Gem,
+    id: "details",
+    num: "07",
     label: "Details",
-    desc: "The little things that matter most",
-    gradient: "from-[#C7A978]/20 via-[#F1EADF] to-transparent",
-    border: "border-[#DED6C9]",
-    iconColor: "text-[#4F918B]",
+    desc: "The little things that matter most.",
+    image: "/images/decor/details.png",
+    alt: "Details — Fine candlelit table arrangements and finishing touches",
+    icon: Gem,
+    accent: "#4F918B",
+    accentBg: "bg-[#FCFAF6] text-[#4F918B] border-[#4F918B]/35",
+    tag: "Finishing Touches",
+    widthClass: "w-[270px] sm:w-[300px] lg:w-[310px]",
+    heightClass: "h-[370px] sm:h-[400px] lg:h-[420px]",
+    yOffsetClass: "translate-y-3 lg:translate-y-6",
+    shapeClass: "rounded-3xl",
   },
 ];
 
-/* ================================================================== */
-/* CustomisedDecor — Décor Portfolio Section                            */
-/* ================================================================== */
 export default function CustomisedDecor() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
   useGSAP(
     () => {
       if (!containerRef.current) return;
 
-      /* Heading fade-in */
+      const prefersReduced =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* Header entrance */
       gsap.fromTo(
-        containerRef.current.querySelectorAll(".decor-anim"),
-        { y: 32, opacity: 0 },
+        containerRef.current.querySelectorAll(".decor-head-elem"),
+        { y: prefersReduced ? 0 : 32, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.85,
-          stagger: 0.1,
+          duration: prefersReduced ? 0 : 0.85,
+          stagger: prefersReduced ? 0 : 0.1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
@@ -105,36 +184,17 @@ export default function CustomisedDecor() {
         }
       );
 
-      /* Element cards stagger */
-      gsap.fromTo(
-        containerRef.current.querySelectorAll(".decor-card"),
-        { y: 40, opacity: 0, scale: 0.97 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.65,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current.querySelector(".decor-grid"),
-            start: "top 82%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      /* Parallax on the background visual */
-      const bgVisual = containerRef.current.querySelector(".decor-bg-visual");
-      if (bgVisual) {
+      /* Parallax scale on the background visual band */
+      const heroVisual = containerRef.current.querySelector(".decor-bg-visual");
+      if (heroVisual && !prefersReduced) {
         gsap.fromTo(
-          bgVisual,
-          { scale: 1.08 },
+          heroVisual,
+          { scale: 1.06 },
           {
             scale: 1,
             ease: "none",
             scrollTrigger: {
-              trigger: containerRef.current,
+              trigger: containerRef.current.querySelector(".decor-hero-band"),
               start: "top bottom",
               end: "bottom top",
               scrub: true,
@@ -150,129 +210,278 @@ export default function CustomisedDecor() {
     <section
       id="customised-decor"
       ref={containerRef}
-      className="relative w-full bg-[#F1EADF] overflow-hidden"
+      className="relative w-full bg-[#F7F3EA] overflow-hidden"
+      aria-label="Customised Décor Experience"
     >
       {/* ═══════════════════════════════════════════════════════════════ */}
-      {/* FULL-WIDTH CINEMATIC HEADER BAND                               */}
+      {/* 1. BRIGHT LUXURY EDITORIAL HEADER BAND                          */}
       {/* ═══════════════════════════════════════════════════════════════ */}
-      <div className="relative w-full min-h-[50vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0 z-0">
+      <div className="decor-hero-band relative w-full min-h-[46vh] md:min-h-[54vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#FCFAF6] via-[#F7F3EA] to-[#F7F3EA]">
+        {/* Soft background ambient visual with bright luxury warmth */}
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
           <div
-            className="decor-bg-visual absolute inset-[-5%] w-[110%] h-[110%] bg-cover bg-center"
+            className="decor-bg-visual absolute inset-[-5%] w-[110%] h-[110%] bg-cover bg-center filter saturate-125"
             style={{ backgroundImage: `url('/images/hero-bg.png')` }}
           />
-          {/* Strong dark overlay for text readability */}
-          <div className="absolute inset-0 bg-[#1a1208]/55 z-10" />
-          {/* Bottom fade into section background */}
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#F1EADF] to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FCFAF6]/90 via-[#F7F3EA]/75 to-[#F7F3EA]" />
         </div>
 
+        {/* Delicate pastel atmospheric light orbs */}
+        <div className="absolute -top-24 left-1/4 w-[500px] h-[500px] bg-[#F0D7C8]/35 blur-[130px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] bg-[#D8B5A8]/25 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[220px] bg-[#C7A978]/20 blur-[100px] rounded-full pointer-events-none" />
+
         {/* Content */}
-        <div className="relative z-20 text-center px-4 sm:px-6 py-14 sm:py-20 md:py-28 max-w-5xl mx-auto">
+        <div className="relative z-20 text-center px-4 sm:px-6 py-16 sm:py-20 md:py-24 max-w-5xl mx-auto">
           {/* Eyebrow badge */}
-          <div className="decor-anim mb-5 sm:mb-6">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C7A978]/50 bg-[#FCFAF6]/10 text-[#C7A978] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C7A978] animate-pulse" />
+          <div className="decor-head-elem mb-4 sm:mb-5">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C7A978]/50 bg-[#FCFAF6] text-[#C7A978] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#4F918B] animate-pulse" />
               Customised Décor
             </span>
           </div>
 
-          {/* Heading — white on dark overlay */}
-          <h2 className="decor-anim text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight leading-[1.12]" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
-            Your Idea.{" "}
-            <span className="text-[#C7A978]">Your Story.</span>
+          {/* Heading in rich charcoal */}
+          <h1 className="decor-head-elem text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-[#292825] tracking-tight leading-[1.12]">
+            Your Idea. <span className="text-[#C7A978]">Your Story.</span>
             <br className="hidden sm:inline" />
             Your Celebration.
-          </h2>
+          </h1>
 
           {/* Subheading */}
-          <p className="decor-anim mt-5 sm:mt-7 text-base sm:text-lg md:text-xl text-white/80 font-light tracking-wide" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.3)' }}>
+          <p className="decor-head-elem mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-[#6F6A61] font-light tracking-wide max-w-2xl mx-auto">
             Customised Décor Designed Around You
           </p>
         </div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════ */}
-      {/* CONTENT + ELEMENT GRID                                         */}
+      {/* 2. EDITORIAL INTRODUCTION (Preserved Core Content)              */}
       {/* ═══════════════════════════════════════════════════════════════ */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-12 sm:py-16 md:py-24">
-        {/* Intro content — centred, elegant */}
-        <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-5 mb-12 sm:mb-16 md:mb-20">
-          <p className="decor-anim text-base sm:text-lg md:text-xl text-[#292825] font-medium leading-relaxed">
-            We specialise in creating décor concepts that are uniquely yours.
-          </p>
-          <p className="decor-anim text-sm sm:text-base md:text-lg text-[#6F6A61] font-light leading-relaxed">
-            From elegant and minimal setups to grand, immersive experiences,
-            every element is thoughtfully designed to match your celebration.
-          </p>
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-10 text-center pt-12 sm:pt-16 pb-6 sm:pb-10 space-y-4 sm:space-y-5">
+        <p className="decor-head-elem text-xl sm:text-2xl md:text-3xl font-serif font-bold text-[#292825] leading-snug">
+          We specialise in creating décor concepts that are uniquely yours.
+        </p>
+        <p className="decor-head-elem text-sm sm:text-base md:text-lg text-[#6F6A61] font-light leading-relaxed max-w-3xl mx-auto">
+          From elegant and minimal setups to grand, immersive experiences, every
+          element is thoughtfully designed to match your celebration.
+        </p>
+
+        {/* Subtle decorative pip divider */}
+        <div className="decor-head-elem flex items-center justify-center gap-3 pt-2">
+          <span className="w-12 h-px bg-gradient-to-r from-transparent to-[#C7A978]" />
+          <Sparkles className="w-4 h-4 text-[#C7A978]" />
+          <span className="w-12 h-px bg-gradient-to-l from-transparent to-[#C7A978]" />
         </div>
+      </div>
 
-        {/* ── Décor Elements Grid ── */}
-        <div className="decor-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
-          {decorElements.map((el) => {
-            const Icon = el.icon;
-            return (
-              <div
-                key={el.label}
-                className={`decor-card group relative p-4 sm:p-5 md:p-6 rounded-2xl border ${el.border} bg-[#FCFAF6] hover:border-[#C7A978]/60 transition-all duration-500 overflow-hidden cursor-default`}
-              >
-                {/* Hover glow */}
+      {/* ═══════════════════════════════════════════════════════════════ */}
+      {/* 3. BRIGHT FLOATING INSPIRATION GALLERY (NO DARK OVERLAYS)       */}
+      {/* ═══════════════════════════════════════════════════════════════ */}
+      <div className="relative w-full py-8 sm:py-12 md:py-16 overflow-hidden">
+        {/* Soft edge fade masks on desktop */}
+        <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-24 xl:w-32 bg-gradient-to-r from-[#F7F3EA] to-transparent z-20 pointer-events-none" />
+        <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-24 xl:w-32 bg-gradient-to-l from-[#F7F3EA] to-transparent z-20 pointer-events-none" />
+
+        {/* Ambient warm glow behind the gallery */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[360px] bg-[#F0D7C8]/25 blur-[150px] rounded-full pointer-events-none" />
+
+        {/* 
+          Continuous moving carousel track:
+          - Uses CSS animation `decor-marquee`
+          - Pauses smoothly on hover (:hover pause)
+          - Duplicated sequence (set A & set B) for zero-gap looping
+          - Mobile supports native horizontal touch-scroll
+        */}
+        <div
+          ref={trackRef}
+          className="group/track flex gap-6 sm:gap-8 lg:gap-10 overflow-x-auto lg:overflow-x-visible no-scrollbar px-4 sm:px-8 lg:px-0 py-8 select-none"
+        >
+          {/* Inner animated track (runs continuous marquee on lg screens) */}
+          <div className="flex gap-6 sm:gap-8 lg:gap-10 flex-nowrap lg:animate-marquee group-hover/track:[animation-play-state:paused]">
+            {/* FIRST PASS (7 Items) */}
+            {decorShowcaseItems.map((item) => {
+              const Icon = item.icon;
+              const isSelected = activeItem === item.id;
+
+              return (
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${el.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`}
-                />
+                  key={`first-${item.id}`}
+                  onMouseEnter={() => setActiveItem(item.id)}
+                  onMouseLeave={() => setActiveItem(null)}
+                  className={`relative flex-shrink-0 flex flex-col justify-between transition-all duration-500 cursor-pointer ${item.widthClass} ${item.heightClass} ${item.yOffsetClass}`}
+                >
+                  {/* Organic image canvas (curved masks, champagne border, luxury soft shadow) */}
+                  <div
+                    className={`relative w-full h-full overflow-hidden border border-[#C7A978]/40 shadow-[0_12px_36px_rgba(199,169,120,0.16)] transition-all duration-700 bg-[#FCFAF6] ${
+                      item.shapeClass
+                    } ${
+                      isSelected
+                        ? "scale-[1.03] shadow-[0_20px_45px_rgba(79,145,139,0.22)] ring-2 ring-[#4F918B]/60"
+                        : "hover:scale-[1.02] hover:border-[#4F918B]/60"
+                    }`}
+                  >
+                    {/* Natural bright photograph with zero dark overlays */}
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      sizes="380px"
+                      className="object-cover transition-transform duration-1000 ease-out group-hover/track:scale-105"
+                    />
 
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="mb-3 sm:mb-4">
-                    <div
-                      className={`inline-flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#F1EADF] border border-[#DED6C9] transition-colors duration-300`}
-                    >
-                      <Icon
-                        className={`w-4 h-4 sm:w-5 sm:h-5 ${el.iconColor} group-hover:scale-110 transition-transform duration-300`}
-                      />
+                    {/* Top floating badge (Category tag + Number) in light cream */}
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="w-8 h-8 rounded-full bg-[#FCFAF6]/95 border border-[#C7A978]/40 font-serif font-bold text-sm text-[#292825] flex items-center justify-center shadow-xs">
+                        {item.num}
+                      </span>
+                      <span
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest backdrop-blur-md border shadow-xs ${item.accentBg}`}
+                      >
+                        <Icon className="w-3 h-3" />
+                        <span>{item.tag}</span>
+                      </span>
+                    </div>
+
+                    {/* Bottom editorial caption panel on soft cream frosted vignette */}
+                    <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-[#FCFAF6] via-[#FCFAF6]/90 to-transparent pt-8 text-left space-y-1 z-10">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="w-2 h-2 rounded-full"
+                          style={{ backgroundColor: item.accent }}
+                        />
+                        <h2 className="text-xl font-serif font-bold text-[#292825] tracking-tight">
+                          {item.label}
+                        </h2>
+                      </div>
+                      <p className="text-xs sm:text-[13px] text-[#6F6A61] font-light leading-snug">
+                        {item.desc}
+                      </p>
                     </div>
                   </div>
-
-                  {/* Label */}
-                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#292825] tracking-tight mb-1">
-                    {el.label}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-[11px] sm:text-xs md:text-sm text-[#6F6A61] group-hover:text-[#292825] font-light leading-relaxed transition-colors duration-300">
-                    {el.desc}
-                  </p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
 
-          {/* Special closing card spanning remaining space */}
-          <div className="decor-card col-span-2 sm:col-span-3 lg:col-span-1 relative p-5 md:p-6 rounded-2xl border border-[#DED6C9] bg-[#F1EADF] flex flex-col justify-center items-center text-center overflow-hidden group hover:border-[#C7A978]/60 transition-all duration-500 cursor-default">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(199,169,120,0.08),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative z-10">
-              <p className="text-sm sm:text-base md:text-lg text-[#4F918B] font-medium italic leading-relaxed">
-                &ldquo;You tell us what you imagine.
-                <br />
-                We&apos;ll create it.&rdquo;
-              </p>
-            </div>
+            {/* DUPLICATE PASS (for seamless infinite loop on lg+ screens) */}
+            {decorShowcaseItems.map((item) => {
+              const Icon = item.icon;
+              const isSelected = activeItem === `${item.id}-dup`;
+
+              return (
+                <div
+                  key={`second-${item.id}`}
+                  onMouseEnter={() => setActiveItem(`${item.id}-dup`)}
+                  onMouseLeave={() => setActiveItem(null)}
+                  aria-hidden="true"
+                  className={`hidden lg:flex relative flex-shrink-0 flex-col justify-between transition-all duration-500 cursor-pointer ${item.widthClass} ${item.heightClass} ${item.yOffsetClass}`}
+                >
+                  <div
+                    className={`relative w-full h-full overflow-hidden border border-[#C7A978]/40 shadow-[0_12px_36px_rgba(199,169,120,0.16)] transition-all duration-700 bg-[#FCFAF6] ${
+                      item.shapeClass
+                    } ${
+                      isSelected
+                        ? "scale-[1.03] shadow-[0_20px_45px_rgba(79,145,139,0.22)] ring-2 ring-[#4F918B]/60"
+                        : "hover:scale-[1.02] hover:border-[#4F918B]/60"
+                    }`}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      sizes="380px"
+                      className="object-cover transition-transform duration-1000 ease-out"
+                    />
+
+                    {/* Top floating badge in light cream */}
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="w-8 h-8 rounded-full bg-[#FCFAF6]/95 border border-[#C7A978]/40 font-serif font-bold text-sm text-[#292825] flex items-center justify-center shadow-xs">
+                        {item.num}
+                      </span>
+                      <span
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest backdrop-blur-md border shadow-xs ${item.accentBg}`}
+                      >
+                        <Icon className="w-3 h-3" />
+                        <span>{item.tag}</span>
+                      </span>
+                    </div>
+
+                    {/* Bottom editorial caption panel */}
+                    <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-[#FCFAF6] via-[#FCFAF6]/90 to-transparent pt-8 text-left space-y-1 z-10">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="w-2 h-2 rounded-full"
+                          style={{ backgroundColor: item.accent }}
+                        />
+                        <h2 className="text-xl font-serif font-bold text-[#292825] tracking-tight">
+                          {item.label}
+                        </h2>
+                      </div>
+                      <p className="text-xs sm:text-[13px] text-[#6F6A61] font-light leading-snug">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* ── CTA ── */}
-        <div className="decor-anim mt-12 sm:mt-14 md:mt-16 flex justify-center">
+        {/* Mobile touch scroll hint */}
+        <div className="lg:hidden flex items-center justify-center gap-2 text-[10px] font-mono uppercase tracking-widest text-[#C7A978] pt-3">
+          <span>&larr; Swipe to explore 7 décor elements &rarr;</span>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════ */}
+      {/* 4. BRAND PROMISE STATEMENT & ENQUIRY CALLOUT                    */}
+      {/* ═══════════════════════════════════════════════════════════════ */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-10 py-16 sm:py-20 md:py-24 text-center space-y-6 sm:space-y-8">
+        {/* Preserved Signature Brand Statement */}
+        <div className="decor-head-elem space-y-2">
+          <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#C7A978] font-semibold block">
+            The Iragu Décor Promise
+          </span>
+          <p className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#292825] italic leading-snug">
+            &ldquo;You tell us what you imagine.
+            <br />
+            <span className="text-[#4F918B]">We&apos;ll create it.</span>&rdquo;
+          </p>
+        </div>
+
+        {/* Direct Action Link */}
+        <div className="decor-head-elem pt-2 flex justify-center">
           <Link
-            href="#contact"
+            href="/contact"
             aria-label="Discuss your décor idea"
-            className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] px-7 sm:px-9 py-4 font-bold uppercase tracking-widest transition-all duration-300 text-xs md:text-sm shadow-lg rounded-sm"
+            className="group inline-flex items-center justify-center gap-3 bg-[#4F918B] hover:bg-[#3F7A75] text-[#FCFAF6] px-8 sm:px-10 py-4 font-mono font-bold uppercase tracking-widest transition-all duration-300 text-xs sm:text-sm shadow-xl shadow-[#4F918B]/20 rounded-full active:scale-95"
           >
-            Discuss Your Décor Idea
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <span>Discuss Your Décor Idea</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
           </Link>
         </div>
       </div>
+
+      {/* Custom Keyframe Styles for Smooth Marquee */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .lg\\:animate-marquee {
+          animation: marquee 24s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .lg\\:animate-marquee {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
