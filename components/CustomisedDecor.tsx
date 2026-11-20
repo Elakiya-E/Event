@@ -19,7 +19,7 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 /* ------------------------------------------------------------------ */
-/* 7 Décor Elements Data with authentic imagery, dimensions & accents  */
+/* 7 Décor Elements Data with unique photographs & balanced styling   */
 /* ------------------------------------------------------------------ */
 interface DecorItem {
   id: string;
@@ -33,7 +33,7 @@ interface DecorItem {
   accentBg: string;
   tag: string;
   widthClass: string;
-  heightClass: string;
+  imgHeightClass: string;
   yOffsetClass: string;
   shapeClass: string;
 }
@@ -44,31 +44,31 @@ const decorShowcaseItems: DecorItem[] = [
     num: "01",
     label: "Theme",
     desc: "Concepts designed around your story.",
-    image: "/images/decor/colours.png",
+    image: "/images/decor/theme.png",
     alt: "Theme — Bespoke concept celebration setup by Iragu Events",
     icon: Palette,
     accent: "#4F918B",
     accentBg: "bg-[#FCFAF6] text-[#4F918B] border-[#4F918B]/35",
-    tag: "Concept & Narrative",
-    widthClass: "w-[290px] sm:w-[320px] lg:w-[340px]",
-    heightClass: "h-[400px] sm:h-[440px] lg:h-[460px]",
+    tag: "Concept & Story",
+    widthClass: "w-[280px] sm:w-[310px] lg:w-[330px]",
+    imgHeightClass: "h-[340px] sm:h-[370px] lg:h-[390px]",
     yOffsetClass: "translate-y-0",
-    shapeClass: "rounded-t-[140px] rounded-b-3xl",
+    shapeClass: "rounded-t-[140px] rounded-b-2xl",
   },
   {
     id: "colours",
     num: "02",
     label: "Colours",
     desc: "Palettes that match your personality.",
-    image: "/images/b1.png",
-    alt: "Colours — Curated color palette and harmonious lighting",
+    image: "/images/decor/colours.png",
+    alt: "Colours — Curated color palette, fabrics, and harmonious styling",
     icon: SwatchBook,
     accent: "#C7A978",
     accentBg: "bg-[#FCFAF6] text-[#C7A978] border-[#C7A978]/40",
     tag: "Harmonious Palettes",
-    widthClass: "w-[270px] sm:w-[300px] lg:w-[310px]",
-    heightClass: "h-[370px] sm:h-[400px] lg:h-[420px]",
-    yOffsetClass: "translate-y-4 lg:translate-y-7",
+    widthClass: "w-[260px] sm:w-[285px] lg:w-[305px]",
+    imgHeightClass: "h-[300px] sm:h-[330px] lg:h-[350px]",
+    yOffsetClass: "translate-y-5 lg:translate-y-8",
     shapeClass: "rounded-3xl",
   },
   {
@@ -82,10 +82,10 @@ const decorShowcaseItems: DecorItem[] = [
     accent: "#AEBBAA",
     accentBg: "bg-[#FCFAF6] text-[#556953] border-[#AEBBAA]/50",
     tag: "Botanical Artistry",
-    widthClass: "w-[280px] sm:w-[310px] lg:w-[330px]",
-    heightClass: "h-[410px] sm:h-[450px] lg:h-[470px]",
+    widthClass: "w-[270px] sm:w-[300px] lg:w-[320px]",
+    imgHeightClass: "h-[350px] sm:h-[380px] lg:h-[400px]",
     yOffsetClass: "-translate-y-2 lg:-translate-y-5",
-    shapeClass: "rounded-t-3xl rounded-b-[130px]",
+    shapeClass: "rounded-t-2xl rounded-b-[130px]",
   },
   {
     id: "stage",
@@ -98,10 +98,10 @@ const decorShowcaseItems: DecorItem[] = [
     accent: "#C7A978",
     accentBg: "bg-[#FCFAF6] text-[#C7A978] border-[#C7A978]/40",
     tag: "Grand Centrepieces",
-    widthClass: "w-[330px] sm:w-[360px] lg:w-[380px]",
-    heightClass: "h-[430px] sm:h-[470px] lg:h-[490px]",
-    yOffsetClass: "translate-y-1 lg:translate-y-3",
-    shapeClass: "rounded-t-[160px] rounded-b-3xl",
+    widthClass: "w-[305px] sm:w-[335px] lg:w-[355px]",
+    imgHeightClass: "h-[365px] sm:h-[395px] lg:h-[420px]",
+    yOffsetClass: "translate-y-1 lg:translate-y-2",
+    shapeClass: "rounded-t-[160px] rounded-b-2xl",
   },
   {
     id: "entrance",
@@ -114,9 +114,9 @@ const decorShowcaseItems: DecorItem[] = [
     accent: "#D8B5A8",
     accentBg: "bg-[#FCFAF6] text-[#9A6051] border-[#D8B5A8]/50",
     tag: "First Impressions",
-    widthClass: "w-[280px] sm:w-[310px] lg:w-[320px]",
-    heightClass: "h-[380px] sm:h-[420px] lg:h-[440px]",
-    yOffsetClass: "translate-y-5 lg:translate-y-9",
+    widthClass: "w-[260px] sm:w-[290px] lg:w-[310px]",
+    imgHeightClass: "h-[310px] sm:h-[340px] lg:h-[360px]",
+    yOffsetClass: "translate-y-6 lg:translate-y-9",
     shapeClass: "rounded-3xl",
   },
   {
@@ -127,13 +127,13 @@ const decorShowcaseItems: DecorItem[] = [
     image: "/images/decor/photozone.png",
     alt: "Photo Zones — Immersive photo booth and backdrop styling",
     icon: Camera,
-    accent: "#F0D7C8",
-    accentBg: "bg-[#FCFAF6] text-[#A66E58] border-[#F0D7C8]/70",
+    accent: "#C8BDD8",
+    accentBg: "bg-[#FCFAF6] text-[#6A5A7A] border-[#C8BDD8]/50",
     tag: "Backdrops & Frames",
-    widthClass: "w-[290px] sm:w-[320px] lg:w-[330px]",
-    heightClass: "h-[400px] sm:h-[440px] lg:h-[460px]",
+    widthClass: "w-[280px] sm:w-[310px] lg:w-[330px]",
+    imgHeightClass: "h-[340px] sm:h-[370px] lg:h-[390px]",
     yOffsetClass: "-translate-y-1 lg:-translate-y-4",
-    shapeClass: "rounded-t-3xl rounded-b-[120px]",
+    shapeClass: "rounded-t-2xl rounded-b-[120px]",
   },
   {
     id: "details",
@@ -146,9 +146,9 @@ const decorShowcaseItems: DecorItem[] = [
     accent: "#4F918B",
     accentBg: "bg-[#FCFAF6] text-[#4F918B] border-[#4F918B]/35",
     tag: "Finishing Touches",
-    widthClass: "w-[270px] sm:w-[300px] lg:w-[310px]",
-    heightClass: "h-[370px] sm:h-[400px] lg:h-[420px]",
-    yOffsetClass: "translate-y-3 lg:translate-y-6",
+    widthClass: "w-[260px] sm:w-[285px] lg:w-[305px]",
+    imgHeightClass: "h-[300px] sm:h-[330px] lg:h-[350px]",
+    yOffsetClass: "translate-y-4 lg:translate-y-7",
     shapeClass: "rounded-3xl",
   },
 ];
@@ -183,25 +183,6 @@ export default function CustomisedDecor() {
           },
         }
       );
-
-      /* Parallax scale on the background visual band */
-      const heroVisual = containerRef.current.querySelector(".decor-bg-visual");
-      if (heroVisual && !prefersReduced) {
-        gsap.fromTo(
-          heroVisual,
-          { scale: 1.06 },
-          {
-            scale: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: containerRef.current.querySelector(".decor-hero-band"),
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      }
     },
     { scope: containerRef }
   );
@@ -276,29 +257,29 @@ export default function CustomisedDecor() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════ */}
-      {/* 3. BRIGHT FLOATING INSPIRATION GALLERY (NO DARK OVERLAYS)       */}
+      {/* 3. CONTINUOUS FLOATING DÉCOR GALLERY                            */}
       {/* ═══════════════════════════════════════════════════════════════ */}
       <div className="relative w-full py-8 sm:py-12 md:py-16 overflow-hidden">
         {/* Soft edge fade masks on desktop */}
-        <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-24 xl:w-32 bg-gradient-to-r from-[#F7F3EA] to-transparent z-20 pointer-events-none" />
-        <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-24 xl:w-32 bg-gradient-to-l from-[#F7F3EA] to-transparent z-20 pointer-events-none" />
+        <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-20 xl:w-28 bg-gradient-to-r from-[#F7F3EA] to-transparent z-20 pointer-events-none" />
+        <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-20 xl:w-28 bg-gradient-to-l from-[#F7F3EA] to-transparent z-20 pointer-events-none" />
 
         {/* Ambient warm glow behind the gallery */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[360px] bg-[#F0D7C8]/25 blur-[150px] rounded-full pointer-events-none" />
 
         {/* 
           Continuous moving carousel track:
-          - Uses CSS animation `decor-marquee`
-          - Pauses smoothly on hover (:hover pause)
+          - Infinite CSS marquee animation
+          - Pauses on desktop hover
           - Duplicated sequence (set A & set B) for zero-gap looping
           - Mobile supports native horizontal touch-scroll
         */}
         <div
           ref={trackRef}
-          className="group/track flex gap-6 sm:gap-8 lg:gap-10 overflow-x-auto lg:overflow-x-visible no-scrollbar px-4 sm:px-8 lg:px-0 py-8 select-none"
+          className="group-marquee flex overflow-x-auto lg:overflow-x-hidden no-scrollbar px-4 sm:px-8 lg:px-0 py-8 select-none"
         >
-          {/* Inner animated track (runs continuous marquee on lg screens) */}
-          <div className="flex gap-6 sm:gap-8 lg:gap-10 flex-nowrap lg:animate-marquee group-hover/track:[animation-play-state:paused]">
+          {/* Animated Marquee Track */}
+          <div className="animate-marquee-track flex gap-6 sm:gap-8 lg:gap-10 flex-nowrap items-start">
             {/* FIRST PASS (7 Items) */}
             {decorShowcaseItems.map((item) => {
               const Icon = item.icon;
@@ -309,55 +290,53 @@ export default function CustomisedDecor() {
                   key={`first-${item.id}`}
                   onMouseEnter={() => setActiveItem(item.id)}
                   onMouseLeave={() => setActiveItem(null)}
-                  className={`relative flex-shrink-0 flex flex-col justify-between transition-all duration-500 cursor-pointer ${item.widthClass} ${item.heightClass} ${item.yOffsetClass}`}
+                  className={`relative flex-shrink-0 flex flex-col items-center transition-all duration-500 cursor-pointer ${item.widthClass} ${item.yOffsetClass}`}
                 >
-                  {/* Organic image canvas (curved masks, champagne border, luxury soft shadow) */}
+                  {/* Organic image frame (Clean photograph, zero embedded text) */}
                   <div
-                    className={`relative w-full h-full overflow-hidden border border-[#C7A978]/40 shadow-[0_12px_36px_rgba(199,169,120,0.16)] transition-all duration-700 bg-[#FCFAF6] ${
-                      item.shapeClass
-                    } ${
+                    className={`relative w-full overflow-hidden border border-[#C7A978]/40 shadow-[0_12px_36px_rgba(199,169,120,0.14)] transition-all duration-700 bg-[#FCFAF6] ${item.imgHeightClass} ${item.shapeClass} ${
                       isSelected
                         ? "scale-[1.03] shadow-[0_20px_45px_rgba(79,145,139,0.22)] ring-2 ring-[#4F918B]/60"
                         : "hover:scale-[1.02] hover:border-[#4F918B]/60"
                     }`}
                   >
-                    {/* Natural bright photograph with zero dark overlays */}
                     <Image
                       src={item.image}
                       alt={item.alt}
                       fill
                       sizes="380px"
-                      className="object-cover transition-transform duration-1000 ease-out group-hover/track:scale-105"
+                      className="object-cover transition-transform duration-700 ease-out hover:scale-105"
                     />
 
-                    {/* Top floating badge (Category tag + Number) in light cream */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
-                      <span className="w-8 h-8 rounded-full bg-[#FCFAF6]/95 border border-[#C7A978]/40 font-serif font-bold text-sm text-[#292825] flex items-center justify-center shadow-xs">
+                    {/* Minimal number badge inside top right of image */}
+                    <div className="absolute top-3.5 right-3.5 z-10 pointer-events-none">
+                      <span className="w-8 h-8 rounded-full bg-[#FCFAF6]/90 backdrop-blur-md border border-[#C7A978]/40 font-serif font-bold text-xs text-[#292825] flex items-center justify-center shadow-xs">
                         {item.num}
                       </span>
+                    </div>
+                  </div>
+
+                  {/* LABELS & DESCRIPTIONS CLEARLY VISIBLE BELOW THE PHOTOGRAPH */}
+                  <div className="mt-4 text-center px-2 space-y-1.5 w-full">
+                    {/* Category Tag Badge */}
+                    <div className="flex justify-center">
                       <span
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest backdrop-blur-md border shadow-xs ${item.accentBg}`}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest border shadow-xs ${item.accentBg}`}
                       >
                         <Icon className="w-3 h-3" />
                         <span>{item.tag}</span>
                       </span>
                     </div>
 
-                    {/* Bottom editorial caption panel on soft cream frosted vignette */}
-                    <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-[#FCFAF6] via-[#FCFAF6]/90 to-transparent pt-8 text-left space-y-1 z-10">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="w-2 h-2 rounded-full"
-                          style={{ backgroundColor: item.accent }}
-                        />
-                        <h2 className="text-xl font-serif font-bold text-[#292825] tracking-tight">
-                          {item.label}
-                        </h2>
-                      </div>
-                      <p className="text-xs sm:text-[13px] text-[#6F6A61] font-light leading-snug">
-                        {item.desc}
-                      </p>
-                    </div>
+                    {/* Décor Title */}
+                    <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#292825] tracking-tight">
+                      {item.label}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-xs sm:text-[13px] text-[#6F6A61] font-light leading-relaxed max-w-[260px] mx-auto">
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
               );
@@ -374,12 +353,10 @@ export default function CustomisedDecor() {
                   onMouseEnter={() => setActiveItem(`${item.id}-dup`)}
                   onMouseLeave={() => setActiveItem(null)}
                   aria-hidden="true"
-                  className={`hidden lg:flex relative flex-shrink-0 flex-col justify-between transition-all duration-500 cursor-pointer ${item.widthClass} ${item.heightClass} ${item.yOffsetClass}`}
+                  className={`hidden lg:flex relative flex-shrink-0 flex-col items-center transition-all duration-500 cursor-pointer ${item.widthClass} ${item.yOffsetClass}`}
                 >
                   <div
-                    className={`relative w-full h-full overflow-hidden border border-[#C7A978]/40 shadow-[0_12px_36px_rgba(199,169,120,0.16)] transition-all duration-700 bg-[#FCFAF6] ${
-                      item.shapeClass
-                    } ${
+                    className={`relative w-full overflow-hidden border border-[#C7A978]/40 shadow-[0_12px_36px_rgba(199,169,120,0.14)] transition-all duration-700 bg-[#FCFAF6] ${item.imgHeightClass} ${item.shapeClass} ${
                       isSelected
                         ? "scale-[1.03] shadow-[0_20px_45px_rgba(79,145,139,0.22)] ring-2 ring-[#4F918B]/60"
                         : "hover:scale-[1.02] hover:border-[#4F918B]/60"
@@ -390,37 +367,33 @@ export default function CustomisedDecor() {
                       alt={item.alt}
                       fill
                       sizes="380px"
-                      className="object-cover transition-transform duration-1000 ease-out"
+                      className="object-cover transition-transform duration-700 ease-out hover:scale-105"
                     />
 
-                    {/* Top floating badge in light cream */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
-                      <span className="w-8 h-8 rounded-full bg-[#FCFAF6]/95 border border-[#C7A978]/40 font-serif font-bold text-sm text-[#292825] flex items-center justify-center shadow-xs">
+                    <div className="absolute top-3.5 right-3.5 z-10 pointer-events-none">
+                      <span className="w-8 h-8 rounded-full bg-[#FCFAF6]/90 backdrop-blur-md border border-[#C7A978]/40 font-serif font-bold text-xs text-[#292825] flex items-center justify-center shadow-xs">
                         {item.num}
                       </span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 text-center px-2 space-y-1.5 w-full">
+                    <div className="flex justify-center">
                       <span
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest backdrop-blur-md border shadow-xs ${item.accentBg}`}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest border shadow-xs ${item.accentBg}`}
                       >
                         <Icon className="w-3 h-3" />
                         <span>{item.tag}</span>
                       </span>
                     </div>
 
-                    {/* Bottom editorial caption panel */}
-                    <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-[#FCFAF6] via-[#FCFAF6]/90 to-transparent pt-8 text-left space-y-1 z-10">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="w-2 h-2 rounded-full"
-                          style={{ backgroundColor: item.accent }}
-                        />
-                        <h2 className="text-xl font-serif font-bold text-[#292825] tracking-tight">
-                          {item.label}
-                        </h2>
-                      </div>
-                      <p className="text-xs sm:text-[13px] text-[#6F6A61] font-light leading-snug">
-                        {item.desc}
-                      </p>
-                    </div>
+                    <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#292825] tracking-tight">
+                      {item.label}
+                    </h3>
+
+                    <p className="text-xs sm:text-[13px] text-[#6F6A61] font-light leading-relaxed max-w-[260px] mx-auto">
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
               );
@@ -463,21 +436,27 @@ export default function CustomisedDecor() {
         </div>
       </div>
 
-      {/* Custom Keyframe Styles for Smooth Marquee */}
+      {/* Seamless Marquee Animation Styles */}
       <style jsx>{`
-        @keyframes marquee {
+        @keyframes decorMarquee {
           0% {
-            transform: translateX(0%);
+            transform: translate3d(0, 0, 0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translate3d(-50%, 0, 0);
           }
         }
-        .lg\\:animate-marquee {
-          animation: marquee 24s linear infinite;
+        .animate-marquee-track {
+          display: flex;
+          width: max-content;
+          animation: decorMarquee 24s linear infinite;
+          will-change: transform;
+        }
+        .group-marquee:hover .animate-marquee-track {
+          animation-play-state: paused;
         }
         @media (prefers-reduced-motion: reduce) {
-          .lg\\:animate-marquee {
+          .animate-marquee-track {
             animation: none !important;
           }
         }
