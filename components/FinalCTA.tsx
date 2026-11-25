@@ -78,7 +78,7 @@ export default function FinalCTA() {
 
         <div className="final-cta-elem pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            href="#contact-form"
+            href="/contact"
             onClick={handleScrollToForm}
             aria-label="Start planning your event with Iragu Events"
             className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] font-bold uppercase tracking-widest text-xs sm:text-sm transition-all duration-300 shadow-xl shadow-[#4F918B]/15 active:scale-95"

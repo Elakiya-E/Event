@@ -169,7 +169,7 @@ export default function OurApproach() {
 
             <div className="approach-left-elem pt-2">
               <Link
-                href="#contact"
+                href="/contact"
                 className="group inline-flex items-center gap-3 bg-[#4F918B] hover:bg-[#3F7A75] text-[#FCFAF6] px-7 py-3.5 font-bold uppercase tracking-widest text-xs transition-all duration-300 shadow-lg shadow-[#4F918B]/20"
               >
                 <span>Discuss Your Event</span>

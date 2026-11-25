@@ -1,22 +1,18 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import FinalCTA from "@/components/FinalCTA";
+import PageLayout from "@/components/PageLayout";
+import Locations from "@/components/Locations";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Iragu Events — Complete Event Planning & Management",
+  title: "Contact Iragu Events | Plan Your Event",
   description:
-    "Planning an event? Have an idea you've been imagining? Or simply don't know where to start? Tell us about it. Our team will understand your requirements and help you plan the next step.",
+    "Planning an event? Have an idea you've been imagining? Or simply don't know where to start? Tell us about it. Call +91 90424 29868 or submit your enquiry.",
 };
 
 export default function ContactPage() {
   return (
-    <main className="relative flex flex-col min-h-screen bg-black overflow-x-hidden w-full max-w-full">
-      <Navbar />
-      <div className="pt-20">
-        <FinalCTA />
-        <Footer />
-      </div>
-    </main>
+    <PageLayout>
+      {/* LOCATIONS & COVERAGE */}
+      <Locations />
+    </PageLayout>
   );
 }

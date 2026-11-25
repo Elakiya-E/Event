@@ -206,7 +206,7 @@ export default function FAQ() {
               </p>
             </div>
             <Link
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 bg-teal-500 hover:bg-teal-400 text-black font-bold text-xs uppercase font-mono tracking-widest transition-colors flex-shrink-0 shadow-md shadow-teal-500/15"
             >
               <span>Ask Our Team</span>

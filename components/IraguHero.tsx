@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import { useGSAP, gsap } from "@/hooks/useGsap";
 import Link from "next/link";
-import { ArrowRight, Leaf, Calendar, Sparkles } from "lucide-react";
+import { ArrowRight, Leaf, Calendar, Sparkles, Phone } from "lucide-react";
 
 export default function IraguHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,16 +49,24 @@ export default function IraguHero() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-3 pt-1">
+          <div className="flex flex-wrap items-center gap-3 pt-1">
             <Link
-              href="#contact"
-              className="inline-flex items-center gap-2 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] font-bold px-5 py-3 rounded-full transition text-sm"
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-[#4F918B] hover:bg-[#437D77] text-[#FCFAF6] font-bold px-5 py-3 rounded-full transition text-xs sm:text-sm shadow-sm active:scale-95"
             >
               PLAN YOUR EVENT <ArrowRight className="w-4 h-4" />
             </Link>
+            <a
+              href="tel:+919042429868"
+              className="inline-flex items-center justify-center gap-2 border border-[#4F918B]/60 hover:border-[#4F918B] bg-[#FCFAF6] text-[#292825] hover:text-[#4F918B] font-bold px-4 sm:px-5 py-3 rounded-full transition-all text-xs sm:text-sm shadow-sm hover:shadow active:scale-95 group"
+              aria-label="Call Us: +91 90424 29868"
+            >
+              <Phone className="w-4 h-4 text-[#4F918B] transition-transform duration-300 group-hover:scale-110 flex-shrink-0" />
+              <span>CALL US: +91 90424 29868</span>
+            </a>
             <Link
-              href="#portfolio"
-              className="inline-flex items-center gap-2 border border-[#DED6C9] text-[#292825] font-bold px-5 py-3 rounded-full hover:bg-[#F7F3EA] transition text-sm"
+              href="/our-work"
+              className="inline-flex items-center justify-center gap-2 border border-[#DED6C9] text-[#292825] font-bold px-5 py-3 rounded-full hover:bg-[#F7F3EA] transition text-xs sm:text-sm active:scale-95"
             >
               VIEW OUR WORK <ArrowRight className="w-4 h-4" />
             </Link>

@@ -1,79 +1,34 @@
-import Navbar from "@/components/Navbar";
+import type { Metadata } from "next";
+import PageLayout from "@/components/PageLayout";
 import IraguHero from "@/components/IraguHero";
-import TrustSection from "@/components/TrustSection";
+import CinematicVideoSection from "@/components/CinematicVideoSection";
 import WhatWeDo from "@/components/WhatWeDo";
-import USPSection from "@/components/USPSection";
-import CustomisedDecor from "@/components/CustomisedDecor";
-import ServicesExperience from "@/components/ServicesExperience";
-import EventShowcase from "@/components/EventShowcase";
-import EventCreationJourney from "@/components/EventCreationJourney";
 import CaseStudies from "@/components/CaseStudies";
-import OurApproach from "@/components/OurApproach";
-import IraguDifference from "@/components/IraguDifference";
-import AboutFounder from "@/components/AboutFounder";
-import Testimonials from "@/components/Testimonials";
-import Pricing from "@/components/Pricing";
-import Locations from "@/components/Locations";
 import FinalCTA from "@/components/FinalCTA";
-import Footer from "@/components/Footer";
-import MobileCTABar from "@/components/MobileCTABar";
+
+export const metadata: Metadata = {
+  title: "Iragu Events | Complete Event Planning & Management",
+  description:
+    "Helping People & Brands Create Stress-Free Events. We're not just event decorators — we're your complete event partner. Your Vision. Our Creativity. Complete Event Responsibility.",
+};
 
 export default function Home() {
   return (
-    <main className="relative flex flex-col min-h-screen bg-black overflow-x-hidden w-full max-w-full pb-24 md:pb-0">
-      <Navbar />
-      
-      {/* 01. HERO */}
+    <PageLayout offsetNav={false}>
+      {/* 01. HERO — Introduce IRAGU EVENTS and complete event management */}
       <IraguHero />
-      
-      {/* 02. TRUST / SOCIAL PROOF */}
-      <TrustSection />
-      
-      {/* 03. WHAT WE DO / CORE PROPOSITION */}
-      <WhatWeDo />
 
-      {/* 03.5. USP — Vision → Understanding → Creativity → Execution */}
-      <USPSection />
-      
-      {/* 04. CUSTOMISED DÉCOR */}
-      <CustomisedDecor />
+      {/* 02. COMPLETE EVENT MANAGEMENT VIDEO — Planning, décor, catering, photography, sound & execution */}
+      <CinematicVideoSection />
 
-      {/* 05. COMPLETE SERVICES & EVENT CATEGORIES */}
-      <ServicesExperience />
-      
-      {/* 06. PORTFOLIO / OUR WORK */}
-      <EventShowcase />
-      
-      {/* 07. HOW WE WORK / PROCESS */}
-      <EventCreationJourney />
-      
-      {/* 08. CASE STUDIES */}
+      {/* 03. ABOUT / BRAND INTRODUCTION — Who IRAGU is, our philosophy & what makes us different */}
+      <WhatWeDo showCoreValueJourney={false} />
+
+      {/* 04. CASE STUDIES — Documented event challenges, planning, on-ground execution & results */}
       <CaseStudies />
 
-      {/* 09. OUR APPROACH */}
-      <OurApproach />
-      
-      {/* 10. WHY IRAGU / DIFFERENTIATORS */}
-      <IraguDifference />
-      
-      {/* 11. ABOUT IRAGU & MEET THE FOUNDER */}
-      <AboutFounder />
-      
-      {/* 12. TESTIMONIALS */}
-      <Testimonials />
-      
-      {/* 13. PRICING */}
-      <Pricing />
-
-      {/* 14. LOCATIONS */}
-      <Locations />
-
-      {/* 15. FINAL CTA */}
+      {/* 05. CONTACT / FINAL ENQUIRY CTA — Plan your event with our team */}
       <FinalCTA />
-      
-      {/* 17. FOOTER / ENQUIRY FORM */}
-      <Footer />
-      <MobileCTABar />
-    </main>
+    </PageLayout>
   );
 }

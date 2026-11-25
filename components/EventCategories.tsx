@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "@/hooks/useGsap";
 import { siteContent } from "@/data/siteContent";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Heart,
@@ -29,6 +30,7 @@ import {
   ArrowUpRight,
   ShieldCheck,
   CheckCircle2,
+  LayoutGrid,
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -163,19 +165,48 @@ export default function EventCategories() {
     () => {
       if (!containerRef.current) return;
 
-      /* Heading entrance */
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      const dur = prefersReduced ? 0 : 0.85;
+      const stag = prefersReduced ? 0 : 0.1;
+
+      /* Hero Typography Entrance */
       gsap.fromTo(
-        containerRef.current.querySelectorAll(".cat-heading-elem"),
-        { y: 32, opacity: 0 },
+        containerRef.current.querySelectorAll(".cat-hero-elem"),
+        { y: prefersReduced ? 0 : 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.85,
-          stagger: 0.1,
+          duration: dur,
+          stagger: stag,
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 78%",
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      /* Hero Photo Showcase Entrance */
+      gsap.fromTo(
+        containerRef.current.querySelectorAll(".cat-photo-elem"),
+        {
+          y: prefersReduced ? 0 : 40,
+          opacity: 0,
+          scale: prefersReduced ? 1 : 0.96,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: prefersReduced ? 0 : 0.95,
+          stagger: prefersReduced ? 0 : 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current.querySelector(".cat-photo-wrap"),
+            start: "top 82%",
             toggleActions: "play none none none",
           },
         }
@@ -184,16 +215,16 @@ export default function EventCategories() {
       /* Category card entrance */
       gsap.fromTo(
         containerRef.current.querySelectorAll(".cat-main-card"),
-        { y: 40, opacity: 0 },
+        { y: prefersReduced ? 0 : 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.75,
-          stagger: 0.12,
+          duration: prefersReduced ? 0 : 0.75,
+          stagger: prefersReduced ? 0 : 0.12,
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current.querySelector(".cat-cards-container"),
-            start: "top 82%",
+            start: "top 85%",
             toggleActions: "play none none none",
           },
         }
@@ -211,53 +242,166 @@ export default function EventCategories() {
     <section
       id="capabilities"
       ref={containerRef}
-      className="relative w-full bg-[#FCFAF6] overflow-hidden py-24 md:py-32"
+      className="relative w-full bg-[#FCFAF6] overflow-hidden py-20 md:py-28"
     >
+      {/* Background warm ambient glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-[700px] h-[350px] bg-[#C7A978]/5 blur-[140px] rounded-full" />
+        <div className="absolute top-1/2 right-10 w-[500px] h-[350px] bg-[#4F918B]/5 blur-[130px] rounded-full" />
+      </div>
+
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        {/* ── Section Header ── */}
-        <div className="space-y-4 mb-12 sm:mb-16">
-          <div className="cat-heading-elem inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#4F918B]/30 bg-[#4F918B]/10 text-[#4F918B] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#4F918B] animate-pulse" />
-            Capabilities &amp; Scope
+        {/* ── Section Hero: Editorial 2-Column Composition ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-12 sm:mb-16">
+          {/* LEFT SIDE — Typography & Brand Message */}
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6">
+            {/* Eyebrow Label */}
+            <div className="cat-hero-elem inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-[#C7A978]/30 bg-[#C7A978]/10 text-[#C7A978] text-[11px] sm:text-xs font-mono tracking-[0.2em] uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C7A978] animate-pulse" />
+              Capabilities &amp; Scope
+            </div>
+
+            {/* Main Heading with italic accents */}
+            <h1 className="cat-hero-elem text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-serif font-bold tracking-tight text-[#292825] leading-[1.12]">
+              Events We Plan,
+              <br />
+              <span className="text-[#4F918B] italic font-normal">Design</span>{" "}
+              <span className="text-[#292825]">&amp;</span>{" "}
+              <span className="text-[#C7A978] italic font-normal">Manage</span>.
+            </h1>
+
+            {/* Fine champagne editorial line */}
+            <div className="cat-hero-elem w-20 h-[2px] bg-gradient-to-r from-[#C7A978] via-[#C7A978]/60 to-transparent" />
+
+            {/* Supporting Description */}
+            <p className="cat-hero-elem text-base sm:text-lg text-[#6F6A61] leading-relaxed max-w-xl font-light">
+              From personal life milestones to corporate gatherings and large-scale public events, explore our complete event execution capabilities.
+            </p>
+
+            {/* Supporting Brand Statement */}
+            <div className="cat-hero-elem pt-1 flex flex-wrap items-center gap-2 text-xs sm:text-sm font-mono tracking-wider text-[#292825]">
+              <span className="w-2 h-2 rounded-full bg-[#4F918B]" />
+              <span className="font-semibold text-[#292825]">One Team.</span>
+              <span className="text-[#6F6A61]">Every Detail.</span>
+              <span className="text-[#C7A978] font-medium">Complete Event Responsibility.</span>
+            </div>
           </div>
-          <h2 className="cat-heading-elem text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-[#292825] leading-tight">
-            Events We Plan, Design &amp; Manage
-          </h2>
-          <p className="cat-heading-elem text-[#292825] text-xs sm:text-sm md:text-base font-light max-w-2xl">
-            From personal life milestones to corporate gatherings and large-scale public events, explore our complete event execution capabilities.
-          </p>
+
+          {/* RIGHT SIDE — Visual Event Showcase */}
+          <div className="lg:col-span-5 cat-photo-wrap relative flex justify-center lg:justify-end">
+            {/* Numbered marker */}
+            <div className="cat-photo-elem absolute -top-5 right-2 sm:right-6 text-[10px] sm:text-xs font-mono tracking-[0.25em] text-[#C7A978] uppercase z-20">
+              01 / OUR CAPABILITIES
+            </div>
+
+            {/* Main landscape event photograph — banner image (b1.png) */}
+            <div className="cat-photo-elem relative w-full max-w-[460px] aspect-[4/3] sm:aspect-[16/11] rounded-2xl sm:rounded-[2.5rem] overflow-hidden border-2 border-[#C7A978]/30 shadow-xl bg-[#FCFAF6]">
+              <Image
+                src="/images/b1.png"
+                alt="Iragu Events — Stage & Celebration Design"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 460px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#292825]/40 via-transparent to-transparent pointer-events-none" />
+            </div>
+
+            {/* Smaller overlapping detail photograph */}
+            <div className="cat-photo-elem absolute -bottom-6 -left-3 sm:-bottom-8 sm:-left-6 w-[140px] sm:w-[180px] md:w-[210px] aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#C7A978]/40 shadow-2xl z-20 bg-[#FCFAF6]">
+              <Image
+                src="/images/hero2.png"
+                alt="Event styling & floral detail"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 140px, 210px"
+              />
+            </div>
+
+            {/* Small floating caption badge */}
+            <div className="cat-photo-elem absolute bottom-3 sm:bottom-5 right-2 sm:right-4 bg-[#FCFAF6]/95 backdrop-blur-md border border-[#DED6C9] rounded-xl px-3.5 py-2 sm:px-4 sm:py-2.5 shadow-lg z-20">
+              <p className="text-[10px] sm:text-xs font-mono tracking-[0.15em] uppercase text-[#292825] font-medium">
+                CREATING EXPERIENCES, NOT JUST EVENTS.
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* ── Category Navigation Tabs ── */}
-        <div className="cat-heading-elem flex flex-wrap items-center gap-1.5 sm:gap-2 md:gap-3 mb-8 sm:mb-12 border-b border-[#DED6C9] pb-4 sm:pb-5">
-          <button
-            onClick={() => setActiveTab("all")}
-            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono tracking-wider uppercase transition-all duration-300 ${
-              activeTab === "all"
-                ? "bg-[#4F918B] text-[#FCFAF6] font-bold shadow-md shadow-[#4F918B]/20"
-                : "border-[#DED6C9] bg-[#F7F3EA] text-[#292825] hover:text-[#292825] hover:border-[#C7A978]/60"
-            }`}
-          >
-            All Categories (04)
-          </button>
-          {categories.map((cat, idx) => (
+        {/* ── Category Navigation: Editorial Horizontal Rail ── */}
+        <div className="relative border-y border-[#DED6C9] py-3.5 sm:py-4 mb-10 sm:mb-14 bg-[#FCFAF6]/80 backdrop-blur-sm">
+          <div className="overflow-x-auto no-scrollbar scroll-smooth flex items-center gap-3 sm:gap-6 md:gap-8 px-1">
+            {/* All Categories Button */}
             <button
-              key={cat.id}
-              onClick={() => setActiveTab(cat.id)}
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono tracking-wider uppercase transition-all duration-300 ${
-                activeTab === cat.id
-                  ? "bg-[#4F918B] text-[#FCFAF6] font-bold shadow-md shadow-[#4F918B]/20"
-                  : "border-[#DED6C9] bg-[#F7F3EA] text-[#292825] hover:text-[#292825] hover:border-[#C7A978]/60"
+              onClick={() => setActiveTab("all")}
+              className={`group relative flex items-center gap-2.5 pb-2 pt-1 text-xs sm:text-sm font-mono tracking-wider uppercase transition-all duration-300 flex-shrink-0 ${
+                activeTab === "all"
+                  ? "text-[#4F918B] font-bold"
+                  : "text-[#6F6A61] hover:text-[#292825] font-medium"
               }`}
             >
-              0{idx + 1}. {cat.title}
+              <LayoutGrid
+                className={`w-3.5 h-3.5 transition-colors ${
+                  activeTab === "all" ? "text-[#4F918B]" : "text-[#C7A978] group-hover:text-[#4F918B]"
+                }`}
+              />
+              <span>All Categories (04)</span>
+              {activeTab === "all" && (
+                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#4F918B] rounded-full" />
+              )}
             </button>
-          ))}
+
+            {/* Separator */}
+            <span className="hidden sm:inline-block w-px h-4 bg-[#DED6C9] flex-shrink-0" />
+
+            {/* 4 Category Tabs */}
+            {categories.map((cat, idx) => {
+              const TabIcon =
+                cat.id === "life-events"
+                  ? Heart
+                  : cat.id === "corporate-events"
+                  ? Building2
+                  : cat.id === "institutional-public"
+                  ? Landmark
+                  : Layers;
+              const isActive = activeTab === cat.id;
+              const numberStr = (idx + 1).toString().padStart(2, "0");
+
+              return (
+                <React.Fragment key={cat.id}>
+                  <button
+                    onClick={() => setActiveTab(cat.id)}
+                    className={`group relative flex items-center gap-2.5 pb-2 pt-1 text-xs sm:text-sm font-mono tracking-wider uppercase transition-all duration-300 flex-shrink-0 ${
+                      isActive
+                        ? "text-[#4F918B] font-bold"
+                        : "text-[#6F6A61] hover:text-[#292825] font-medium"
+                    }`}
+                  >
+                    <TabIcon
+                      className={`w-3.5 h-3.5 transition-colors ${
+                        isActive ? "text-[#4F918B]" : "text-[#C7A978] group-hover:text-[#4F918B]"
+                      }`}
+                    />
+                    <span className={isActive ? "text-[#4F918B]" : "text-[#C7A978] group-hover:text-[#4F918B]"}>
+                      {numberStr}.
+                    </span>
+                    <span>{cat.title}</span>
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#4F918B] rounded-full" />
+                    )}
+                  </button>
+
+                  {idx < categories.length - 1 && (
+                    <span className="hidden sm:inline-block w-px h-4 bg-[#DED6C9] flex-shrink-0" />
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
         </div>
 
         {/* ── 4 Major Categories Container ── */}
         <div className="cat-cards-container flex flex-col space-y-6 sm:space-y-10">
-          {filteredCategories.map((category, idx) => {
+          {filteredCategories.map((category) => {
             const theme =
               categoryTheme[category.id as keyof typeof categoryTheme] ||
               categoryTheme["life-events"];
@@ -300,7 +444,7 @@ export default function EventCategories() {
                   {/* Right Actions: Expand Toggle + Plan CTA */}
                   <div className="flex items-center gap-3 self-end md:self-auto flex-shrink-0">
                     <Link
-                      href="#contact"
+                      href="/contact"
                       className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FCFAF6] border border-[#DED6C9] text-xs font-mono uppercase tracking-wider text-[#292825] hover:text-[#4F918B] hover:border-[#4F918B]/40 transition-colors"
                     >
                       <span>Discuss</span>

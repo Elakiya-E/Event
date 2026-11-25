@@ -356,7 +356,7 @@ export const siteContent = {
         guestCount: "1300+ Guests",
         servicesProvided: ["Complete Event Planning", "Décor", "Stage & Production", "Sound & Lighting"],
         image: "/images/img1.1.png",
-        caseStudyLink: "#case-studies"
+        caseStudyLink: "/case-studies"
       },
       {
         id: "sp-grand-days",
@@ -369,7 +369,7 @@ export const siteContent = {
         guestCount: "Private Gathering",
         servicesProvided: ["Customised Décor", "Special Effects", "DJ Setup", "Cake Arrangement", "Complete Coordination"],
         image: "/images/img1.2.png",
-        caseStudyLink: "#case-studies"
+        caseStudyLink: "/case-studies"
       }
     ]
   },
@@ -582,14 +582,15 @@ export const siteContent = {
       { label: "Birthdays", href: "/events/birthdays" },
       { label: "Corporate", href: "/events/corporate" },
       { label: "Public Events", href: "/events/public-events" },
-      { label: "Customised Décor", href: "/events/customised-decor" },
+      { label: "Customised Décor", href: "/customised-decor" },
     ],
     exploreLinks: [
-      { label: "About", href: "/#about" },
-      { label: "Our Work", href: "/#portfolio" },
-      { label: "Case Studies", href: "/#case-studies" },
+      { label: "About", href: "/about" },
+      { label: "Our Work", href: "/our-work" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Why Iragu", href: "/why-iragu" },
       { label: "FAQ", href: "/faq" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Contact", href: "/contact" },
     ],
     contactInfo: {
       phone: "90424 29868",

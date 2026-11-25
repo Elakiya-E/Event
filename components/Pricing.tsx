@@ -168,7 +168,7 @@ export default function Pricing() {
           {/* CTA Action */}
           <div className="relative z-10 pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
             <Link
-              href="#contact"
+              href="/contact"
               className="group inline-flex items-center gap-3 bg-[#4F918B] hover:bg-[#3d7a75] text-[#FCFAF6] px-9 py-4 font-bold uppercase tracking-widest text-xs transition-all duration-300 shadow-lg shadow-[#4F918B]/20"
             >
               <span>{content.cta}</span>

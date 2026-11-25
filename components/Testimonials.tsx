@@ -167,7 +167,7 @@ export default function Testimonials() {
 
               <div className="text-center pt-6">
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-[#4F918B] hover:bg-[#3d7a75] text-[#FCFAF6] font-bold text-xs uppercase font-mono tracking-widest transition-colors shadow-lg shadow-[#4F918B]/15"
                 >
                   <span>{content.cta}</span>
@@ -236,7 +236,7 @@ export default function Testimonials() {
                 {/* Action CTA */}
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Link
-                    href="#contact"
+                    href="/contact"
                     className="group inline-flex items-center gap-3 bg-[#4F918B] hover:bg-[#3d7a75] text-[#FCFAF6] px-8 py-4 font-bold uppercase tracking-widest text-xs transition-all duration-300 shadow-lg shadow-[#4F918B]/20"
                   >
                     <span>{content.cta}</span>
@@ -244,7 +244,7 @@ export default function Testimonials() {
                   </Link>
 
                   <Link
-                    href="#contact"
+                    href="/contact"
                     className="inline-flex items-center gap-2 px-6 py-4 rounded-none border border-[#DED6C9] hover:border-[#C7A978]/60 text-[#6F6A61] hover:text-[#292825] font-mono text-xs uppercase tracking-widest transition-colors"
                   >
                     <span>Share Event Experience</span>
