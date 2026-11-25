@@ -118,69 +118,92 @@ const categoryNavConfig: CategoryNavConfig[] = [
   },
 ];
 
-/* ─── 8-Step "More Than Just Décor" Story Sequence ─── */
-const managementSteps = [
+/* ─── 8-Step "More Than Just Décor" Connected Journey Sequence ─── */
+interface JourneyStage {
+  step: string;
+  title: string;
+  desc: string;
+  icon: React.ElementType;
+  accent: string;
+  tag: string;
+  previewImage?: string;
+}
+
+const managementSteps: JourneyStage[] = [
   {
     step: "01",
     title: "Event Planning",
     desc: "Understanding vision, timeline, budget & run-of-show roadmap.",
     icon: CalendarCheck2,
-    accent: "#C7A978",
+    accent: "#C7A978", // Champagne Gold
+    tag: "Blueprint & Roadmap",
   },
   {
     step: "02",
     title: "Venue Preparation",
     desc: "Layout mapping, zoning, electrical rigging & site clearance.",
     icon: Store,
-    accent: "#4F918B",
+    accent: "#4F918B", // Muted Teal
+    tag: "Site Architecture",
   },
   {
     step: "03",
     title: "Décor & Styling",
     desc: "Themes, customized backdrops, stagecraft & floral artistry.",
     icon: Flower2,
-    accent: "#D8B5A8",
+    accent: "#D8B5A8", // Dusty Rose
+    tag: "Aesthetic Identity",
+    previewImage: "/images/hero2.png",
   },
   {
     step: "04",
     title: "Catering Arrangements",
     desc: "Menu tasting, live food counters & seamless buffet protocol.",
     icon: UtensilsCrossed,
-    accent: "#BC806B",
+    accent: "#BC806B", // Terracotta
+    tag: "Hospitality Protocol",
+    previewImage: "/images/b4.png",
   },
   {
     step: "05",
     title: "Photography & Video",
     desc: "Cinematic drone coverage, candid highlights & live telecast.",
     icon: Camera,
-    accent: "#C8BDD8",
+    accent: "#C8BDD8", // Soft Lavender
+    tag: "Visual Memory",
+    previewImage: "/images/hero1.png",
   },
   {
     step: "06",
     title: "Sound & Lighting",
     desc: "Acoustic calibration, mood washes & dynamic stage lighting.",
     icon: Volume2,
-    accent: "#4F918B",
+    accent: "#4F918B", // Muted Teal
+    tag: "Audio-Visual Precision",
   },
   {
     step: "07",
     title: "Guest Management",
     desc: "VIP assistance, hospitality desks, entries & valet coordination.",
     icon: UserCheck,
-    accent: "#AEBBAA",
+    accent: "#AEBBAA", // Sage Green
+    tag: "Seamless Experience",
   },
   {
     step: "08",
     title: "Final Event Execution",
     desc: "On-ground floor management, cues & immediate troubleshooting.",
     icon: ShieldCheck,
-    accent: "#C7A978",
+    accent: "#C7A978", // Warm Gold
+    tag: "Showtime Stewardship",
+    previewImage: "/images/b1.png",
   },
 ];
 
 export default function ServicesPageContent() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState<number>(0);
+  const [activeJourneyStage, setActiveJourneyStage] = useState<number | null>(null);
 
   useGSAP(
     () => {
@@ -236,25 +259,79 @@ export default function ServicesPageContent() {
         }
       );
 
-      /* 4. "More than decor" cards sequence */
+      /* 4. Desktop Horizontal Journey Connecting Line Progressive Draw */
+      const hLine = containerRef.current.querySelector(".journey-h-track");
+      if (hLine) {
+        const len = (hLine as SVGPathElement).getTotalLength?.() || 1160;
+        gsap.set(hLine, { strokeDasharray: len, strokeDashoffset: len });
+        gsap.to(hLine, {
+          strokeDashoffset: 0,
+          duration: 1.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current.querySelector(".journey-h-wrap"),
+            start: "top 78%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+
+      /* 5. Desktop Horizontal Journey Nodes Sequence */
       gsap.fromTo(
-        containerRef.current.querySelectorAll(".step-story-card"),
-        { y: 30, opacity: 0 },
+        containerRef.current.querySelectorAll(".journey-stage-node"),
+        { y: 30, opacity: 0, scale: 0.96 },
         {
           y: 0,
           opacity: 1,
+          scale: 1,
           duration: 0.75,
-          stagger: 0.07,
+          stagger: 0.08,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: containerRef.current.querySelector(".story-steps-track"),
-            start: "top 82%",
+            trigger: containerRef.current.querySelector(".journey-h-wrap"),
+            start: "top 75%",
             toggleActions: "play none none none",
           },
         }
       );
 
-      /* 5. Closing CTA section reveal */
+      /* 6. Mobile Vertical Journey Items Sequence */
+      gsap.fromTo(
+        containerRef.current.querySelectorAll(".journey-v-item"),
+        { x: -20, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.65,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current.querySelector(".journey-v-wrap"),
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      /* 7. Journey Completion Beacon Reveal */
+      gsap.fromTo(
+        containerRef.current.querySelectorAll(".journey-completion-elem"),
+        { y: 25, opacity: 0, scale: 0.95 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current.querySelector(".journey-completion-beacon"),
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      /* 8. Closing CTA section reveal */
       gsap.fromTo(
         containerRef.current.querySelectorAll(".svc-cta-content"),
         { y: 25, opacity: 0 },
@@ -1052,23 +1129,26 @@ export default function ServicesPageContent() {
       )}
 
       {/* ════════════════════════════════════════════════════ */}
-      {/* 4. NEW SECTION: "MORE THAN JUST DÉCOR"               */}
-      {/* (Horizontal image-led storytelling sequence)         */}
+      {/* 4. THE EVENT JOURNEY EXPERIENCE                      */}
+      {/* (Horizontal connected journey on desktop, vertical   */}
+      {/* timeline on mobile, ending in completion beacon)     */}
       {/* ════════════════════════════════════════════════════ */}
-      <section className="relative w-full bg-[#F1EADF] overflow-hidden py-18 sm:py-24 md:py-32 border-b border-[#DED6C9]">
+      <section className="journey-section relative w-full bg-[#F1EADF] overflow-hidden py-18 sm:py-24 md:py-32 border-b border-[#DED6C9]">
+        {/* Warm Ambient Glows */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[400px] bg-[#C7A978]/8 blur-[140px] rounded-full" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-[#C7A978]/9 blur-[140px] rounded-full" />
+          <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-[#4F918B]/6 blur-[120px] rounded-full" />
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 space-y-12">
-          {/* Header */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 space-y-14">
+          {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#4F918B]/30 bg-[#4F918B]/10 text-[#4F918B] text-[11px] font-mono tracking-[0.2em] uppercase">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#4F918B]/35 bg-[#4F918B]/10 text-[#4F918B] text-[11px] font-mono tracking-[0.2em] uppercase shadow-xs">
               <ShieldCheck className="w-3.5 h-3.5 text-[#4F918B]" />
               <span>END-TO-END EVENT STEWARDSHIP</span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-[#292825] tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-serif font-bold text-[#292825] tracking-tight leading-[1.14]">
               More Than Just Décor.
               <br />
               <span className="text-[#4F918B] italic font-normal">
@@ -1080,51 +1160,336 @@ export default function ServicesPageContent() {
               From planning and coordination to catering, photography, production
               and event-day execution, one team brings every detail together.
             </p>
+
+            {/* Continuous Journey Milestone Indicator */}
+            <div className="pt-2 flex items-center justify-center gap-2 text-[10px] sm:text-xs font-mono tracking-widest uppercase text-[#928B81]">
+              <span className="text-[#C7A978] font-bold">01 Event Planning</span>
+              <span>&rarr;</span>
+              <span className="hidden sm:inline">02 Prep &rarr; 03 Styling &rarr; 04 Catering &rarr; 05 Photo &rarr; 06 AV &rarr; 07 Guests &rarr;</span>
+              <span className="text-[#4F918B] font-bold">08 Final Execution</span>
+            </div>
           </div>
 
-          {/* 8-Step Storytelling Journey (Open, Image-Led Horizontal Grid) */}
-          <div className="story-steps-track grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 pt-4">
-            {managementSteps.map((stepItem) => {
-              const StepIcon = stepItem.icon;
-              return (
-                <div
-                  key={stepItem.step}
-                  className="step-story-card group relative p-6 rounded-3xl border border-[#DED6C9] bg-[#FCFAF6] hover:bg-[#F7F3EA] hover:border-[#C7A978] transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-md"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-serif text-3xl font-bold text-[#C7A978]">
-                        {stepItem.step}
-                      </span>
+          {/* ─── DESKTOP: Continuous Horizontal Event Journey (lg and up) ─── */}
+          <div className="journey-h-wrap hidden lg:block relative w-full pt-4 pb-8">
+            {/* Horizontal Flowing Sinuous SVG Path */}
+            <svg
+              className="absolute inset-x-0 top-[256px] w-full h-[32px] pointer-events-none z-10"
+              viewBox="0 0 1200 32"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="journeyHGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#C7A978" />
+                  <stop offset="25%" stopColor="#4F918B" />
+                  <stop offset="50%" stopColor="#D8B5A8" />
+                  <stop offset="75%" stopColor="#BC806B" />
+                  <stop offset="100%" stopColor="#C7A978" />
+                </linearGradient>
+              </defs>
+              {/* Subtle guide track */}
+              <path
+                d="M 40,16 Q 180,6 320,16 T 600,16 T 880,16 T 1160,16"
+                fill="none"
+                stroke="#DED6C9"
+                strokeWidth="2"
+                strokeDasharray="6 6"
+              />
+              {/* Progressive animated gradient line */}
+              <path
+                className="journey-h-track"
+                d="M 40,16 Q 180,6 320,16 T 600,16 T 880,16 T 1160,16"
+                fill="none"
+                stroke="url(#journeyHGrad)"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+              />
+            </svg>
+
+            {/* 8-Column Continuous Alternating Composition */}
+            <div className="grid grid-cols-8 gap-3 relative h-[560px]">
+              {managementSteps.map((stepItem, idx) => {
+                const StepIcon = stepItem.icon;
+                const isEven = idx % 2 === 1; // 0, 2, 4, 6 (Odd numbered stages 01, 03, 05, 07) vs 1, 3, 5, 7 (Even stages 02, 04, 06, 08)
+                const isActive = activeJourneyStage === idx;
+
+                return (
+                  <div
+                    key={stepItem.step}
+                    className="journey-stage-node relative h-[560px] flex flex-col items-center group/node cursor-pointer"
+                    onMouseEnter={() => setActiveJourneyStage(idx)}
+                    onMouseLeave={() => setActiveJourneyStage(null)}
+                    onClick={() => setActiveJourneyStage(idx)}
+                  >
+                    {/* ── TOP SECTION (For Stages 01, 03, 05, 07) ── */}
+                    {!isEven ? (
                       <div
-                        className="p-2.5 rounded-xl border border-[#DED6C9] bg-[#F7F3EA] group-hover:scale-110 transition-transform"
-                        style={{ color: stepItem.accent }}
+                        className={`absolute top-0 inset-x-0 h-[240px] flex flex-col justify-end items-center text-center pb-3 px-1 transition-all duration-300 ${
+                          isActive ? "scale-105" : ""
+                        }`}
                       >
-                        <StepIcon className="w-5 h-5" />
+                        {/* Micro Phase Tag */}
+                        <span
+                          className="text-[9px] font-mono tracking-wider uppercase px-2 py-0.5 rounded-full border mb-1.5 bg-[#FCFAF6]/90 transition-colors"
+                          style={{
+                            borderColor: `${stepItem.accent}55`,
+                            color: stepItem.accent,
+                          }}
+                        >
+                          {stepItem.tag}
+                        </span>
+
+                        {/* Large Stage Number */}
+                        <span
+                          className="font-serif text-3xl font-bold tracking-tight transition-colors duration-300"
+                          style={{
+                            color: isActive ? stepItem.accent : "#928B81",
+                          }}
+                        >
+                          {stepItem.step}
+                        </span>
+
+                        {/* Stage Title */}
+                        <h3 className="text-sm font-serif font-bold text-[#292825] group-hover/node:text-[#4F918B] transition-colors leading-snug mt-0.5">
+                          {stepItem.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-[11px] text-[#6F6A61] font-light leading-snug mt-1 max-w-[135px]">
+                          {stepItem.desc}
+                        </p>
+
+                        {/* Genuine Event Photo Preview (for selected stages) */}
+                        {stepItem.previewImage && (
+                          <div className="relative w-16 h-11 rounded-lg overflow-hidden border border-[#DED6C9] shadow-xs mt-2 transition-transform duration-300 group-hover/node:scale-110">
+                            <Image
+                              src={stepItem.previewImage}
+                              alt={stepItem.title}
+                              fill
+                              className="object-cover"
+                              sizes="64px"
+                            />
+                          </div>
+                        )}
+
+                        {/* Vertical Stem pointing down to node */}
+                        <div
+                          className="w-[1.5px] h-5 mt-2 transition-all duration-300"
+                          style={{
+                            backgroundColor: isActive ? stepItem.accent : "#DED6C9",
+                          }}
+                        />
+                      </div>
+                    ) : null}
+
+                    {/* ── CENTRAL MILESTONE CIRCLE MARKER (Baseline y = 260px) ── */}
+                    <div className="absolute top-[260px] -translate-y-1/2 left-1/2 -translate-x-1/2 z-20">
+                      {/* Pulse Ring Halo */}
+                      <span
+                        className={`absolute -inset-2 rounded-full transition-all duration-300 ${
+                          isActive
+                            ? "scale-125 opacity-100"
+                            : "scale-100 opacity-0 group-hover/node:opacity-40"
+                        }`}
+                        style={{ backgroundColor: `${stepItem.accent}35` }}
+                      />
+
+                      {/* Core Milestone Button */}
+                      <div
+                        className={`w-12 h-12 rounded-full border-2 transition-all duration-300 flex items-center justify-center shadow-md bg-[#FCFAF6] ${
+                          isActive ? "scale-115 shadow-lg" : "group-hover/node:scale-105"
+                        }`}
+                        style={{
+                          borderColor: stepItem.accent,
+                          color: isActive ? "#FCFAF6" : stepItem.accent,
+                          backgroundColor: isActive ? stepItem.accent : "#FCFAF6",
+                        }}
+                      >
+                        <StepIcon className="w-5 h-5 stroke-[1.8]" />
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-serif font-bold text-[#292825] group-hover:text-[#4F918B] transition-colors leading-snug">
+                    {/* ── BOTTOM SECTION (For Stages 02, 04, 06, 08) ── */}
+                    {isEven ? (
+                      <div
+                        className={`absolute top-[284px] inset-x-0 h-[250px] flex flex-col justify-start items-center text-center pt-3 px-1 transition-all duration-300 ${
+                          isActive ? "scale-105" : ""
+                        }`}
+                      >
+                        {/* Vertical Stem pointing up from node */}
+                        <div
+                          className="w-[1.5px] h-5 mb-2 transition-all duration-300"
+                          style={{
+                            backgroundColor: isActive ? stepItem.accent : "#DED6C9",
+                          }}
+                        />
+
+                        {/* Micro Phase Tag */}
+                        <span
+                          className="text-[9px] font-mono tracking-wider uppercase px-2 py-0.5 rounded-full border mb-1 bg-[#FCFAF6]/90 transition-colors"
+                          style={{
+                            borderColor: `${stepItem.accent}55`,
+                            color: stepItem.accent,
+                          }}
+                        >
+                          {stepItem.tag}
+                        </span>
+
+                        {/* Large Stage Number */}
+                        <span
+                          className="font-serif text-3xl font-bold tracking-tight transition-colors duration-300"
+                          style={{
+                            color: isActive ? stepItem.accent : "#928B81",
+                          }}
+                        >
+                          {stepItem.step}
+                        </span>
+
+                        {/* Stage Title */}
+                        <h3 className="text-sm font-serif font-bold text-[#292825] group-hover/node:text-[#4F918B] transition-colors leading-snug mt-0.5">
+                          {stepItem.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-[11px] text-[#6F6A61] font-light leading-snug mt-1 max-w-[135px]">
+                          {stepItem.desc}
+                        </p>
+
+                        {/* Genuine Event Photo Preview (for selected stages) */}
+                        {stepItem.previewImage && (
+                          <div className="relative w-16 h-11 rounded-lg overflow-hidden border border-[#DED6C9] shadow-xs mt-2 transition-transform duration-300 group-hover/node:scale-110">
+                            <Image
+                              src={stepItem.previewImage}
+                              alt={stepItem.title}
+                              fill
+                              className="object-cover"
+                              sizes="64px"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ─── MOBILE & TABLET: Vertical Connected Timeline (below lg) ─── */}
+          <div className="journey-v-wrap lg:hidden relative pl-8 sm:pl-12 max-w-lg mx-auto space-y-10 sm:space-y-12 pt-4">
+            {/* Left Continuous Vertical Spine Line */}
+            <div className="absolute left-[19px] sm:left-[23px] top-4 bottom-6 w-[2px] bg-gradient-to-b from-[#C7A978] via-[#4F918B] to-[#C7A978]" />
+
+            {managementSteps.map((stepItem, idx) => {
+              const StepIcon = stepItem.icon;
+              return (
+                <div
+                  key={`v-${stepItem.step}`}
+                  className="journey-v-item relative group/v flex items-start gap-4"
+                >
+                  {/* Left Milestone Marker along the line */}
+                  <div
+                    className="absolute -left-[35px] sm:-left-[43px] top-1 w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 bg-[#FCFAF6] flex items-center justify-center shadow-md transition-transform group-hover/v:scale-110 z-10"
+                    style={{
+                      borderColor: stepItem.accent,
+                      color: stepItem.accent,
+                    }}
+                  >
+                    <StepIcon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
+                  </div>
+
+                  {/* Right Content Stream */}
+                  <div className="flex-1 space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="font-serif text-xl sm:text-2xl font-bold"
+                        style={{ color: stepItem.accent }}
+                      >
+                        {stepItem.step}
+                      </span>
+                      <span
+                        className="text-[9px] font-mono tracking-wider uppercase px-2 py-0.5 rounded-full border bg-[#FCFAF6]"
+                        style={{
+                          borderColor: `${stepItem.accent}55`,
+                          color: stepItem.accent,
+                        }}
+                      >
+                        {stepItem.tag}
+                      </span>
+                    </div>
+
+                    <h3 className="text-base sm:text-lg font-serif font-bold text-[#292825] group-hover/v:text-[#4F918B] transition-colors leading-snug">
                       {stepItem.title}
                     </h3>
 
-                    <p className="text-xs text-[#6F6A61] font-light leading-relaxed mt-2">
+                    <p className="text-xs sm:text-sm text-[#6F6A61] font-light leading-relaxed">
                       {stepItem.desc}
                     </p>
-                  </div>
 
-                  <div className="mt-5 pt-3 border-t border-[#DED6C9]/60 flex items-center justify-between">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#928B81]">
-                      Stage {stepItem.step}
-                    </span>
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: stepItem.accent }}
-                    />
+                    {/* Photo preview on mobile if present */}
+                    {stepItem.previewImage && (
+                      <div className="relative w-24 h-16 rounded-xl overflow-hidden border border-[#DED6C9] shadow-sm mt-2">
+                        <Image
+                          src={stepItem.previewImage}
+                          alt={stepItem.title}
+                          fill
+                          className="object-cover"
+                          sizes="96px"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* ─── STRONG VISUAL ENDING: Completion Beacon Emblem ─── */}
+          <div className="journey-completion-beacon pt-12 sm:pt-16 max-w-2xl mx-auto text-center space-y-4 border-t border-[#DED6C9]/80">
+            {/* Distinctive Animated Circular Completion Emblem */}
+            <div className="journey-completion-elem relative w-20 h-20 mx-auto flex items-center justify-center">
+              {/* Dual Concentric Spinning Dashed Rings */}
+              <div className="absolute inset-0 rounded-full border-2 border-dashed border-[#C7A978] animate-[spin_24s_linear_infinite]" />
+              <div className="absolute inset-2 rounded-full border border-dashed border-[#4F918B] animate-[spin_16s_linear_infinite_reverse]" />
+              {/* Center Shield Beacon */}
+              <div className="w-12 h-12 rounded-full bg-[#FCFAF6] border-2 border-[#C7A978] flex items-center justify-center shadow-lg text-[#4F918B]">
+                <ShieldCheck className="w-6 h-6 text-[#4F918B]" />
+              </div>
+            </div>
+
+            <div className="journey-completion-elem inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#C7A978]/40 bg-[#FCFAF6] text-[#C7A978] text-[10px] font-mono tracking-[0.2em] uppercase shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#C7A978]" />
+              <span>JOURNEY COMPLETED &bull; COMPLETE RESPONSIBILITY</span>
+            </div>
+
+            <h3 className="journey-completion-elem text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#292825] tracking-tight">
+              Every Detail. One Responsible Team.
+            </h3>
+
+            <p className="journey-completion-elem text-sm sm:text-base text-[#6F6A61] font-light leading-relaxed max-w-lg mx-auto">
+              From the first conversation to the final guest departure, we bring
+              every part of your event together.
+            </p>
+
+            {/* Complete Roadmap Flow Bar */}
+            <div className="journey-completion-elem pt-2 flex flex-wrap items-center justify-center gap-2 text-[10px] font-mono text-[#928B81]">
+              <span>01 Plan</span>
+              <span>&rarr;</span>
+              <span>02 Prep</span>
+              <span>&rarr;</span>
+              <span>03 Style</span>
+              <span>&rarr;</span>
+              <span>04 Cater</span>
+              <span>&rarr;</span>
+              <span>05 Capture</span>
+              <span>&rarr;</span>
+              <span>06 AV</span>
+              <span>&rarr;</span>
+              <span>07 Guests</span>
+              <span>&rarr;</span>
+              <span className="text-[#4F918B] font-bold">08 Execute</span>
+            </div>
           </div>
         </div>
       </section>
